@@ -14,13 +14,13 @@ const config = {
   url: 'https://marvin-season.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/danny-website/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'marvin-season', // Usually your GitHub org/user name.
   projectName: 'danny-website', // Usually your repo name.
-  deploymentBranch: 'master',
+  deploymentBranch: 'gh-pages',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   trailingSlash: false,
