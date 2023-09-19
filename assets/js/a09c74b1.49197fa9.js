@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdanny_website=self.webpackChunkdanny_website||[]).push([[3058],{437:e=>{e.exports=JSON.parse('{"permalink":"/danny-website/blog/tags/docusaurus","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
