@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdanny_website=self.webpackChunkdanny_website||[]).push([[535],{5641:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"vue-grid-layout","permalink":"/danny-website/blog/vue-grid-layout"},{"title":"MDX Blog Post","permalink":"/danny-website/blog/mdx-blog-post"}]}')}}]);
