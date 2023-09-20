@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdanny_website=self.webpackChunkdanny_website||[]).push([[396],{7547:e=>{e.exports=JSON.parse('{"label":"draggable","permalink":"/danny-website/blog/tags/draggable","allTagsPath":"/danny-website/blog/tags","count":1}')}}]);
