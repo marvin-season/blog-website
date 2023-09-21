@@ -25,20 +25,6 @@
         <category label="高阶函数" term="高阶函数"/>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Eventloop]]></title>
-        <id>https://marvin-season.github.io/danny-website/blog/eventloop</id>
-        <link href="https://marvin-season.github.io/danny-website/blog/eventloop"/>
-        <updated>2023-09-20T03:07:51.000Z</updated>
-        <summary type="html"><![CDATA[What is the event loop]]></summary>
-        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_t7vb" id="what-is-the-event-loop">What is the event loop<a href="#what-is-the-event-loop" class="hash-link" aria-label="Direct link to What is the event loop" title="Direct link to What is the event loop">​</a></h2><p>The <strong>event loop</strong> is the secret behind JavaScript’s asynchronous programming, JS executes all operations on a Single thread, but using a few smart data structures, it gives us the illusion of multi-threading.</p><h2 class="anchor anchorWithStickyNavbar_t7vb" id="a-few-smart-data-structures">A few smart data structures<a href="#a-few-smart-data-structures" class="hash-link" aria-label="Direct link to A few smart data structures" title="Direct link to A few smart data structures">​</a></h2><p>The <strong>call stack</strong> is responsible for keeping track of all the operations in line to be executed. Whenever a function is finished, it is popped from the stack.</p><p>The <strong>event queue</strong> is responsible for sending new functions to the stack for processing. It follows the queue data structure to maintain the correct sequence in which all operations should be sent for execution.</p><h2 class="anchor anchorWithStickyNavbar_t7vb" id="how-does-it-work">How does it work<a href="#how-does-it-work" class="hash-link" aria-label="Direct link to How does it work" title="Direct link to How does it work">​</a></h2><p>Whenever an <strong>async function</strong> is called, it is sent to a <em>browser API</em>. These are APIs built into the browser. Based on the command received from the call stack, the API starts its own single-threaded operation.</p><p>An example of this is the <code>setTimeout</code> method. When a <code>setTimeout</code> operation is processed in the stack, it is sent to the corresponding API which waits till the specified time to send this operation back in for processing.</p><p>Where does it send the operation? The <strong>event queue</strong>. Hence, we have a cyclic system for running async operations in JavaScript. The language itself is single-threaded, but the browser APIs act as separate threads.</p><p>The event loop facilitates this process; it constantly checks whether or not the call stack is empty. If it is empty, new functions are added from the event queue. If it is not, then the current function call is processed.</p><h2 class="anchor anchorWithStickyNavbar_t7vb" id="grabbing-the-operation">Grabbing the operation<a href="#grabbing-the-operation" class="hash-link" aria-label="Direct link to Grabbing the operation" title="Direct link to Grabbing the operation">​</a></h2><p>According to the priority of the operation from large to small, the event queue is divided into <strong>micro queue</strong>, <strong>interaction queue</strong>, and <strong>delay queue</strong>. When the call stack is empty, an operation is grabbed based on the priority of the queue.</p>]]></content>
-        <author>
-            <name>marvin-season</name>
-            <uri>https://github.com/marvin-season</uri>
-        </author>
-        <category label="eventloop" term="eventloop"/>
-        <category label="javascript" term="javascript"/>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[Vue-grid-layout]]></title>
         <id>https://marvin-season.github.io/danny-website/blog/vue-grid-layout</id>
         <link href="https://marvin-season.github.io/danny-website/blog/vue-grid-layout"/>
