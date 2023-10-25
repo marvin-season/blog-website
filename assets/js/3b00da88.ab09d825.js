@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdanny_website=self.webpackChunkdanny_website||[]).push([[348],{3742:e=>{e.exports=JSON.parse('{"permalink":"/danny-website/blog/tags/curry","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
