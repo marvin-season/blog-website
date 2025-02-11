@@ -10,7 +10,7 @@ ssh $SERVER "mkdir -p $TARGET_DIR"
 
 # 生成带时间戳的 zip 文件名
 TIMESTAMP=$(date +%Y%m%d%H%M%S)
-ZIP_FILE="dist_${TIMESTAMP}.zip"
+ZIP_FILE="build_${TIMESTAMP}.zip"
 
 # 压缩本地的 build 目录
 echo "压缩本地的 build 目录为 $ZIP_FILE..."
