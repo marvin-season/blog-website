@@ -2,7 +2,7 @@
 slug: React开发记录
 title: React开发记录
 authors: [marvin-season]
-tags: [React, 闭包陷阱, scroll]
+tags: []
 ---
 
 ## 组件的最新状态值

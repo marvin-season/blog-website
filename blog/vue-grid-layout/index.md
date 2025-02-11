@@ -2,7 +2,7 @@
 slug: vue-grid-layout
 title: Vue-grid-layout
 authors: [marvin-season]
-tags: [vue-grid-layout, draggable]
+tags: []
 ---
 
 

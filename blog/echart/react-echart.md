@@ -2,7 +2,7 @@
 slug: echart
 title: echart
 authors: [marvin-season]
-tags: [React, echart]
+tags: []
 ---
 
 ## echart-react
