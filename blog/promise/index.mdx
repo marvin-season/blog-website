@@ -83,7 +83,7 @@ sequenceDiagram
     MainThread->>MainThread: console.log("sync code before async operation")
     
     MainThread->>WebAPI: setTimeout(fn, 1000) (注册异步任务)
-    WebAPI-->>MacroTaskQueue: 1 秒后，将回调放入宏任务队列
+    Note over WebAPI: 1 秒后，将回调放入宏任务队列
     
     MainThread->>MainThread: 返回 Promise 并继续执行同步代码
     MainThread->>MainThread: console.log("sync code 3") (同步执行)
@@ -95,14 +95,14 @@ sequenceDiagram
 
     Note over MainThread: (主线程空闲，检查任务队列)
 
-    MainThread->>MacroTaskQueue: 取出 setTimeout 回调并执行
-    MacroTaskQueue-->>MainThread: console.log("async operation completed")
+    MacroTaskQueue->>MainThread: 取出 setTimeout 回调并执行
+    MainThread-->>MainThread: console.log("async operation completed")
     
     MainThread->>MainThread: resolve() 触发 Promise
-    MainThread->>MicroTaskQueue: 将 then() 放入微任务队列
+    MainThread->>MicroTaskQueue: 将 then()回调 放入微任务队列
     
-    MainThread->>MicroTaskQueue: 执行 Promise.then()
-    MicroTaskQueue-->>MainThread: console.log("promise resolved")
+    MicroTaskQueue->>MainThread: 取出执行 Promise.then()回调
+    MainThread-->>MainThread: console.log("promise resolved")
 
     Note over MainThread: (所有任务执行完毕)
 ```
