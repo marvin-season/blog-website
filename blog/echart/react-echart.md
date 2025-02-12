@@ -1,6 +1,6 @@
 ---
 slug: echart
-title: echart
+title: Echart
 authors: [marvin-season]
 tags: []
 ---
