@@ -3,10 +3,10 @@ promise:
   permalink: /promise
   description: Promise tag description
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+javscript:
+  label: Javscript
+  permalink: /javscript
+  description: Javscript tag description
 
 docusaurus:
   label: Docusaurus

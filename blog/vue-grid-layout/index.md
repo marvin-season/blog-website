@@ -2,7 +2,7 @@
 slug: vue-grid-layout
 title: Vue-grid-layout
 authors: [marvin-season]
-tags: []
+tags: [javscript]
 ---
 
 # Drag-and-Drop Layout Solution Based on Vue-Grid-Layout
