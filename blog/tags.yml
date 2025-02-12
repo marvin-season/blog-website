@@ -1,7 +1,7 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+promise:
+  label: Promise
+  permalink: /promise
+  description: Promise tag description
 
 hello:
   label: Hello
