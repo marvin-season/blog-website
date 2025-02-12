@@ -1,14 +1,68 @@
 ---
-slug: promise
-title: Promise
+slug: conprehensive-of-javascript
+title: Comprehensive of JavaScript
 authors: [marvin-season]
 tags: [promise]
 ---
-## References:
+
+As we all know, JavaScript is a single-threaded language. This means that only one task can be executed at a time.
+So, if you have a long-running task, it will block the execution of other tasks.  
+
+Actually, JavaScript is a single-threaded language, but it has a non-blocking I/O model. This means that JavaScript can perform multiple tasks at the same time.
+How does JavaScript achieve this? The answer is **Event Loop**.
+
+## Event Loop
+
+- [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Event_loop)
+
+The Event Loop is a mechanism that allows JavaScript to perform non-blocking I/O operations. It is responsible for handling asynchronous operations in JavaScript.
+On the other hand, the Event Loop is an approach to achieve asynchronous programming.
+
+The Event Loop is a loop that continuously checks the call stack and the task queue. If the call stack is empty, it will take the first task from the task queue and push it onto the call stack.
+
+Pseudo code:
+```javascript
+while (queue.waitForMessage()) {
+  queue.processNextMessage();
+}
+
+```
+More specifically, the Event Loop consists of the following components:
+```js
+function runJs() {
+  let syncStack = [] // 同步执行栈
+  let asyncMicroQueue = [] // 异步微任务队列
+  let asyncMacroQueue = [] // 异步宏任务队列
+
+  function runSyncStack() { // 主线程
+    while (syncStack.length) syncStack.pop()() // 清空同步执行栈
+    reRender() // 重新渲染
+    runAsyncQueue() // 从任务队列取出异步任务执行
+  }
+
+  function runAsyncQueue() { // 任务队列
+    while (asyncMicroQueue.length) asyncMicroQueue.shift()() // 先清空微任务队列
+
+    while (asyncMacroQueue.length) {
+       // 每执行一个异步宏，就要清空一次微任务队列（因为有可能异步宏会往微任务队列push异步微）
+      asyncMacroQueue.shift()()
+      while (asyncMicroQueue.length) asyncMicroQueue.shift()()
+    }
+    runSyncStack() // 回到js主线程
+  }
+  runSyncStack()
+}
+
+```
+
+In concurrent programming, thread synchronization is often a concern. 
+In JavaScript, how do multiple asynchronous operations synchronize data? The answer is **Promise**.
+
+
+## Promise
  - [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
  - [Comprehensive of promise](https://medium.com/@PavanCodeCraft/mastering-promises-in-javascript-41a0c9df7473)
 
-## Comprehensive
 Promise is a JavaScript object for asynchronous operations. It represents a value which may be available now, or in the future, or never.
 
 Asynchronous operations are common in JavaScript, and often require a callback function. 
