@@ -23,6 +23,11 @@ function HomepageHeader() {
             to="/docs/intro">
             Get Started
           </Link>
+          <Link
+            className={clsx("button button--secondary button--lg", styles.linkAIButton)}
+            to="http://ai.fuelstack.icu">
+            AI Editor
+          </Link>
         </div>
       </div>
     </header>
