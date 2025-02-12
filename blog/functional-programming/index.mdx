@@ -1,0 +1,73 @@
+---
+slug: functional-programming
+title: Functional Programming
+authors: [marvin-season]
+tags: []
+---
+
+## Currying
+
+Currying is a technique of converting a function that takes multiple arguments into a series of functions that each take a single argument.
+
+**In short: Using the characteristics of higher-order functions, the function is partially called according to the parameters.**
+
+### Currying Function
+
+:::tip
+Use the **curry** from the lodash library to curry the function add, and get **curriedAdd**
+:::
+
+```js
+import { curry } from "lodash";
+
+const add = (p1, p2, p3) => p1 + p2 + p3;
+
+const curriedAdd = curry(add);
+```
+
+:::tip
+Call with full arguments to get the final result
+
+```js
+curriedAdd(1, 2, 3); // 6
+curriedAdd(1)(2)(3); // 6
+```
+
+Call with partial arguments to get another functional function curriedAdd100, a function that adds 100
+
+```js
+const curriedAdd100 = curriedAdd(100);
+curriedAdd100(2, 3); // 105
+```
+
+Before all arguments are called, the returned are all corresponding functional functions
+
+```js
+const curriedAdd105 = curriedAdd100(5);
+curriedAdd105(10); // 115
+```
+
+:::
+
+## Compose
+
+Compose functions, compose pure functions. For example, a function: f(x) = x^2
+
+The composed functions are like pipelines, executed sequentially from right to left (by default), processing the data.
+
+```js
+import * as R from "ramda";
+
+const arr = [{ name: "a" }, { name: "b" }];
+// Use compose to arrange appropriate functions to get the data `A.B`
+
+const func1 = R.compose(
+  R.join("."),
+  R.map(R.compose(R.toUpper, R.prop("name")))
+);
+
+console.log(func1(arr)); // expected: A.B
+```
+:::tip
+The various functions used in the above example from the ramda library are all curried. By composing various methods with compose, a new function that can achieve the target functionality is obtained.
+:::

@@ -5,7 +5,7 @@ authors: [marvin-season]
 tags: []
 ---
 
-## echart-react
+## Echart React
 
 对于绘制图表，提供合适的 options 给 echart 即可，但是往往需要显示的数据从接口获取，需要将图表的数据和样式分离。
 
