@@ -4,10 +4,21 @@
  */
 
 .heroBanner {
+  font-family: monospace;
   padding: 4rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: linear-gradient(90deg, rgb(239, 159, 172) 0%, #e4a0c3 50%, #f385f6 100%);
+}
+
+.linkButton {
+  border: none;
+  background-color: #fff;
+  &:hover {
+    background: rgb(153, 153, 231);
+    color: white;
+  }
 }
 
 @media screen and (max-width: 996px) {
