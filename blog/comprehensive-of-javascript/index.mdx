@@ -105,7 +105,7 @@ asyncOperation().then(() => {
 console.log('sync code 3');
 ```
 
-Output:
+**Output:**
 ```sh
 sync code 1
 sync code 2
@@ -113,7 +113,6 @@ sync code before async operation
 sync code 3
 async operation completed
 promise resolved
-
 ```
 In the above code, the `asyncOperation` function returns a Promise object. The `then` method is used to handle the resolved value of the Promise.
 
@@ -148,13 +147,15 @@ sequenceDiagram
     Note over MainThread: (主线程空闲，检查任务队列)
 
     MacroTaskQueue->>MainThread: 取出 setTimeout 回调并执行
-    MainThread-->>MainThread: console.log("async operation completed")
+    MainThread->>MainThread: console.log("async operation completed")
     
-    MainThread->>MainThread: resolve() 触发 Promise
-    MainThread->>MicroTaskQueue: 将 then()回调 放入微任务队列
-    
+    Note over MainThread: resolve() 触发 Promise
+    MainThread-->>MicroTaskQueue: 将 then()回调 放入微任务队列
+
+    Note over MainThread: (主线程空闲，检查任务队列)
+
     MicroTaskQueue->>MainThread: 取出执行 Promise.then()回调
-    MainThread-->>MainThread: console.log("promise resolved")
+    MainThread->>MainThread: console.log("promise resolved")
 
     Note over MainThread: (所有任务执行完毕)
 ```

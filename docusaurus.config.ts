@@ -11,7 +11,7 @@ const config: Config = {
   },
   title: 'FuelStack',
   tagline: 'Keep in your own way',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/loopy.png',
 
   // Set the production url of your site here
   url: 'https://your-docusaurus-site.example.com',
@@ -75,7 +75,7 @@ const config: Config = {
       title: 'Home',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/loopy.png',
       },
       items: [
         {
