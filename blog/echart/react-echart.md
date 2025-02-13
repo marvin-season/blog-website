@@ -3,6 +3,7 @@ slug: echart
 title: Echart
 authors: [marvin-season]
 tags: []
+date: '2024-01-08'
 ---
 
 ## Echart React

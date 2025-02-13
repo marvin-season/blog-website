@@ -3,6 +3,7 @@ slug: vue-grid-layout
 title: Vue-grid-layout
 authors: [marvin-season]
 tags: [javscript]
+date: '2023-12-01'
 ---
 
 # Drag-and-Drop Layout Solution Based on Vue-Grid-Layout
