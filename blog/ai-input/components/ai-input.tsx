@@ -42,7 +42,13 @@ const CoreInput = ({
         </div>
     </>
 }
-
+const groupBy = function (arr, keyFn) {
+    return arr.reduce((acc, item) => {
+      const key = keyFn(item);
+      (acc[key] ||= []).push(item);
+      return acc;
+    }, {});
+  };
 const attachments: Attachment[] = [
     {
         type: 'tool',
@@ -63,8 +69,7 @@ const attachments: Attachment[] = [
 ]
 export default function AIInput() {
     const groupedAttachments = useMemo(() => {
-        // @ts-ignore
-        return Object.groupBy(attachments, ({ type }) => type) as Record<Attachment['type'], Attachment[]>;
+        return groupBy(attachments, ({ type }) => type) as Record<Attachment['type'], Attachment[]>;
     }, [attachments])
     const [activedKey, setActivedKey] = useState<Attachment['type']>(undefined);
 
