@@ -165,6 +165,39 @@ Promises can be in one of three states:
 - Fulfilled: The operation completed successfully.
 - Rejected: The operation failed.
 
+If the promise is resolved by async operation, the `then` method is called. 
+If the promise is rejected, the `catch` method is called.
+
+## Async/Await
+Actually, the `async/await` syntax is built on top of Promises. It is a **syntactic sugar** for Promises.
+```js
+async function asyncOperation(){}
+// equivalent to
+function asyncOperation() {
+  return Promise.resolve();
+}
+// equivalent to
+function asyncOperation() {
+  return new Promise((resolve, reject) => {
+    resolve();
+  });
+}
+```
+
+The above three functions are equivalent. The `async` keyword is used to define an asynchronous function, and the following code is equivalent.
+```js
+async function main() {
+  asyncOperation().then(() => {
+    console.log('promise resolved');
+  });
+  // equivalent to
+  await asyncOperation();
+  console.log('promise resolved');
+}
+```
+
+The `await` keyword is used to wait for the completion of an asynchronous operation. It can only be used inside an `async` function.
+
 ## Recap
 - Event Loop is a mechanism that allows JavaScript to perform non-blocking I/O operations.
 - Promise is a container for interactions between asynchronous operations.
