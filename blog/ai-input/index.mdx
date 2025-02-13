@@ -1,0 +1,24 @@
+---
+slug: ai-input
+title: AI Input
+authors: [marvin-season]
+tags: [javscript]
+---
+
+import AIInput from './components/ai-input';
+
+<AIInput />
+
+## Basic Concepts
+AIInput is a component that can collect user input and handle it, just like the plain text and some attachments which selected by some other actions
+
+The actions is flexible, just like upload files, select tools, etc.
+
+```tsx
+type CoreInputProps = {
+    onSend: (value: string, attachments: Attachment[]) => void;
+    attachmentRender: (value: string, onSelect: (attactment: Attachment) => void) => JSX.Element;
+    attachmentDisplayer: (attachments: Attachment[], onClick: () => void) => JSX.Element;
+    attachmentHandler?: (attactment: Attachment, setAttachments: React.Dispatch<React.SetStateAction<Attachment[]>>) => void;
+}
+```
