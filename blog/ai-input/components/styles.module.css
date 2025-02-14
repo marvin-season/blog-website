@@ -1,9 +1,13 @@
+.aiInputContainer{
+  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+}
+
 .attachmentGroup{
   display: flex;
   gap: 1rem;
   padding: 6px 0;
   position: relative;
-  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.1);
 }
 
 .attachmentListContainer{

@@ -23,7 +23,7 @@ const CoreInput = ({
 }: CoreInputProps) => {
     const [value, setValue] = useState('');
     const [attachments, setAttachments] = useState<Attachment[]>([]);
-    return <>
+    return <div className={styles.aiInputContainer}>
         <div>
             {
                 attachmentDisplayer(attachments, setAttachments)
@@ -42,7 +42,7 @@ const CoreInput = ({
                 setAttachments([...attachments, attactment])
             })}
         </div>
-    </>
+    </div>
 }
 const groupBy = function (arr, keyFn) {
     return arr.reduce((acc, item) => {
