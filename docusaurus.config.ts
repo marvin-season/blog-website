@@ -86,6 +86,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {to: '/blog/tags', label: 'Tags', position: 'left'},
+        { to: '/personal', label: 'Personal', position: 'left' }, // 新增
         {
           href: 'https://github.com/marvin-season/danny-website',
           label: 'GitHub',
