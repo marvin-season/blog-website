@@ -69,17 +69,16 @@ const attachments: Attachment[] = [
         value: 'file1'
     },
 ]
-export default function AIInput() {
+export default function AIInput({ onSend }: {
+    onSend: CoreInputProps['onSend']
+}) {
     const groupedAttachments = useMemo(() => {
         return groupBy(attachments, ({ type }) => type) as Record<Attachment['type'], Attachment[]>;
     }, [attachments])
     const [activedKey, setActivedKey] = useState<Attachment['type']>(undefined);
 
     return <CoreInput
-        onSend={(...props) => {
-            alert('Open the console log to view the result');
-            console.log(props)
-        }}
+        onSend={onSend}
         attachmentHandler={(attactment, setAttachments) => {
             setAttachments(prev => {
                 if (prev.find(a => a.value === attactment.value)) {
