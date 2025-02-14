@@ -15,6 +15,9 @@ date: '2024-01-08'
 ```js
 <EchartReact options={options} {...{ others }}></EchartReact>
 ```
+
+<!--truncate  -->
+
 ### 基本配置
 **一个基本的折线图配置**
 

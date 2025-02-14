@@ -17,7 +17,7 @@ Users can perform operations such as **dragging** and **resizing** the content o
 ## What is Vue-Grid-Layout?
 
 [Vue-Grid-Layout](https://jbaysolutions.github.io/vue-grid-layout/) is a drag-and-drop layout component that can meet the above requirements. It is a secondary development based on [Gridster](http://dsmorse.github.io/gridster.js/), supporting drag-and-drop, scaling, responsive layout, etc.
-
+<!--truncate  -->
 ## How to Use?
 
 ### Installation
