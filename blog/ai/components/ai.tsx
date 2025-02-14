@@ -10,11 +10,11 @@ export default function AI() {
 
         setLoading(true);
         try {
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            await new Promise(resolve => setTimeout(resolve, 1000));
             setMessages(
                 [...messages,
-                { role: 'user', content: value },
-                { role: 'assistant', content: value }
+                { role: 'user', content: value, attachments },
+                { role: 'assistant', content: value, attachments }
                 ]);
         } catch (error) {
             console.error(error);

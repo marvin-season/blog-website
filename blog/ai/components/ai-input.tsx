@@ -112,7 +112,7 @@ export default function AIInput({ onSend }: {
                             <span className={styles.attachment} onClick={() => {
                                 setActivedKey(key as Attachment['type'])
                             }}>{groupedAttachments[key][0].symbol}</span>
-                            {/*  */}
+
                         </Tippy>
                     })
                 }
