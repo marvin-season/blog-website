@@ -1,5 +1,7 @@
 import { useMemo, useState } from "react"
 import styles from './styles.module.css';
+import Tippy from "@tippyjs/react";
+
 type Attachment = {
     type: 'tool' | 'file',
     symbol: string,
@@ -44,11 +46,11 @@ const CoreInput = ({
 }
 const groupBy = function (arr, keyFn) {
     return arr.reduce((acc, item) => {
-      const key = keyFn(item);
-      (acc[key] ||= []).push(item);
-      return acc;
+        const key = keyFn(item);
+        (acc[key] ||= []).push(item);
+        return acc;
     }, {});
-  };
+};
 const attachments: Attachment[] = [
     {
         type: 'tool',
@@ -90,23 +92,30 @@ export default function AIInput() {
             return <div className={styles.attachmentGroup}>
                 {
                     Object.entries(groupedAttachments).map(([key, value]) => {
-                        return <span className={styles.attachment} key={key} onClick={() => {
-                            setActivedKey(key as Attachment['type'])
-                        }}>
-                            {groupedAttachments[key][0].symbol}
-                        </span>
+                        return <Tippy
+                            delay={100}
+                            duration={0}
+                            key={key}
+                            content={<div className={styles.attachmentListContainer}>
+                                {
+                                    groupedAttachments[activedKey]?.map(attachment => {
+                                        return <span onClick={() => {
+                                            onSelect(attachment)
+                                        }} key={attachment.value}>{attachment.label}</span>
+                                    })
+                                }
+                            </div>}
+                            interactive
+                            placement={'top-start'} // 将弹窗位置设置为底部
+                            visible={activedKey === key}
+                            onClickOutside={() => setActivedKey(null)} // 点击外部关闭弹窗
+                        >
+                            <span className={styles.attachment} onClick={() => {
+                                setActivedKey(key as Attachment['type'])
+                            }}>{groupedAttachments[key][0].symbol}</span>
+                            {/*  */}
+                        </Tippy>
                     })
-                }
-                {
-                    activedKey && <div className={styles.attachmentListContainer}>
-                        {
-                            groupedAttachments[activedKey].map(attachment => {
-                                return <span onClick={() => {
-                                    onSelect(attachment)
-                                }} key={attachment.value}>{attachment.label}</span>
-                            })
-                        }
-                    </div>
                 }
             </div>
         }}
