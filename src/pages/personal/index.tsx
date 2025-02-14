@@ -1,7 +1,5 @@
-import React from 'react';
 import Layout from '@theme/Layout';
-
-export default function MyProfile() {
+export default function Home() {
   return (
     <Layout title={`Hello from Personal`}
       description="Personal Information">
