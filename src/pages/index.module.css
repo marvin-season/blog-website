@@ -3,19 +3,25 @@
  * and scoped locally.
  */
 
+ .subtitle{
+  font-weight: 700;
+  font-size: 28px;
+  font-style: italic;
+ }
+
 .heroBanner {
   font-family: monospace;
   padding: 4rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(90deg, rgb(239, 159, 172) 0%, #e4a0c3 50%, #f385f6 100%);
+  background: linear-gradient(160deg, rgb(239, 159, 172) 30%, rgb(210, 238, 120) 50%, #e227e9 100%);
 }
 .linkAIButton{
   border: none;
   background-color: #fff;
   &:hover {
-    background: rgb(149, 149, 169);
+    background: rgb(96, 96, 224);
     color: white;
   }
 }
@@ -23,7 +29,7 @@
   border: none;
   background-color: #fff;
   &:hover {
-    background: rgb(153, 153, 231);
+    background: rgb(96, 96, 224);
     color: white;
   }
 }
@@ -39,4 +45,9 @@
   align-items: center;
   justify-content: center;
   gap: 1rem;
+
+  @media screen and (max-width: 996px) {
+    flex-direction: column;
+    
+  }
 }

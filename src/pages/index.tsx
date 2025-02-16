@@ -16,7 +16,7 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <p className={clsx('hero__subtitle', styles.subtitle)}>{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <Link
             className={clsx("button button--secondary button--lg", styles.linkButton)}
@@ -26,7 +26,7 @@ function HomepageHeader() {
           <Link
             className={clsx("button button--secondary button--lg", styles.linkAIButton)}
             to="http://ai.fuelstack.icu">
-            AI Editor
+            Your Editor
           </Link>
         </div>
       </div>

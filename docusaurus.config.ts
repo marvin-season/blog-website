@@ -9,7 +9,7 @@ const config: Config = {
   markdown: {
     mermaid: true,
   },
-  title: 'FuelStack',
+  title: 'Collections of Knowledge',
   tagline: 'Keep in your own way',
   favicon: 'img/loopy.png',
 
