@@ -5,6 +5,8 @@ export default function Home() {
       description="Personal Information">
       <main>
         <h1>Personal Information</h1>
+        <p>My name is </p>
+        
       </main>
     </Layout>
   );
