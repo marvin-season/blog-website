@@ -1,0 +1,39 @@
+---
+title: Three.js
+---
+
+## Introduction
+1. Basic Three.js Concepts
+    -	Scene: The container for all objects, lights, and cameras, defining all elements in the 3D space.
+    -	Camera: Determines the viewing perspective of the scene. Common types are PerspectiveCamera and OrthographicCamera.
+    -	Renderer: Responsible for rendering the scene to the screen, usually using WebGLRenderer.
+```js
+renderer.render(scene, camera);
+```
+2. Creating 3D Objects
+    - Geometry: The shape of objects, such as BoxGeometry, SphereGeometry, PlaneGeometry, RingGeometry, etc.
+    - Material: Defines the appearance of objects (color, texture, etc.), commonly used are MeshBasicMaterial, MeshLambertMaterial, MeshStandardMaterial, etc.
+    - Mesh: A combination of geometry and material, representing an actual 3D object.
+```js
+const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+```
+3. Lights
+    - AmbientLight: Illuminates the entire scene uniformly.
+    - PointLight: Emits light from a point in all directions.
+    - DirectionalLight: Emits parallel light rays from a direction, similar to sunlight.
+    - SpotLight: Emits a cone-shaped beam of light from a point.
+    - Shadows: Enable shadow effects to increase realism, involving casting shadows (castShadow) and receiving shadows (receiveShadow).
+```js
+const pointLight = new THREE.PointLight(0xffffff, 1, 1000);
+pointLight.position.set(2, 2, 5);
+scene.add(pointLight);
+```
+4. Camera Controls
+    - OrbitControls: Allows users to interact by rotating, zooming, and panning the camera with the mouse, commonly used in interactive 3D scenes on the web.
+```js
+// Set up OrbitControls (for mouse interaction)
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true; // Smooth movement
+controls.dampingFactor = 0.25; // Damping factor for smoother controls
+controls.screenSpacePanning = false; // Disables up/down movement
+```
