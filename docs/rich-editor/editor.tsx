@@ -1,10 +1,10 @@
-import { EditorProviderProps, JSONContent } from '@tiptap/react'
+import { EditorProviderProps, JSONContent, useCurrentEditor } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
-// import { Markdown } from 'tiptap-markdown'
 import InlinePlaceholder from './inline-placeholder'
 import { serialize } from './utils'
 import Tippy from '@tippyjs/react'
 import { useState } from 'react'
+import { MentionExtension } from './mention'
 
 export const useEditorProps = (content: string | JSONContent) => {
     return {
@@ -16,29 +16,16 @@ export const useEditorProps = (content: string | JSONContent) => {
             StarterKit.configure({
                 history: false,
             }),
-            InlinePlaceholder
+            InlinePlaceholder,
+            MentionExtension
         ],
         content,
         editorProps: {
             attributes: {
                 class: 'w-full prose-sm focus:outline-none w-3/4 p-10 bg-white shadow rounded-[16px]',
             },
-            handleKeyDown(editorView, event) {
-                if (event.key === '@') {
-                    alert('trigger @')
-                    return true
-                }
-                // 监听键盘事件
-                if (event.key === 'Enter' && !event.shiftKey) {
-                    console.log('trigger Enter')
-                    handleSave(editorView.state.toJSON().doc)
-                    return true
-                }
-
-                return false // 返回 false 不拦截事件
-            },
         },
-    } satisfies EditorProviderProps
+    } as EditorProviderProps
 }
 
 const handleSave = (json: JSONContent) => {
@@ -50,6 +37,7 @@ const templateList = [
     "请帮我查询 {{昨天}}的日程"
 ]
 export const Trigger = () => {
+
     const [activedKey, setActivedKey] = useState<string>(undefined);
     return <>
         <Tippy
