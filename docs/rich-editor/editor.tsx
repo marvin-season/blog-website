@@ -3,7 +3,6 @@ import { StarterKit } from '@tiptap/starter-kit'
 import InlinePlaceholder from './inline-placeholder'
 import { deserialize, serialize } from './utils'
 import Tippy from '@tippyjs/react'
-import { useState } from 'react'
 import { MentionExtension } from './mention'
 
 export const useEditorProps = ({ content, setTriggerKey }: { content: string | JSONContent, setTriggerKey: (key: string) => void }) => {
@@ -19,7 +18,6 @@ export const useEditorProps = ({ content, setTriggerKey }: { content: string | J
             InlinePlaceholder,
             MentionExtension.configure({
                 onMentionKeyPress: (key: string) => {
-                    console.log('keyaaa', key)
                     setTriggerKey(key)
                 }
             })
