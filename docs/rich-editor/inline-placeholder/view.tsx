@@ -32,7 +32,7 @@ const View = ({ node, updateAttributes }: NodeViewProps) => {
                 as={'span'}
             >
                 {
-                    type === 'input' && <input type="password"
+                    type === 'input' && <input
                         style={{ width: `${count}rem` }}
                         className={`outline-none border-b border-blue-500 mx-2 box-border text-gray-500`}
                         contentEditable={false}
