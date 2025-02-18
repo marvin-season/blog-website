@@ -1,7 +1,7 @@
 import { EditorProviderProps, JSONContent, useCurrentEditor } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 import InlinePlaceholder from './inline-placeholder'
-import { serialize } from './utils'
+import { deserialize, serialize } from './utils'
 import Tippy from '@tippyjs/react'
 import { useState } from 'react'
 import { MentionExtension } from './mention'
@@ -42,7 +42,10 @@ const templateList = [
     "请帮我查询 {{昨天}}的日程"
 ]
 export const Trigger = ({ setTriggerKey, triggerKey }) => {
-
+    const { editor } = useCurrentEditor();
+    if (!editor) {
+        return null
+    }
     return <>
         {/* trigger @ */}
         <Tippy
@@ -52,7 +55,7 @@ export const Trigger = ({ setTriggerKey, triggerKey }) => {
                 {
                     templateList.map((item, index) => {
                         return <div onClick={() => {
-                            console.log('click', item)
+                            editor.commands.setContent(deserialize(item))
                         }} key={index}>{item}</div>
                     })
                 }
