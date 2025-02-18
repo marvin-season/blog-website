@@ -1,9 +1,10 @@
-import { EditorProviderProps, JSONContent, useCurrentEditor } from '@tiptap/react'
+import { Editor, EditorProviderProps, JSONContent, useCurrentEditor } from '@tiptap/react'
 import { StarterKit } from '@tiptap/starter-kit'
 import InlinePlaceholder from './inline-placeholder'
 import { deserialize, serialize } from './utils'
 import Tippy from '@tippyjs/react'
 import { MentionExtension } from './mention'
+import { ConfirmExtension } from './confirm'
 
 export const useEditorProps = ({ content, setTriggerKey }: { content: string | JSONContent, setTriggerKey: (key: string) => void }) => {
     return {
@@ -20,7 +21,12 @@ export const useEditorProps = ({ content, setTriggerKey }: { content: string | J
                 onMentionKeyPress: (key: string) => {
                     setTriggerKey(key)
                 }
-            })
+            }),
+            ConfirmExtension.configure({
+                onConfirmKeyPress: (editor: Editor) => {
+                    handleSave(editor.getJSON())
+                }
+            }),
         ],
         content,
         editorProps: {

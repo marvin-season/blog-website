@@ -1,7 +1,7 @@
 import { Extension } from '@tiptap/core';
 interface MentionExtensionOptions {
-    onMentionKeyPress: (key: string) => boolean;  // 外部回调函数
-  }
+  onMentionKeyPress: (key: string) => boolean; // 外部回调函数
+}
 export const MentionExtension = Extension.create({
   name: 'mention',
 
@@ -14,8 +14,8 @@ export const MentionExtension = Extension.create({
       },
 
       // 你也可以监听其他键
-      Enter: () => {
-        console.log('Enter key pressed');
+      '#': () => {
+        console.log('# pressed');
         return false; // 允许其他行为
       },
     };
