@@ -12,6 +12,8 @@ const caculteWidth = (value: string) => {
 let timer: number | null = null;
 const View = ({ node, updateAttributes }: NodeViewProps) => {
     const { type, value, placeholder } = node.attrs
+    
+    console.log('type', type)
     // 当输入变化时更新 value 属性
     const handleInput = (e: React.FormEvent) => {
         const inputElement = e.target as HTMLInputElement;
@@ -27,19 +29,27 @@ const View = ({ node, updateAttributes }: NodeViewProps) => {
     return (
         <NodeViewWrapper as="span">
             <NodeViewContent
-                as="input"
-                style={{ width: `${count}rem` }}
-                className={`outline-none border-b border-blue-500 mx-2 box-border text-gray-500`}
-                contentEditable={false}
-                data-node-type={type}
-                onInput={handleInput}
-                placeholder={placeholder}
-                defaultValue={value}
+                as={'span'}
             >
+                {
+                    type === 'input' && <input type="password"
+                        style={{ width: `${count}rem` }}
+                        className={`outline-none border-b border-blue-500 mx-2 box-border text-gray-500`}
+                        contentEditable={false}
+                        onInput={handleInput}
+                        placeholder={placeholder}
+                        defaultValue={value}
+                    />
+                }
+                {
+                    type === 'select' && <select defaultValue={value}>
+                        <option value="1">1</option>
+                    </select>
+                }
 
             </NodeViewContent>
         </NodeViewWrapper>
     )
 }
 
-export default memo(View)
+export default View

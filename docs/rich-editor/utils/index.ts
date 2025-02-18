@@ -36,6 +36,7 @@ export function deserialize(input: string) {
       attrs: {
         placeholder: value,
         value: '',
+        type: 'input'
       },
     });
 

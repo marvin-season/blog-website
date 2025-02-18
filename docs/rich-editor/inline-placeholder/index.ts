@@ -4,15 +4,14 @@ import View from './view';
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
-    inlinePlaceholder: {
-    };
+    inlinePlaceholder: {};
   }
 }
 
 interface InlinePlaceholderAttributes {
   placeholder: string;
   value: string;
-  type: 'input';
+  type: 'input' | 'select';
   HTMLAttributes?: Record<string, any>;
 }
 
@@ -47,6 +46,7 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
           };
         },
       },
+      type: {},
       value: {
         default: '',
         rendered: false,
@@ -71,15 +71,15 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
   },
 
   renderHTML({ HTMLAttributes, node }) {
-    return [
-      'span',
-      mergeAttributes(this.options.HTMLAttributes || {}, HTMLAttributes),
-      node.attrs.placeholder,
-    ];
+    const attrs = mergeAttributes(
+      this.options.HTMLAttributes || {},
+      HTMLAttributes,
+    );
+    return ['span', attrs, node.attrs.placeholder];
   },
   addNodeView() {
     return ReactNodeViewRenderer(View);
-  }
+  },
 });
 
 export default InlinePlaceholder;
