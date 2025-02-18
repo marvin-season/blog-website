@@ -5,16 +5,28 @@ title: Tiptap Prictice
 import RichEditor from './index.tsx'
 
 <RichEditor />
-
+## Core Concept
+- **Editor**: The main editor component
+    - **Node**: A piece of content in the editor
+    - **Mark**: A piece of text formatting
+    - **Extension**: A piece of functionality
+- **Schema**: The structure of the document
+- **Commands**: Functions to manipulate the editor
+- **Plugins**: Extend the editor with custom functionality
+- **State**: The current state of the editor
 ## Design
 ```mermaid
 sequenceDiagram
     participant User
     participant Editor
+    participant CustomNode
 
     Note over Editor: 初始化文本 "name: {{name}}, age: {{age}}"
     Note over Editor: 自定义节点匹配规则
     Editor-->>Editor: 反序列化为 JSON
+    Editor-->>CustomNode: 自定义节点处理
+    CustomNode-->>CustomNode: 自定义渲染逻辑
+    CustomNode -->>Editor: 渲染自定义组件
     Editor->>User: 渲染文本
     User->>Editor: 修改文本
     Editor-->>Editor: 更新 JSON
@@ -24,4 +36,49 @@ sequenceDiagram
     Editor-->>User: 序列化为 文本信息
     Note over Editor: 自定义节点匹配规则
 ```
+## What
+A RichEditor.
+## How
+Creating a custom node.
+## Core Code
+```tsx
+const View = ({ node, updateAttributes }: NodeViewProps) => {
+    const { type, value, options, placeholder } = node.attrs
 
+    const handleInput = (e: React.FormEvent) => {
+        const inputElement = e.target as HTMLInputElement;
+        const newValue = inputElement.value || '';
+        updateAttributes({ value: newValue })
+    };
+
+    // dynaimc with of input
+    const count = caculteWidth(value ? value : placeholder);
+
+    return (
+        <NodeViewWrapper as="span">
+            <NodeViewContent
+                as={'input'}
+                style={{ width: `${count}rem` }}
+                contentEditable={false}
+                onInput={handleInput}
+                placeholder={placeholder}
+                defaultValue={value}
+            >
+            </NodeViewContent>
+        </NodeViewWrapper>
+    )
+}
+
+const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
+    renderHTML({ HTMLAttributes, node }) {
+        const attrs = mergeAttributes(
+            this.options.HTMLAttributes || {},
+            HTMLAttributes,
+        );
+        return ['span', attrs, 0]; // 0 or child of span
+    },
+    addNodeView() {
+        return ReactNodeViewRenderer(View);
+    },
+})
+```
