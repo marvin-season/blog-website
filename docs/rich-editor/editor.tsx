@@ -36,8 +36,9 @@ const handleSave = (json: JSONContent) => {
 }
 
 const templateList = [
-    "我是{{宫本武藏}},我的工作是 {{吃饭睡觉打拳击}}。",
-    "请帮我查询 {{昨天}}的日程"
+    "我是{{角色名}}, 我的工作是{{主要活动}}，我的爱好是{{爱好}}",
+    "我喜欢{{活动1}}和{{活动2}}，但我最擅长{{技能}}",
+    "在我的{{生活}}中，{{事情1}}和{{事情2}}是我每天必做的事。",
 ]
 export const Trigger = ({ setTriggerKey, triggerKey }) => {
     const { editor } = useCurrentEditor();
@@ -48,11 +49,12 @@ export const Trigger = ({ setTriggerKey, triggerKey }) => {
         {/* trigger @ */}
         <Tippy
             delay={100}
+            className='border border-blue-300 backdrop-blur backdrop-opacity-80 p-4 rounded-[12px] shadow text-sm'
             duration={0}
-            content={<div className={""}>
+            content={<div className={"flex flex-col gap-2"}>
                 {
                     templateList.map((item, index) => {
-                        return <div onClick={() => {
+                        return <div className='truncate cursor-pointer hover:text-blue-400' onClick={() => {
                             editor.commands.setContent(deserialize(item))
                         }} key={index}>{item}</div>
                     })
@@ -65,7 +67,7 @@ export const Trigger = ({ setTriggerKey, triggerKey }) => {
         >
             <div className='cursor-pointer p-4 bg-white w-full rounded-[12px] shadow text-blue-500'>
                 <span onClick={() => {
-                    setTriggerKey('@')
+                    setTriggerKey(triggerKey === '@' ? null : '@')
                 }}>
                     {'@'}
                 </span>
