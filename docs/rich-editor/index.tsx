@@ -7,7 +7,7 @@ function App() {
     const [triggerKey, setTriggerKey] = useState<string>(undefined);
 
     const editorProps = useEditorProps({
-        content: deserialize("我是{{宫本武藏}},我的工作是 {{吃饭睡觉打拳击}}。"),
+        content: deserialize("我是{{宫本武藏}},我的爱好是{{爱好:吃饭#睡觉#打豆豆}}。"),
         setTriggerKey
     })
 

@@ -43,7 +43,7 @@ const handleSave = (json: JSONContent) => {
 
 const templateList = [
     "我是{{角色名}}, 我的工作是{{主要活动}}，我的爱好是{{爱好}}",
-    "我喜欢{{活动1}}和{{活动2}}，但我最擅长{{技能}}",
+    "我喜欢{{活动1}}和{{活动2}}，但我最擅长{{技能:下棋#游戏#写作}}。",
     "在我的{{生活}}中，{{事情1}}和{{事情2}}是我每天必做的事。",
 ]
 export const Trigger = ({ setTriggerKey, triggerKey }) => {

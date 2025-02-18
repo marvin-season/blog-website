@@ -30,14 +30,17 @@ export function deserialize(input: string) {
       });
     }
 
+    const [placeholder, optionsString] = value.split(':');
+    const options = optionsString ? optionsString.split('#') : undefined;
+
     // 添加占位符
     content.push({
       type: 'inlinePlaceholder',
       attrs: {
-        placeholder: value,
+        placeholder,
         value: '',
-        type: 'select',
-        options: ['吃饭', '睡觉', '打拳击'],
+        type: options ? 'select' : 'input',
+        options,
       },
     });
 
