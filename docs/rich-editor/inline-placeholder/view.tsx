@@ -11,9 +11,9 @@ const caculteWidth = (value: string) => {
 
 let timer: number | null = null;
 const View = ({ node, updateAttributes }: NodeViewProps) => {
-    const { type, value, placeholder } = node.attrs
-    
-    console.log('type', type)
+    const { type, value, options, placeholder } = node.attrs
+
+    console.log('options', options)
     // 当输入变化时更新 value 属性
     const handleInput = (e: React.FormEvent) => {
         const inputElement = e.target as HTMLInputElement;
@@ -42,8 +42,12 @@ const View = ({ node, updateAttributes }: NodeViewProps) => {
                     />
                 }
                 {
-                    type === 'select' && <select defaultValue={value}>
-                        <option value="1">1</option>
+                    type === 'select' && <select defaultValue={value} onInput={handleInput} className="outline-none border-b border-blue-500 mx-2 box-border text-gray-500">
+                        {
+                            options.map((option, index) => {
+                                return <option key={index} value={option}>{option}</option>
+                            })
+                        }
                     </select>
                 }
 

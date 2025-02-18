@@ -36,7 +36,8 @@ export function deserialize(input: string) {
       attrs: {
         placeholder: value,
         value: '',
-        type: 'input'
+        type: 'select',
+        options: ['吃饭', '睡觉', '打拳击'],
       },
     });
 

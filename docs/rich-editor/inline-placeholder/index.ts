@@ -12,6 +12,8 @@ interface InlinePlaceholderAttributes {
   placeholder: string;
   value: string;
   type: 'input' | 'select';
+
+  options?: string[];
   HTMLAttributes?: Record<string, any>;
 }
 
@@ -47,6 +49,9 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
         },
       },
       type: {},
+      options: {
+        rendered: false,
+      },
       value: {
         default: '',
         rendered: false,
