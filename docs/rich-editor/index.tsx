@@ -1,5 +1,5 @@
 import { EditorProvider } from "@tiptap/react";
-import { Trigger, useEditorProps } from "./editor";
+import { Trigger, useEditorProps, Sender, Tips } from "./editor";
 import { deserialize } from "./utils";
 import { useState } from "react";
 
@@ -13,8 +13,11 @@ function App() {
 
     return <div className="bg-[#f5f1f1] rounded-4xl flex flex-col justify-center items-center gap-4 p-8 pb-4">
         <EditorProvider editable={true} {...editorProps}>
-            <Trigger triggerKey={triggerKey} setTriggerKey={setTriggerKey}/>
-            <div className="text-gray-400 text-sm">{'CTRL/Command + Enter or Typing @'}</div>
+            <div className="w-full flex gap-4 items-end">
+                <Trigger triggerKey={triggerKey} setTriggerKey={setTriggerKey} />
+                <Sender />
+            </div>
+            <Tips />
         </EditorProvider>
     </div>;
 }

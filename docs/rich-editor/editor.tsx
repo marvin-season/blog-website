@@ -65,7 +65,7 @@ export const Trigger = ({ setTriggerKey, triggerKey }) => {
             visible={triggerKey === '@'}
             onClickOutside={() => setTriggerKey(null)} // 点击外部关闭弹窗
         >
-            <div className='cursor-pointer p-4 bg-white w-full rounded-[12px] shadow text-blue-500'>
+            <div className='cursor-pointer px-4 py-2 bg-white w-full rounded-[12px] shadow text-blue-500'>
                 <span onClick={() => {
                     setTriggerKey(triggerKey === '@' ? null : '@')
                 }}>
@@ -75,4 +75,19 @@ export const Trigger = ({ setTriggerKey, triggerKey }) => {
 
         </Tippy>
     </>
+}
+
+export const Sender = () => {
+    const { editor } = useCurrentEditor();
+
+    return <>
+        <div className={"border text-white px-3 py-1 rounded-[12px] bg-blue-500 cursor-pointer"} onClick={() => {
+            handleSave(editor.getJSON())
+        }}>Send</div>
+    </>
+}
+
+
+export const Tips = () => {
+    return <div className="text-gray-400 text-sm">{'CTRL/Command + Enter or Typing @'}</div>
 }
