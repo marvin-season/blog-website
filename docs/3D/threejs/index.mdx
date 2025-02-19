@@ -2,7 +2,43 @@
 title: Three.js
 ---
 
+
 ## Introduction
+
+### 坐标系概述
+
+| **概念**        | **描述**                                                                                   |
+|-----------------|--------------------------------------------------------------------------------------------|
+| **坐标系类型**  | Three.js 使用的是 **右手坐标系**（Right-Handed Coordinate System）。                        |
+| **X 轴**        | 横向，正方向指向右侧（水平）。                                                             |
+| **Y 轴**        | 纵向，正方向指向上方（垂直）。                                                             |
+| **Z 轴**        | 深度方向，正方向指向屏幕外。                                                               |
+| **物体的位置**  | 物体的位置由 `position` 属性控制，是一个 **Vector3** 对象。通过设置 `x`、`y`、`z` 控制物体位置。  |
+| **物体的旋转**  | 物体的旋转由 `rotation` 属性控制，也是一个 **Vector3** 对象，单位是弧度，分别控制绕 X、Y、Z 轴的旋转。|
+| **物体的缩放**  | 物体的缩放通过 `scale` 属性控制，也是一个 **Vector3** 对象，分别控制 X、Y、Z 轴的缩放比例。     |
+| **父子关系**    | 物体之间可以形成父子关系，子物体的位置是相对于父物体的。父物体的变换会影响子物体。                     |
+| **局部与世界坐标系** | 物体的坐标可以是相对于父物体的局部坐标，也可以是相对于世界坐标系的世界坐标。                           |
+| **变换矩阵**    | 变换矩阵描述物体的**位置**、**旋转**和**缩放**。Three.js 会自动计算这些矩阵，`matrixWorld` 代表物体在世界坐标系中的变换矩阵。 |
+| **坐标转换方法** | `object.localToWorld(vector)`：将局部坐标转换为世界坐标。`object.worldToLocal(vector)`：将世界坐标转换为局部坐标。 |
+
+```javascript
+object.rotation.x  // 围绕X轴的旋转（俯仰）
+object.rotation.y  // 围绕Y轴的旋转（偏航）
+object.rotation.z  // 围绕Z轴的旋转（滚转）
+
+object.rotation.x += 0.1;  // 每次调用时沿X轴旋转0.1弧度
+object.rotation.y += 0.05; // 每次调用时沿Y轴旋转0.05弧度
+
+
+object.scale.x  // 沿X轴的缩放比例
+object.scale.y  // 沿Y轴的缩放比例
+object.scale.z  // 沿Z轴的缩放比例
+
+object.scale.set(2, 1, 1); // X轴拉伸为2倍，Y轴和Z轴不变
+```
+
+### 基础概念
+
 1. Basic Three.js Concepts
     -	Scene: The container for all objects, lights, and cameras, defining all elements in the 3D space.
     -	Camera: Determines the viewing perspective of the scene. Common types are PerspectiveCamera and OrthographicCamera.
@@ -37,3 +73,14 @@ controls.enableDamping = true; // Smooth movement
 controls.dampingFactor = 0.25; // Damping factor for smoother controls
 controls.screenSpacePanning = false; // Disables up/down movement
 ```
+
+## Recap
+完成一个 Three.js 的 Demo 通常涉及以下方面的知识：
+- 基础知识：场景、相机、渲染器的搭建。
+- 3D 对象：几何体、材质和网格的使用。
+- 灯光与阴影：不同类型的光源与阴影效果。
+- 交互：相机控制、鼠标和键盘事件。
+- 动画：物体的动态变换与动画循环。
+- 优化与性能：资源管理、几何体优化等。
+- 特效：粒子系统、后期处理等。
+- 模型加载：加载和渲染外部模型。
