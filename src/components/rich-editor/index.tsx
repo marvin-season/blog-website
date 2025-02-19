@@ -1,0 +1,1 @@
+export { default as RichEditorProvider } from './editor-provider'
