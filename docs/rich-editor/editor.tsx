@@ -31,7 +31,7 @@ export const useEditorProps = ({ content, setTriggerKey }: { content: string | J
         content,
         editorProps: {
             attributes: {
-                class: 'w-full prose-sm focus:outline-none w-3/4 p-10 bg-white shadow rounded-[16px]',
+                class: 'w-full prose-sm focus:outline-none p-10 bg-white shadow rounded-[16px]',
             },
         },
     } as EditorProviderProps
@@ -87,7 +87,7 @@ export const Sender = () => {
     const { editor } = useCurrentEditor();
 
     return <>
-        <div className={"border text-white px-3 py-1 rounded-[12px] bg-blue-500 cursor-pointer"} onClick={() => {
+        <div className={"border text-white px-4 py-1 rounded-[8px] bg-blue-500 hover:bg-blue-600 cursor-pointer"} onClick={() => {
             handleSave(editor.getJSON())
         }}>Send</div>
     </>
