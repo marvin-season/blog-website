@@ -10,16 +10,16 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: '朝花夕拾',
+    title: '', // 朝花夕拾
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-       Gathering flowers in the morning, reminiscing in the evening
+        Gathering flowers in the morning, reminiscing in the evening
       </>
     ),
   },
   {
-    title: '兴尽悲来，识盈虚之有数。',
+    title: '', // 兴尽悲来，识盈虚之有数。
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
@@ -28,7 +28,7 @@ const FeatureList: FeatureItem[] = [
     ),
   },
   {
-    title: '东隅已逝，桑榆非晚。',
+    title: '', // 东隅已逝，桑榆非晚。
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
@@ -38,9 +38,9 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({ title, Svg, description }: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
+    <div className={"flex flex-col items-center"}>
       <div className="text--center">
         <Svg className={styles.featureSvg} role="img" />
       </div>
@@ -54,14 +54,10 @@ function Feature({title, Svg, description}: FeatureItem) {
 
 export default function HomepageFeatures() {
   return (
-    <section className={styles.features}>
-      <div className="container">
-        <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
-        </div>
-      </div>
+    <section className={'container flex justify-between'}>
+      {FeatureList.map((props, idx) => (
+        <Feature key={idx} {...props} />
+      ))}
     </section>
   );
 }
