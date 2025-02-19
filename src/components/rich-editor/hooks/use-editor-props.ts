@@ -11,11 +11,11 @@ import { ConfirmExtension } from '../extension/confirm';
 
 export const useEditorProps = ({
   content,
-  setTriggerKey,
+  onMentionKeyPress,
   onConfirmKeyPress
 }: {
   content: string | JSONContent;
-  setTriggerKey: (key: string) => void;
+  onMentionKeyPress: (key: string) => Promise<void>;
   onConfirmKeyPress: (editor: Editor) => Promise<boolean | void>;
 }) => {
   return {
@@ -29,9 +29,7 @@ export const useEditorProps = ({
       }),
       InlinePlaceholder,
       MentionExtension.configure({
-        onMentionKeyPress: (key: string) => {
-          setTriggerKey(key);
-        },
+        onMentionKeyPress,
       }),
       ConfirmExtension.configure({
         onConfirmKeyPress

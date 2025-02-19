@@ -6,7 +6,8 @@ import { Trigger } from "./trigger";
 import { Sender } from "./sender";
 import { Tips } from "./tips";
 
-function RichEditorProvider() {
+
+function RichEditor() {
     const [triggerKey, setTriggerKey] = useState<string>(undefined);
     const handelSave = async (editor: Editor) => {
         alert(serialize(editor.getJSON()))
@@ -14,7 +15,9 @@ function RichEditorProvider() {
 
     const editorProps = useEditorProps({
         content: deserialize("我是{{宫本武藏}},我的爱好是{{爱好:吃饭#睡觉#打豆豆}}。"),
-        setTriggerKey,
+        async onMentionKeyPress(key) {
+            setTriggerKey(key)
+        },
         async onConfirmKeyPress(editor) {
             handelSave(editor)
         }
@@ -33,4 +36,4 @@ function RichEditorProvider() {
     </div>;
 }
 
-export default RichEditorProvider;
+export default RichEditor;
