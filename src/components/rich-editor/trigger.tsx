@@ -1,6 +1,7 @@
 import { useCurrentEditor } from "@tiptap/react";
 import { deserialize } from "./utils";
 import Tippy from "@tippyjs/react";
+import 'tippy.js/animations/shift-away.css'; // 过渡动画
 import { useImperativeHandle, useState } from "react";
 
 const templateList = [
@@ -24,9 +25,8 @@ export const Trigger = ({ ref }) => {
     return <>
         <div className='cursor-pointer px-4 py-2 bg-white w-full rounded-[12px] shadow text-blue-500'>
             <Tippy
-                delay={100}
+                animation="shift-away"
                 className='border border-blue-300 backdrop-blur backdrop-opacity-80 p-4 rounded-[12px] shadow text-sm'
-                duration={0}
                 content={<div className={"flex flex-col gap-2"}>
                     {
                         templateList.map((item, index) => {
