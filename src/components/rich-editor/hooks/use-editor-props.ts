@@ -8,6 +8,7 @@ import { StarterKit } from '@tiptap/starter-kit';
 import InlinePlaceholder from '../extension/inline-placeholder';
 import { MentionExtension } from '../extension/mention';
 import { ConfirmExtension } from '../extension/confirm';
+import { MentionKey } from '../constant';
 
 export const useEditorProps = ({
   content,
@@ -15,7 +16,7 @@ export const useEditorProps = ({
   onConfirmKeyPress
 }: {
   content: string | JSONContent;
-  onMentionKeyPress: (key: string) => Promise<void>;
+  onMentionKeyPress: (key: MentionKey) => Promise<void>;
   onConfirmKeyPress: (editor: Editor) => Promise<boolean | void>;
 }) => {
   return {

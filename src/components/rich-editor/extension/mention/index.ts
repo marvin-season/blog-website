@@ -1,23 +1,20 @@
 import { Extension } from '@tiptap/core';
+import { MentionKey } from '../../constant';
 interface MentionExtensionOptions {
-  onMentionKeyPress: (key: string) => boolean; // 外部回调函数
+  onMentionKeyPress: (key: MentionKey) => boolean; // 外部回调函数
 }
 export const MentionExtension = Extension.create({
   name: 'mention',
 
   addKeyboardShortcuts() {
-    return {
-      // 监听 @ 键
-      '@': () => {
-        // 处理 @ 输入
-        return this.options.onMentionKeyPress('@');
-      },
+    // iterate over all keys in MentionKey
 
-      // 你也可以监听其他键
-      '#': () => {
-        console.log('# pressed');
-        return false; // 允许其他行为
-      },
-    };
+    return Object.entries(MentionKey).reduce((prev, [key, value]) => {
+      prev[key] = () => {
+        this.options.onMentionKeyPress(value);
+        return true;
+      };
+      return prev;
+    }, {});
   },
 });

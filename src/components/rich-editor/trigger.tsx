@@ -3,6 +3,7 @@ import { deserialize } from "./utils";
 import Tippy from "@tippyjs/react";
 import 'tippy.js/animations/shift-away.css'; // 过渡动画
 import { useImperativeHandle, useState } from "react";
+import { MentionKey } from "./constant";
 
 const templateList = [
     "我是{{角色名}}, 我的工作是{{主要活动}}，我的爱好是{{爱好}}",
@@ -11,7 +12,7 @@ const templateList = [
 ]
 export const Trigger = ({ ref }) => {
     const { editor } = useCurrentEditor();
-    const [triggerKey, setTriggerKey] = useState<string>(undefined);
+    const [triggerKey, setTriggerKey] = useState<MentionKey>(undefined);
 
     if (!editor) {
         return null
@@ -24,31 +25,37 @@ export const Trigger = ({ ref }) => {
 
     return <>
         <div className='cursor-pointer px-4 py-2 bg-white w-full rounded-[12px] shadow text-blue-500'>
-            <Tippy
-                animation="shift-away"
-                className='border border-blue-300 backdrop-blur backdrop-opacity-80 p-4 rounded-[12px] shadow text-sm'
-                content={<div className={"flex flex-col gap-2"}>
-                    {
-                        templateList.map((item, index) => {
-                            return <div className='truncate cursor-pointer hover:text-blue-400' onClick={() => {
-                                editor.commands.setContent(deserialize(item))
-                            }} key={index}>{item}</div>
-                        })
-                    }
-                </div>}
-                interactive
-                placement={'top-start'} // 将弹窗位置设置为底部
-                visible={triggerKey === '@'}
-                onClickOutside={() => setTriggerKey(null)} // 点击外部关闭弹窗
-            >
-                <span onClick={() => {
-                    setTriggerKey(triggerKey === '@' ? null : '@')
-                }}>
-                    {'@'}
-                </span>
+            {
+                Object.entries(MentionKey).map(([key, value]) => {
+                    return <Tippy
+                        animation="shift-away"
+                        className='border border-blue-300 backdrop-blur backdrop-opacity-80 p-4 rounded-[12px] shadow text-sm'
+                        content={<div className={"flex flex-col gap-2"}>
+                            {
+                                templateList.map((item, index) => {
+                                    return <div className='truncate cursor-pointer hover:text-blue-400' onClick={() => {
+                                        editor.commands.setContent(deserialize(item))
+                                    }} key={index}>{item}</div>
+                                })
+                            }
+                        </div>}
+                        interactive
+                        placement={'top-start'} // 将弹窗位置设置为底部
+                        visible={triggerKey === key}
+                        onClickOutside={() => setTriggerKey(null)} // 点击外部关闭弹窗
+                    >
+                        <span onClick={() => {
+                            setTriggerKey(triggerKey === value ? null : value)
+                        }}>
+                            {key}
+                        </span>
 
 
-            </Tippy>
+                    </Tippy>
+                }
+                )
+            }
+
         </div>
         {/* trigger @ */}
 
