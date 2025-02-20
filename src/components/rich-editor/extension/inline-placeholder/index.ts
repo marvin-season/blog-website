@@ -80,7 +80,7 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
       this.options.HTMLAttributes || {},
       HTMLAttributes,
     );
-    return ['span', attrs, 0];
+    return ['span', attrs];
   },
   addNodeView() {
     return ReactNodeViewRenderer(View);
