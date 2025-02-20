@@ -10,7 +10,7 @@ export const MentionExtension = Extension.create({
     // iterate over all keys in MentionKey
 
     return Object.entries(MentionKey).reduce((prev, [key, value]) => {
-      prev[key] = () => {
+      prev[value] = () => {
         this.options.onMentionKeyPress(value);
         return true;
       };
