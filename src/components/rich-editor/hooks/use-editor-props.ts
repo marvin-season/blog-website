@@ -9,6 +9,7 @@ import InlinePlaceholder from '../extension/inline-placeholder';
 import { MentionExtension } from '../extension/mention';
 import { ConfirmExtension } from '../extension/confirm';
 import { MentionKey } from '../constant';
+import SelectionMark from '../extension/selection-mark';
 
 export const useEditorProps = ({
   content,
@@ -35,6 +36,7 @@ export const useEditorProps = ({
       ConfirmExtension.configure({
         onConfirmKeyPress
       }),
+      SelectionMark
     ],
     content,
     editorProps: {

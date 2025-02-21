@@ -11,6 +11,6 @@ mentionListMap.set(MentionKey.At, [
 ]);
 
 mentionListMap.set(MentionKey.Sharp, [
-  '在我的{{生活}}中，{{事情1}}和{{事情2}}是我每天必做的事。',
+  'hello <span data-selection-mark>world</span>, this is the future',
   '我的爱好是{{爱好:吃饭#睡觉#打豆豆}}。',
 ]);
