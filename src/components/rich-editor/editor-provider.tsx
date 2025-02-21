@@ -5,6 +5,7 @@ import { useEditorProps } from "./hooks/use-editor-props";
 import { Trigger } from "./trigger";
 import { Sender } from "./sender";
 import { Tips } from "./tips";
+import './index.css'
 
 
 function RichEditor() {

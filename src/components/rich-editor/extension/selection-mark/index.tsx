@@ -27,7 +27,7 @@ const SelectionMark = Mark.create<SelectionMarkProps>({
   },
 
   renderHTML({ HTMLAttributes }) {
-    return ['mark', mergeAttributes(HTMLAttributes, { 'data-selection-mark': '' }), 0];
+    return ['selection-mark', mergeAttributes(HTMLAttributes, { 'data-selection-mark': '' }), 0];
   },
 
   addCommands() {
