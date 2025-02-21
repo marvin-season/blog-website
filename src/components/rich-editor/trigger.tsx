@@ -30,8 +30,8 @@ export const Trigger = ({ ref }) => {
                             {
                                 mentionListMap.get(value).map((item, index) => {
                                     return <div className='truncate cursor-pointer hover:text-blue-400' onClick={() => {
-                                        editor.commands.setContent(deserialize(item))
-                                    }} key={index}>{item}</div>
+                                        editor.commands.setContent(item?.serializable ? deserialize(item.value) : item.value)
+                                    }} key={index}>{item.value}</div>
                                 })
                             }
                         </div>}
