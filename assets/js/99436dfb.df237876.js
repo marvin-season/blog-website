@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdanny_website=self.webpackChunkdanny_website||[]).push([[4392],{6938:e=>{e.exports=JSON.parse('{"label":"compose","permalink":"/danny-website/blog/tags/compose","allTagsPath":"/danny-website/blog/tags","count":1}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdanny_website=self.webpackChunkdanny_website||[]).push([[4121],{8070:e=>{e.exports=JSON.parse('[{"label":"eventloop","permalink":"/danny-website/docs/tags/eventloop","count":1},{"label":"javascript","permalink":"/danny-website/docs/tags/javascript","count":1}]')}}]);
