@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkblog_website=self.webpackChunkblog_website||[]).push([[8947],{6600:e=>{e.exports=JSON.parse('{"authors":[{"name":"marvin-season","title":"Maintainer of Docusaurus","url":"https://github.com/marvin-season","imageURL":"https://avatars.githubusercontent.com/u/64943287?v=4","key":"marvin-season","page":null,"count":7}]}')}}]);
