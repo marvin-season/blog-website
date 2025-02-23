@@ -21,37 +21,32 @@ const View = ({ node, updateAttributes }: NodeViewProps) => {
         timer && clearTimeout(timer);
         timer = setTimeout(() => {
             updateAttributes({ value: newValue })
-        }, 200);
+        }, 50);
     };
 
     const count = caculteWidth(value ? value : placeholder);
 
     return (
         <NodeViewWrapper as="span">
-            <NodeViewContent
-                as={'span'}
-            >
-                {
-                    type === 'input' && <input
-                        style={{ width: `${count}rem` }}
-                        className={`outline-none border-b border-blue-500 mx-2 box-border text-gray-500`}
-                        contentEditable={false}
-                        onInput={handleInput}
-                        placeholder={placeholder}
-                        defaultValue={value}
-                    />
-                }
-                {
-                    type === 'select' && <select defaultValue={value} onInput={handleInput} className="outline-none border-b border-blue-500 mx-2 box-border text-gray-500">
-                        {
-                            options.map((option, index) => {
-                                return <option key={index} value={option}>{option}</option>
-                            })
-                        }
-                    </select>
-                }
-
-            </NodeViewContent>
+            {
+                type === 'input' && <input
+                    style={{ width: `${count}rem` }}
+                    className={`outline-none border-b border-blue-500 mx-2 box-border text-gray-500 transition-all`}
+                    contentEditable={false}
+                    onInput={handleInput}
+                    placeholder={placeholder}
+                    defaultValue={value}
+                />
+            }
+            {
+                type === 'select' && <select defaultValue={value} onInput={handleInput} className="outline-none border-b border-blue-500 mx-2 box-border text-gray-500">
+                    {
+                        options.map((option, index) => {
+                            return <option key={index} value={option}>{option}</option>
+                        })
+                    }
+                </select>
+            }
         </NodeViewWrapper>
     )
 }
