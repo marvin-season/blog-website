@@ -1,5 +1,4 @@
-import { NodeViewContent, NodeViewProps, NodeViewWrapper } from "@tiptap/react"
-import { memo } from "react";
+import { NodeViewProps, NodeViewWrapper } from "@tiptap/react"
 const caculteWidth = (value: string) => {
     // 如果是英文的话，一个字符占用 0.5rem，中文占用 1rem
     // 英文的个数
@@ -19,7 +18,7 @@ const View = ({ node, updateAttributes }: NodeViewProps) => {
         const inputElement = e.target as HTMLInputElement;
         const newValue = inputElement.value || '';
         timer && clearTimeout(timer);
-        timer = setTimeout(() => {
+        timer = window.setTimeout(() => {
             updateAttributes({ value: newValue })
         }, 50);
     };
