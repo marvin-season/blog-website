@@ -1,23 +1,24 @@
-const queue = []
+const set = new Set()
 
-function publisher(data) {
-  queue.forEach((resolve) => {
+function publish(data) {
+  set.forEach((resolve) => {
     resolve(data)
   })
+  set.clear()
 }
 
-async function subscriber() {
+async function subscribe() {
   const result = await new Promise((resolve) => {
-    queue.push(resolve)
+    set.add(resolve)
   })
   console.log('subscriber', result)
-  return subscriber()
+  return subscribe()
 }
 
-subscriber()
-subscriber()
+subscribe()
+subscribe()
 let i = 0
 
 setInterval(() => {
-  publisher(i++)
+  publish(i++)
 }, 1000)
