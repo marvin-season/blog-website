@@ -1,26 +1,25 @@
-name: Auto Deploy
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main  # 指定触发分支为 main
+    branches: [main]  # main 分支触发
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # 使用最新 Ubuntu 系统
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4  # 拉取代码
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # 配置 Node.js 环境
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20  # 指定 Node.js 版本
+          node-version: 20   # 与本地开发环境保持一致
 
-      # 安装依赖
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      # 执行部署命令
-      - name: Run Deployment
+      - name: Build and Deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 自动生成的密钥
         run: npm run deploy
