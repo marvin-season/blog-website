@@ -11,11 +11,13 @@ async function subscriber() {
     queue.push(resolve)
   })
   console.log('subscriber', result)
+  return subscriber()
 }
 
 subscriber()
 subscriber()
-setTimeout(() => {
-  publisher('hi')
-}, 1000)
+let i = 0
 
+setInterval(() => {
+  publisher(i++)
+}, 1000)
