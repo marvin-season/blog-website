@@ -20,6 +20,7 @@
   /* scroll behavior */
   scroll-behavior: smooth;
   font-family:'Times New Roman', Times, serif;
+  font-size: 1.1rem;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
@@ -36,4 +37,5 @@
     /* scroll behavior */
     scroll-behavior: smooth;
     font-family:'Times New Roman', Times, serif;
+    font-size: 1.1rem;
 }
