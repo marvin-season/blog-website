@@ -21,7 +21,9 @@ data: "{ name: 'marvin', age: 20 }"
 ```
 在SSE中 数据以固定的格式传输到客户端，在使用之前客户端或许需要先进行解析。
 ### Parse Data from string message
+可以直接使用 [fetch-event-source](https://github.com/Azure/fetch-event-source) 来处理SSE格式的数据，其核心原理类似下面：
 
+{/* truncate */}
 
 ```ts
 export async function* SSEMessageGenerator<T>(stream: ReadableStream) {
