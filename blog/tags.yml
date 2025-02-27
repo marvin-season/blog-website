@@ -13,7 +13,22 @@ ai:
   permalink: /ai
   description: AI tag description
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+github:
+  label: GitHub
+  permalink: /github
+  description: GitHub tag description
+
+actions:
+  label: GitHub Actions
+  permalink: /github-actions
+  description: GitHub Actions tag description
+
+pages:
+  label: GitHub Pages
+  permalink: /github-pages
+
+tiptap:
+  label: Tiptap
+  permalink: /tiptap
+  description: Tiptap tag description
+
