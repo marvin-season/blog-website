@@ -2,19 +2,43 @@
 slug: ai-chat
 title: AI Chat
 authors: [marvin-season]
-tags: [javscript, ai]
+tags: [javascript, ai]
 date: "2024-02-06"
 ---
 
-## Mental Model
+## 概要
+核心数据结构： 消息列表 (messages)
 
-**Producer** : AI Bot/Server
+核心操作：调用模型接口，生成消息
 
-**Consumer** : User/UserAgent/Browser
+次要操作：复制、引用、重新生成、编辑、参考附件选择
 
-**Message** : Message
+UI：聚合上操作以及数据
 
-## S-S-E
+```tsx
+class CoreUI {
+    useMessage(){
+        // connect to message
+        return this
+    }
+    useHandle(){
+        // connect to handle
+        return this
+    }
+    useChat(){
+        // connect to AI
+        return this
+    }
+    render(){
+        // render ui
+        return <></>
+    }
+}
+new CoreUI().useMessage().useHandle().useChat().render();
+```
+
+## Concept
+### S-S-E
 Server-Send-Event: data is flowing from server to client
 format: tag:string
 for example:
@@ -31,9 +55,6 @@ import {Chat} from  '@site/src/components/ai';
 
 ### Parse Data from string message
 可以直接使用 [fetch-event-source](https://github.com/Azure/fetch-event-source) 来处理SSE格式的数据，其核心原理类似下面：
-
-
-
 
 ```ts
 const textDecoder = new TextDecoder()
@@ -72,9 +93,8 @@ for await (const message of SSEMessageGenerator<{ id: string }>(response.body)) 
 ```
 **SSEMessageGenerator**的作用是将数据从 <u>ReadableStream</u> 中解析出来，并返回一个生成器。可以通过迭代这个生成器来获取更加详细的数据。
 
-## ModelDesign
-**define message**
-
+## Design
+### Message
 ```typescript
 class Message {
     id: string;
@@ -98,8 +118,7 @@ class MessageManager {
     citeMessage(message: Message){}
 }
 ```
-将上述实体设计转换为 react hook
-
+Convert to react hook
 ```tsx
 import {useState} from "react";
 
@@ -124,14 +143,80 @@ const useMessage = () => {
         getMessages
     }
 }
+```
+### Handle
+```tsx
+import {useState} from "react";
+
+class Message {
+    id: string;
+    content: string
+}
+
+export default function () {
+    const [citeMessage, setCiteMessage] = useState<Message>();
+    const [loading, setLoading] = useState(false)
+
+    async function* onRe(message: Message) {
+        for (const msg of message.content) {
+            yield {
+                id: message.id,
+                content: msg
+            }
+        }
+    }
+
+    function onCopy(message: Message) {
+        navigator.clipboard.writeText(message.content).then(() => {
+            alert('copied to clipboard')
+        });
+    }
+
+    function onCite(message: Message) {
+        setCiteMessage(prev => {
+            if (prev?.id === message.id) {
+                return undefined
+            }
+            return message
+        });
+    }
+
+    return {
+        onRe,
+        onCopy,
+        onCite,
+        setLoading,
+        loading,
+        citeMessage,
+    }
+}
+````
+
+### AI
+```tsx
+export default function useChat() {
+    async function* send(value: string, {} = {}) {
+        yield 'hello'
+        yield 'world'
+        yield '!'
+    }
+    return {
+        send
+    }
+}
+```
+### UI
+```tsx
+// @ts-ignore
+import { useMessage, useHandle, useChat } from 'your-components'
+
 function Chat(){
-    const {
-        messages,
-        appendMessage,
-    } = useMessage()
+    const {  messages } = useMessage();
+    const {  copy } = useHandle();
+    const {  send } = useChat();
 
     return <>
-
+        Your Ui
     </>
 }
 ```
