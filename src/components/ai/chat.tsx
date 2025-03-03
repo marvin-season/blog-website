@@ -47,7 +47,7 @@ export default function () {
         <RichEditor onSend={async value => {
             setLoading(true);
             appendMessage({
-                id: Date.now().toString(),
+                id: Date.now().toString() + 'user',
                 content: value
             })
             // @ts-ignore
