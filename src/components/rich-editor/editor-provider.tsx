@@ -8,10 +8,19 @@ import { Tips } from "./tips";
 import './index.css'
 
 
-function RichEditor() {
+function RichEditor({
+    onSend
+                    }: {
+    onSend?: (value: string) => void
+}) {
     const triggerRef = useRef(null)
     const handelSave = async (editor: Editor) => {
-        alert(serialize(editor.getJSON()))
+        const value = serialize(editor.getJSON())
+        if (onSend) {
+            onSend(value)
+        } else {
+            alert(value)
+        }
     }
 
     const editorProps = useEditorProps({

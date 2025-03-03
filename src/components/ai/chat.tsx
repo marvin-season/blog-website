@@ -1,6 +1,7 @@
 import useMessage from "./hooks/use-message";
 import useChat from "./hooks/use-chat";
 import {History} from "./components/history";
+import {RichEditor} from "@site/src/components/rich-editor";
 
 export default function () {
     const {
@@ -34,19 +35,16 @@ export default function () {
                 await Array.fromAsync(onRe(message), createOrAppendContent)
                 setLoading(false)
             }}/>
+        {loading && <div>loading...</div>}
         <div>
             {citeMessage && <span className={"bg-blue-200 text-white"}>{citeMessage.content}</span>}
         </div>
-        <div>
-            <button className={"px-2.5 py-0.5 border rounded text-blue-400 hover:text-blue-500 cursor-pointer"}
-                    onClick={() => {
-                        appendMessage({
-                            id: Date.now().toString(),
-                            content: Date.now().toString()
-                        })
-                    }}>
-                {loading ? '加载中' : '添加'}
-            </button>
-        </div>
+        <RichEditor onSend={value => {
+            setLoading(true);
+            appendMessage({
+                id: Date.now().toString(),
+                content: value
+            })
+        }}/>
     </div>
 }
