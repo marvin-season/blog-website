@@ -1,6 +1,10 @@
 export const textDecoder = new TextDecoder()
 export const textEncoder = new TextEncoder();
 
+export async function sleep(timeout: number) {
+    return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 export async function* SSEMessageGenerator<T>(stream: ReadableStream) {
     if (!stream) {
         return
@@ -31,15 +35,16 @@ export async function* SSEMessageGenerator<T>(stream: ReadableStream) {
 
 // 创建一个符合 SSE 格式的 ReadableStream
 export function createMockStream(data: string) {
+    const id = Date.now()
     return new ReadableStream({
-        start(controller) {
-            const id = Date.now()
+        async start(controller) {
             for (const chunk of data.split(/\s+/)) {
                 const line = `data: ${JSON.stringify({
                     id,
-                    text: chunk,
+                    text: chunk + " ",
                 })}`
                 controller.enqueue(textEncoder.encode(line));
+                await sleep(50);
             }
             controller.close(); // 结束流
         }
