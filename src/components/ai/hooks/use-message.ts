@@ -17,10 +17,13 @@ const useMessage = () => {
 
     function appendMessageContent(message: Message) {
         setMessages(prev => prev.map(item => {
-            return {
-                ...item,
-                content: item.content + message.content
+            if (item.id === message.id) {
+                return {
+                    ...item,
+                    content: item.content + message.content
+                }
             }
+            return item
         }))
     }
 
