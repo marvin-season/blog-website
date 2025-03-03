@@ -12,12 +12,16 @@ export default function () {
 
     const {
         onRe,
-        onCopy
+        onCopy,
+        onCite,
+        citeMessage
     } = useChat()
 
     return <div className={'shadow-lg p-4 border border-gray-200 rounded-lg'}>
         <History
+            citeMessage={citeMessage}
             messages={messages}
+            onCite={onCite}
             onCopy={onCopy}
             onRe={async (message) => {
                 // remove old Message
@@ -26,6 +30,9 @@ export default function () {
                     createOrAppendContent(msg)
                 }
             }}/>
+        <div>
+            {citeMessage && <span className={"bg-blue-200 text-white"}>{citeMessage.content}</span>}
+        </div>
         <div>
             <button className={"px-2.5 py-0.5 border rounded text-blue-400 hover:text-blue-500 cursor-pointer"}
                     onClick={() => {

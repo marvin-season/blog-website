@@ -1,6 +1,9 @@
 import {Message} from "../type";
+import {useState} from "react";
 
 export default function useChat() {
+    const [citeMessage, setCiteMessage] = useState<Message>()
+
     async function* onRe(message: Message) {
 
         for (const msg of message.content) {
@@ -11,15 +14,26 @@ export default function useChat() {
             }
         }
     }
-    
+
     function onCopy(message: Message) {
         navigator.clipboard.writeText(message.content).then(() => {
             alert('copied to clipboard')
         });
     }
 
+    function onCite(message: Message) {
+        setCiteMessage(prev => {
+            if (prev?.id === message.id) {
+                return undefined
+            }
+            return message
+        });
+    }
+
     return {
         onRe,
-        onCopy
+        onCopy,
+        onCite,
+        citeMessage
     }
 }
