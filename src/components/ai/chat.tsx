@@ -42,7 +42,7 @@ export default function () {
             }}/>
         {loading && <div>loading...</div>}
         <div>
-            {citeMessage && <span className={"bg-blue-200 text-white"}>{citeMessage.content}</span>}
+            {citeMessage && <span className={"bg-blue-400 text-white text-sm"}>{citeMessage.content}</span>}
         </div>
         <RichEditor onSend={async value => {
             setLoading(true);
