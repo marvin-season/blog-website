@@ -9,7 +9,9 @@ date: "2024-02-06"
 ## Mental Model
 
 **Producer** : AI Bot/Server
+
 **Consumer** : User/UserAgent/Browser
+
 **Message** : Message
 
 ## S-S-E
@@ -25,7 +27,13 @@ data: "{ name: 'marvin', age: 20 }"
 
 {/* truncate */}
 
+import {Chat} from  '@site/src/components/ai';
+
+<Chat/>
+
+
 ```ts
+const textDecoder = new TextDecoder()
 export async function* SSEMessageGenerator<T>(stream: ReadableStream) {
     if (!stream) {
         return
@@ -53,25 +61,76 @@ export async function* SSEMessageGenerator<T>(stream: ReadableStream) {
 
     }
 }
-```
 
-**SSEMessageGenerator**的作用是将数据从 <u>ReadableStream</u> 中解析出来，并返回一个生成器。可以通过迭代这个生成器来获取更加详细的数据。
-
-```ts
 const response = await fetch('');
 for await (const message of SSEMessageGenerator<{ id: string }>(response.body)) {
     console.log(message)
 }
 ```
+**SSEMessageGenerator**的作用是将数据从 <u>ReadableStream</u> 中解析出来，并返回一个生成器。可以通过迭代这个生成器来获取更加详细的数据。
 
+## ModelDesign
+**define message**
 
+```typescript
+class Message {
+    id: string;
+    content: string
+}
+class MessageManager {
+    #messages: Message[]
+    appendMessage(message: Message){
+    }
+    replaceMessage(oldMessage: Message, message: Message){
+    }
+    updateMessage(message: Message){
+    }
+    removeMessage(message: Message){
+    }
+    getMessages(){
+        return [] as Message[]
+    }
+    copyMessage(message: Message){}
+    shareMessage(message: Message){}
+    citeMessage(message: Message){}
+}
+```
+将上述实体设计转换为 react hook
 
+```tsx
+import {useState} from "react";
 
+interface Message {
+    id: string;
+    content: string
+}
+const useMessage = () => {
+    const [messages, setMessages] = useState<Message[]>();
 
+    /** useCallback is not necessary in react 19 */
+    function appendMessage(message: Message){
+        setMessages(prev => prev.concat(message));
+    }
 
+    function getMessages(){
+        return messages;
+    }
+    return {
+        messages,
+        appendMessage,
+        getMessages
+    }
+}
+function Chat(){
+    const {
+        messages,
+        appendMessage,
+    } = useMessage()
 
+    return <>
 
+    </>
+}
+```
 
-
-{/* truncate  */}
 
