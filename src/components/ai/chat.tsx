@@ -26,9 +26,9 @@ export default function () {
             onRe={async (message) => {
                 // remove old Message
                 removeMessage(message);
-                for await (const msg of onRe(message)) {
-                    createOrAppendContent(msg)
-                }
+                // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fromAsync
+                // @ts-ignore
+                await Array.fromAsync(onRe(message), createOrAppendContent)
             }}/>
         <div>
             {citeMessage && <span className={"bg-blue-200 text-white"}>{citeMessage.content}</span>}
