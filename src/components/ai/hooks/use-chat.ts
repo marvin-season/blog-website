@@ -2,7 +2,8 @@ import {Message} from "../type";
 import {useState} from "react";
 
 export default function useChat() {
-    const [citeMessage, setCiteMessage] = useState<Message>()
+    const [citeMessage, setCiteMessage] = useState<Message>();
+    const [loading, setLoading] = useState(false)
 
     async function* onRe(message: Message) {
 
@@ -34,6 +35,8 @@ export default function useChat() {
         onRe,
         onCopy,
         onCite,
-        citeMessage
+        setLoading,
+        loading,
+        citeMessage,
     }
 }

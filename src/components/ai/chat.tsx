@@ -14,7 +14,9 @@ export default function () {
         onRe,
         onCopy,
         onCite,
-        citeMessage
+        setLoading,
+        citeMessage,
+        loading
     } = useChat()
 
     return <div className={'shadow-lg p-4 border border-gray-200 rounded-lg'}>
@@ -24,11 +26,13 @@ export default function () {
             onCite={onCite}
             onCopy={onCopy}
             onRe={async (message) => {
+                setLoading(true)
                 // remove old Message
                 removeMessage(message);
                 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fromAsync
                 // @ts-ignore
                 await Array.fromAsync(onRe(message), createOrAppendContent)
+                setLoading(false)
             }}/>
         <div>
             {citeMessage && <span className={"bg-blue-200 text-white"}>{citeMessage.content}</span>}
@@ -40,7 +44,8 @@ export default function () {
                             id: Date.now().toString(),
                             content: Date.now().toString()
                         })
-                    }}>添加
+                    }}>
+                {loading ? '加载中' : '添加'}
             </button>
         </div>
     </div>
