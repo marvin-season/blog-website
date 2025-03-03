@@ -1,4 +1,5 @@
 import useMessage from "./hooks/use-message";
+import useHandle from "./hooks/use-handle";
 import useChat from "./hooks/use-chat";
 import {History} from "./components/history";
 import {RichEditor} from "@site/src/components/rich-editor";
@@ -18,6 +19,10 @@ export default function () {
         setLoading,
         citeMessage,
         loading
+    } = useHandle()
+
+    const {
+        send
     } = useChat()
 
     return <div className={'shadow-lg p-4 border border-gray-200 rounded-lg'}>
@@ -39,12 +44,15 @@ export default function () {
         <div>
             {citeMessage && <span className={"bg-blue-200 text-white"}>{citeMessage.content}</span>}
         </div>
-        <RichEditor onSend={value => {
+        <RichEditor onSend={async value => {
             setLoading(true);
             appendMessage({
                 id: Date.now().toString(),
                 content: value
             })
+            // @ts-ignore
+            await Array.fromAsync(send(value), createOrAppendContent)
+            setLoading(false)
         }}/>
     </div>
 }
