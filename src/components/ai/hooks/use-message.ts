@@ -1,11 +1,10 @@
 import {useState} from "react";
 import {Message} from "../type";
+import {useLatest} from "ahooks";
 
 const useMessage = () => {
     const [messages, setMessages] = useState<Message[]>([]);
-    const messagesRef = {
-        current: null,
-    }
+    const messagesRef = useLatest(messages);
 
     /** useCallback is not necessary in react 19 */
     function appendMessage(message: Message) {
@@ -18,7 +17,6 @@ const useMessage = () => {
 
     function appendMessageContent(message: Message) {
         setMessages(prev => prev.map(item => {
-            console.log(item);
             return {
                 ...item,
                 content: item.content + message.content
@@ -27,7 +25,6 @@ const useMessage = () => {
     }
 
     function createOrAppendContent(message: Message) {
-        console.log(message, messagesRef.current);
         if (messagesRef.current.findIndex(item => item.id === message.id) > -1) {
             appendMessageContent(message);
         } else {

@@ -24,6 +24,7 @@
     "@tiptap/core": "^2.11.5",
     "@tiptap/react": "^2.10.4",
     "@tiptap/starter-kit": "^2.10.4",
+    "ahooks": "^3.8.4",
     "clsx": "^2.0.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
