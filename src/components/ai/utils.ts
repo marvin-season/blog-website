@@ -24,7 +24,7 @@ export async function* SSEMessageGenerator<T>(stream: ReadableStream) {
                     yield message as T; // 在生成器内yield消息
                 } catch (e) {
                     rest_str += json_str
-                    console.log("e => ", {e, rest_str});
+                    console.warn(e)
                 }
             }
 

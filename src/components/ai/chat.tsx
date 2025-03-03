@@ -50,9 +50,17 @@ export default function () {
                 id: Date.now().toString() + 'user',
                 content: value
             })
-            // @ts-ignore
-            await Array.fromAsync(send(value), createOrAppendContent)
-            setLoading(false)
+            try {
+                // @ts-ignore
+                await Array.fromAsync(send(value), createOrAppendContent)
+            } catch (err) {
+                createOrAppendContent({
+                    id: Date.now() + 'error',
+                    content: err.message
+                })
+            } finally {
+                setLoading(false)
+            }
         }}/>
     </div>
 }
