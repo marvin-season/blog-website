@@ -11,17 +11,21 @@ export default function () {
     } = useMessage();
 
     const {
-        onRe
+        onRe,
+        onCopy
     } = useChat()
 
     return <div className={'shadow-lg p-4 border border-gray-200 rounded-lg'}>
-        <History messages={messages} onRe={async (message) => {
-            // remove old Message
-            removeMessage(message);
-            for await (const msg of onRe(message)) {
-                createOrAppendContent(msg)
-            }
-        }}/>
+        <History
+            messages={messages}
+            onCopy={onCopy}
+            onRe={async (message) => {
+                // remove old Message
+                removeMessage(message);
+                for await (const msg of onRe(message)) {
+                    createOrAppendContent(msg)
+                }
+            }}/>
         <div>
             <button className={"px-2.5 py-0.5 border rounded text-blue-400 hover:text-blue-500 cursor-pointer"}
                     onClick={() => {

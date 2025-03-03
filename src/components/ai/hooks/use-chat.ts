@@ -11,8 +11,15 @@ export default function useChat() {
             }
         }
     }
+    
+    function onCopy(message: Message) {
+        navigator.clipboard.writeText(message.content).then(() => {
+            alert('copied to clipboard')
+        });
+    }
 
     return {
-        onRe
+        onRe,
+        onCopy
     }
 }
