@@ -1,7 +1,7 @@
 import {Message} from "../type";
 import {useState} from "react";
 
-export default function () {
+export default function useHandle() {
     const [citeMessage, setCiteMessage] = useState<Message>();
     const [loading, setLoading] = useState(false)
 
