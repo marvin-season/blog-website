@@ -18,8 +18,7 @@ export function Historical({citeMessage, isLast, message, onCite, onCopy, onRe}:
         <span className={"text-gray-500"}>{message.content}</span>
         <span onClick={() => onRe(message)}>re</span>
         <span onClick={() => onCopy(message)}>cp</span>
-        <span className={`${citeMessage?.id === message.id && 'text-blue-500'}`}
-              onClick={() => onCite(message)}>cite</span>
+        <span onClick={() => onCite(message)}>cite</span>
     </div>
 }
 
@@ -33,8 +32,12 @@ export function History({messages, ...restProps}: { messages: Message[], } & His
             空空如也
         </div>
     }
-    return messages.map((message, index) => {
-        return <MemoHistorical key={message.id} {...restProps} message={message}
-                               isLast={index === messages.length - 1}/>
-    })
+    return <div className={'max-h-[160px] overflow-y-auto border border-gray-200 rounded-lg'}>
+        {
+            messages.map((message, index) => {
+                return <MemoHistorical key={message.id} {...restProps} message={message}
+                                       isLast={index === messages.length - 1}/>
+            })
+        }
+    </div>
 }
