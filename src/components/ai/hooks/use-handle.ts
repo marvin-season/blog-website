@@ -16,9 +16,12 @@ export default function useHandle() {
     }
 
     function onCopy(message: Message) {
-        navigator.clipboard.writeText(message.content).then(() => {
-            alert("copied to clipboard");
-        });
+        if (isSecureContext) {
+            navigator.clipboard.writeText(message.content).then(() => {
+                alert("copied to clipboard");
+            });
+        }
+        alert("拷贝失败");
     }
 
     function onCite(message: Message) {
