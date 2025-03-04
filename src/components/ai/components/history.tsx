@@ -10,13 +10,13 @@ interface HistoryProps {
 }
 
 export function Historical({
-                               citeMessage,
-                               isLast,
-                               message,
-                               onCite,
-                               onCopy,
-                               onRe,
-                           }: {
+    citeMessage,
+    isLast,
+    message,
+    onCite,
+    onCopy,
+    onRe,
+}: {
     message: Message;
     isLast: boolean;
 } & HistoryProps) {
@@ -41,9 +41,9 @@ const MemoHistorical = memo(
 );
 
 export function History({
-                            messages,
-                            ...restProps
-                        }: { messages: Message[] } & HistoryProps) {
+    messages,
+    ...restProps
+}: { messages: Message[] } & HistoryProps) {
     const [isAtBottom, setIsAtBottom] = useState(true);
     const containerRef = useRef(null);
     const anchorRef = useRef(null);
@@ -66,15 +66,21 @@ export function History({
         };
     }, [containerRef, anchorRef]);
 
-    const scrollToBottom = useCallback(debounce(() => {
-        containerRef.current.scrollTo({
-            top: containerRef.current.scrollHeight,
-            behavior: "smooth",
-        });
-    }, 50, {
-        leading: true,
-    }), [containerRef]);
-
+    const scrollToBottom = useCallback(
+        debounce(
+            () => {
+                containerRef.current.scrollTo({
+                    top: containerRef.current.scrollHeight,
+                    behavior: "smooth",
+                });
+            },
+            50,
+            {
+                leading: true,
+            },
+        ),
+        [containerRef],
+    );
 
     useEffect(() => {
         if (!containerRef.current) {
@@ -106,11 +112,7 @@ export function History({
                         "sticky bottom-0 left-[50%] text-center bg-[#0002] backdrop-blur-sm: cursor-pointer"
                     }
                 >
-                    <span
-                        onClick={scrollToBottom}
-                    >
-                        DOWN
-                    </span>
+                    <span onClick={scrollToBottom}>DOWN</span>
                 </div>
             )}
             <div ref={anchorRef}></div>

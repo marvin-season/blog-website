@@ -15,7 +15,7 @@ export default function () {
 
     const { send } = useChat();
 
-    useInit({appendMessage});
+    useInit({ appendMessage });
 
     return (
         <div className={"shadow-lg p-4 border border-gray-200 rounded-lg"}>

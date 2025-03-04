@@ -1,14 +1,11 @@
 import { Message } from "../type";
 import { useEffect } from "react";
 
-const useInit = (
-    {
-        appendMessage,
-    }: {
-        appendMessage: (message: Message) => void,
-    }) => {
-
-
+const useInit = ({
+    appendMessage,
+}: {
+    appendMessage: (message: Message) => void;
+}) => {
     useEffect(() => {
         appendMessage({
             id: "init_id",
