@@ -37,7 +37,6 @@ export default function () {
                 // remove old Message
                 removeMessage(message);
                 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fromAsync
-                // @ts-ignore
                 await Array.fromAsync(onRe(message), createOrAppendContent)
                 setLoading(false)
             }}/>
@@ -53,12 +52,12 @@ export default function () {
             })
             try {
                 const it = send(value)
-                // @ts-ignore
                 await Array.fromAsync(send(value), createOrAppendContent)
             } catch (err) {
+                alert(JSON.stringify(err));
                 createOrAppendContent({
                     id: Date.now() + 'error',
-                    content: err.message
+                    content: JSON.stringify(err)
                 })
             } finally {
                 setLoading(false)
