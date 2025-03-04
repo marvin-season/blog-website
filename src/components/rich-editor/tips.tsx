@@ -1,3 +1,3 @@
 export const Tips = () => {
-    return <div className="text-gray-400 text-sm">{'CTRL/Command + Enter or Typing @'}</div>
+    return <div className="flex-1 text-gray-300 text-sm text-center">{'Typing @ Or #'}</div>
 }

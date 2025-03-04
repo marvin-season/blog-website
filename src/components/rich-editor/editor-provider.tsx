@@ -33,7 +33,7 @@ function RichEditor({
         }
     })
 
-    return <div className="bg-[#f5f1f1] rounded-4xl flex flex-col justify-center items-center gap-4 p-8 pb-4">
+    return <div className="rounded flex flex-col justify-center items-center gap-4">
         <EditorProvider editable={true} {...editorProps}>
             <div className="w-full flex gap-4 items-end">
                 <Trigger ref={triggerRef} />
@@ -41,7 +41,6 @@ function RichEditor({
                     handelSave(editor)
                 }} />
             </div>
-            <Tips />
         </EditorProvider>
     </div>;
 }

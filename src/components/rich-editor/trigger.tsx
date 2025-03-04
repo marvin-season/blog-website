@@ -4,6 +4,7 @@ import Tippy from "@tippyjs/react";
 import 'tippy.js/animations/shift-away.css'; // 过渡动画
 import { useImperativeHandle, useState } from "react";
 import { MentionKey, mentionListMap } from "./constant";
+import {Tips} from "@site/src/components/rich-editor/tips";
 
 
 export const Trigger = ({ ref }) => {
@@ -20,7 +21,7 @@ export const Trigger = ({ ref }) => {
     }, [])
 
     return <>
-        <div className='cursor-pointer px-4 py-2 bg-white w-full rounded-[12px] shadow text-blue-400 flex gap-2'>
+        <div className='cursor-pointer px-4 py-2 bg-white w-full rounded-[12px] shadow text-blue-400 flex gap-2 items-center'>
             {
                 Object.entries(MentionKey).map(([key, value]) => {
                     return <Tippy
@@ -49,7 +50,7 @@ export const Trigger = ({ ref }) => {
                 }
                 )
             }
-
+            <Tips />
         </div>
     </>
 }

@@ -42,7 +42,7 @@ export const useEditorProps = ({
     editorProps: {
       attributes: {
         class:
-          'w-full prose-sm focus:outline-none p-10 bg-white shadow rounded-[16px]',
+          'w-full prose-sm focus:outline-none p-6 pt-8 bg-white border border-gray-100 shadow rounded-[16px]',
       },
     },
   } as EditorProviderProps;
