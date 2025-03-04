@@ -9,12 +9,17 @@ export async function* SSEMessageGenerator<T>(stream: ReadableStream) {
     if (!stream) {
         return
     }
-
     // @ts-ignore ReadableStream is not iterable in typescript
-    for await (const chunk of stream) {
-        const sse_chunk = textDecoder.decode(chunk); // may be multi-line
-        let rest_str = ""
-        // 使用for...of 替代 forEach，确保yield在生成器体内
+    // for await (const chunk of stream) {}
+    let rest_str = ""
+    const reader = stream.getReader();
+    while (true) {
+        const {done, value} = await reader.read()
+        if (done) {
+            break
+        }
+
+        const sse_chunk = textDecoder.decode(value);
         for (const line of sse_chunk.split(/\n+/)) {
             const json_str = line.replace(/data:\s*/, '').trim();
             if (json_str.length > 0) {
@@ -29,8 +34,8 @@ export async function* SSEMessageGenerator<T>(stream: ReadableStream) {
             }
 
         }
-
     }
+
 }
 
 // 创建一个符合 SSE 格式的 ReadableStream

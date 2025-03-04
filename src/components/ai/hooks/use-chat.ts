@@ -3,7 +3,7 @@ import {createMockStream, SSEMessageGenerator} from "@site/src/components/ai/uti
 export default function useChat() {
     async function* send(value: string, {} = {}) {
         // will be replaced fetch response
-        const stream = createMockStream("hello! i am GPT chat bot!");
+        const stream = createMockStream("Hello! I am GPT chat bot!");
 
         for await (const message of SSEMessageGenerator<{
             id: string;

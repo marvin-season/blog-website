@@ -54,10 +54,9 @@ export default function () {
                 const it = send(value)
                 await Array.fromAsync(send(value), createOrAppendContent)
             } catch (err) {
-                alert(JSON.stringify(err));
                 createOrAppendContent({
                     id: Date.now() + 'error',
-                    content: JSON.stringify(err)
+                    content: err.message
                 })
             } finally {
                 setLoading(false)
