@@ -44,14 +44,14 @@ export function History({
                             messages,
                             ...restProps
                         }: { messages: Message[] } & HistoryProps) {
-    const [isAtBottom, setIsAtBottom] = useState(false);
+    const [isAtBottom, setIsAtBottom] = useState(true);
     const containerRef = useRef(null);
     const anchorRef = useRef(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries, observer) => {
-                setIsAtBottom(!entries[0]?.isIntersecting);
+                setIsAtBottom(!!entries[0]?.isIntersecting);
             },
             {
                 root: containerRef.current,
@@ -80,7 +80,7 @@ export function History({
         if (!containerRef.current) {
             return;
         }
-        scrollToBottom();
+        isAtBottom && scrollToBottom();
     }, [messages]);
 
     return (
@@ -100,7 +100,7 @@ export function History({
                     />
                 );
             })}
-            {isAtBottom && (
+            {!isAtBottom && (
                 <div
                     className={
                         "sticky bottom-0 left-[50%] text-center bg-[#0002] backdrop-blur-sm: cursor-pointer"
