@@ -1,13 +1,14 @@
-import Layout from '@theme/Layout';
+import Layout from "@theme/Layout";
 export default function Home() {
-  return (
-    <Layout title={`Hello from Personal`}
-      description="Personal Information">
-      <main>
-        <h1>Personal Information</h1>
-        <p>My name is </p>
-        
-      </main>
-    </Layout>
-  );
+    return (
+        <Layout
+            title={`Hello from Personal`}
+            description="Personal Information"
+        >
+            <main>
+                <h1>Personal Information</h1>
+                <p>My name is </p>
+            </main>
+        </Layout>
+    );
 }

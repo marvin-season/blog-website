@@ -1,33 +1,32 @@
-import {Message} from "../type";
-import {useState} from "react";
+import { Message } from "../type";
+import { useState } from "react";
 
 export default function useHandle() {
     const [citeMessage, setCiteMessage] = useState<Message>();
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
 
     async function* onRe(message: Message) {
-
         for (const msg of message.content) {
-            await new Promise(resolve => setTimeout(resolve, 20));
+            await new Promise((resolve) => setTimeout(resolve, 20));
             yield {
                 id: message.id,
-                content: msg
-            }
+                content: msg,
+            };
         }
     }
 
     function onCopy(message: Message) {
         navigator.clipboard.writeText(message.content).then(() => {
-            alert('copied to clipboard')
+            alert("copied to clipboard");
         });
     }
 
     function onCite(message: Message) {
-        setCiteMessage(prev => {
+        setCiteMessage((prev) => {
             if (prev?.id === message.id) {
-                return undefined
+                return undefined;
             }
-            return message
+            return message;
         });
     }
 
@@ -38,5 +37,5 @@ export default function useHandle() {
         setLoading,
         loading,
         citeMessage,
-    }
+    };
 }

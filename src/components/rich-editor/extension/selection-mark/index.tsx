@@ -1,39 +1,40 @@
 import { Mark, mergeAttributes } from "@tiptap/core";
 
-declare module '@tiptap/core' {
+declare module "@tiptap/core" {
     interface Commands<ReturnType> {
         SelectionMarkProps: {};
     }
-  }
-
-interface SelectionMarkProps {
-
 }
+
+interface SelectionMarkProps {}
 const SelectionMark = Mark.create<SelectionMarkProps>({
-  name: 'selectionMark',
+    name: "selectionMark",
 
-  addOptions() {
-    return {
-      HTMLAttributes: {},
-    };
-  },
+    addOptions() {
+        return {
+            HTMLAttributes: {},
+        };
+    },
 
-  parseHTML() {
-    return [
-      {
-        tag: 'span[data-selection-mark]',
-      },
-    ];
-  },
+    parseHTML() {
+        return [
+            {
+                tag: "span[data-selection-mark]",
+            },
+        ];
+    },
 
-  renderHTML({ HTMLAttributes }) {
-    return ['selection-mark', mergeAttributes(HTMLAttributes, { 'data-selection-mark': '' }), 0];
-  },
+    renderHTML({ HTMLAttributes }) {
+        return [
+            "selection-mark",
+            mergeAttributes(HTMLAttributes, { "data-selection-mark": "" }),
+            0,
+        ];
+    },
 
-  addCommands() {
-    return {
-    };
-  },
-})
+    addCommands() {
+        return {};
+    },
+});
 
-export default SelectionMark
+export default SelectionMark;

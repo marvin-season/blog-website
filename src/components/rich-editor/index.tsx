@@ -1,1 +1,1 @@
-export { default as RichEditor } from './editor-provider'
+export { default as RichEditor } from "./editor-provider";

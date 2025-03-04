@@ -3,18 +3,17 @@
 if (!Array.fromAsync) {
     function fromAsync<T, U>(
         iterableOrArrayLike: AsyncGenerator<T> | Iterable<T | PromiseLike<T>>,
-        mapFn: (value: Awaited<T>) => U
+        mapFn: (value: Awaited<T>) => U,
     ): Promise<Awaited<U>[]> {
         return new Promise(async (resolve, reject) => {
-            const mapResult: Awaited<U>[] = []
+            const mapResult: Awaited<U>[] = [];
             for await (const element of iterableOrArrayLike) {
-                const result = await mapFn(element)
-                mapResult.push(result)
+                const result = await mapFn(element);
+                mapResult.push(result);
             }
             resolve(mapResult);
-        })
+        });
     }
 
-    Array.fromAsync = fromAsync
+    Array.fromAsync = fromAsync;
 }
-
