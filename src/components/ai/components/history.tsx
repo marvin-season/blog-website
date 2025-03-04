@@ -1,5 +1,6 @@
 import { Message } from "../type";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { debounce } from "lodash-es";
 
 interface HistoryProps {
     citeMessage?: Message;
@@ -9,13 +10,13 @@ interface HistoryProps {
 }
 
 export function Historical({
-    citeMessage,
-    isLast,
-    message,
-    onCite,
-    onCopy,
-    onRe,
-}: {
+                               citeMessage,
+                               isLast,
+                               message,
+                               onCite,
+                               onCopy,
+                               onRe,
+                           }: {
     message: Message;
     isLast: boolean;
 } & HistoryProps) {
@@ -40,9 +41,9 @@ const MemoHistorical = memo(
 );
 
 export function History({
-    messages,
-    ...restProps
-}: { messages: Message[] } & HistoryProps) {
+                            messages,
+                            ...restProps
+                        }: { messages: Message[] } & HistoryProps) {
     const [isAtBottom, setIsAtBottom] = useState(false);
     const containerRef = useRef(null);
     const anchorRef = useRef(null);
@@ -54,7 +55,7 @@ export function History({
             },
             {
                 root: containerRef.current,
-                rootMargin: "10px",
+                rootMargin: "30px",
             },
         );
         if (anchorRef.current) {
@@ -63,7 +64,24 @@ export function History({
         return () => {
             observer.disconnect();
         };
-    }, [containerRef.current, anchorRef.current]);
+    }, [containerRef, anchorRef]);
+
+    const scrollToBottom = useCallback(debounce(() => {
+        containerRef.current.scrollTo({
+            top: containerRef.current.scrollHeight,
+            behavior: "smooth",
+        });
+    }, 50, {
+        leading: true,
+    }), [containerRef]);
+
+
+    useEffect(() => {
+        if (!containerRef.current) {
+            return;
+        }
+        scrollToBottom();
+    }, [messages]);
 
     return (
         <div
@@ -89,12 +107,7 @@ export function History({
                     }
                 >
                     <span
-                        onClick={() => {
-                            containerRef.current.scrollTo({
-                                top: containerRef.current.scrollHeight,
-                                behavior: "smooth",
-                            });
-                        }}
+                        onClick={scrollToBottom}
                     >
                         DOWN
                     </span>
