@@ -12,7 +12,6 @@ let timer: number | null = null;
 const View = ({ node, updateAttributes }: NodeViewProps) => {
     const { type, value, options, placeholder } = node.attrs
 
-    console.log('options', options)
     // 当输入变化时更新 value 属性
     const handleInput = (e: React.FormEvent) => {
         const inputElement = e.target as HTMLInputElement;
