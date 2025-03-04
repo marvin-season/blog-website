@@ -1,6 +1,7 @@
 import useMessage from "./hooks/use-message";
 import useHandle from "./hooks/use-handle";
 import useChat from "./hooks/use-chat";
+import useInit from "./hooks/use-init";
 import { History } from "./components/history";
 import { RichEditor } from "@site/src/components/rich-editor";
 import "./polyfill";
@@ -13,6 +14,8 @@ export default function () {
         useHandle();
 
     const { send } = useChat();
+
+    useInit({appendMessage});
 
     return (
         <div className={"shadow-lg p-4 border border-gray-200 rounded-lg"}>
