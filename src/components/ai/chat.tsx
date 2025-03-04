@@ -3,6 +3,7 @@ import useHandle from "./hooks/use-handle";
 import useChat from "./hooks/use-chat";
 import {History} from "./components/history";
 import {RichEditor} from "@site/src/components/rich-editor";
+import './polyfill';
 
 export default function () {
     const {
@@ -51,6 +52,7 @@ export default function () {
                 content: value
             })
             try {
+                const it = send(value)
                 // @ts-ignore
                 await Array.fromAsync(send(value), createOrAppendContent)
             } catch (err) {
