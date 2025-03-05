@@ -1,9 +1,12 @@
-export { default as Notification } from "./notification";
-import UseCase from './use-case'
+import NotificationProvider from "./notification";
+import UseCase from "./use-case";
 
+export { default as Notification } from "./notification";
 
 export const App = () => {
-    return <>
-        <UseCase/>
-    </>;
+    return (
+        <NotificationProvider>
+            <UseCase />
+        </NotificationProvider>
+    );
 };
