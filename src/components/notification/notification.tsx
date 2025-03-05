@@ -20,14 +20,15 @@ const useContextValue = () => {
                 message,
                 id,
                 type: "warning",
-                className: "text-yellow-400",
+                className: "bg-white shadow-sm border-gray-200",
             }),
         );
 
         setTimeout(() => {
             remove(id);
-        }, 3000);
+        }, 6000);
     };
+
     return {
         warning,
         notifications,
@@ -48,12 +49,12 @@ export default function NotificationProvider({
                 return (
                     <div
                         key={notification.id}
-                        className={`${notification.className} border fixed right-10`}
+                        className={`${notification.className} min-w-[220px] min-h-[90px] cursor-pointer border rounded-lg px-2 py-0.5 fixed right-10`}
                         style={{
                             top: 50 + 40 * (index + 1),
                         }}
                     >
-                        <span>{notification.message + notification.id}</span>
+                        <span className={"text-sm"}>{notification.message + notification.id}</span>
 
                         <button
                             onClick={() => {
