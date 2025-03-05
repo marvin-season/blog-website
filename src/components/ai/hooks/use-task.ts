@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
 
-
 type TaskStatus = "pending" | "running" | "completed" | "failed";
-
 
 interface Task<T = any> {
     id: string;
@@ -12,13 +10,11 @@ interface Task<T = any> {
     createdAt: number;
 }
 
-
 interface TaskQueueConfig {
     concurrency?: number;
     retry?: number;
     retryInterval?: number;
 }
-
 
 const DEFAULT_CONFIG: Required<TaskQueueConfig> = {
     concurrency: 3,
@@ -26,13 +22,11 @@ const DEFAULT_CONFIG: Required<TaskQueueConfig> = {
     retryInterval: 1000,
 };
 
-
 function useTask(config?: TaskQueueConfig) {
     const queueRef = useRef<Task[]>([]);
     const activeTasksRef = useRef<Set<string>>(new Set());
     const isMountedRef = useRef(true);
     const configRef = useRef({ ...DEFAULT_CONFIG, ...config });
-
 
     // 任务处理器
     const processTask = useCallback(async () => {
@@ -44,10 +38,9 @@ function useTask(config?: TaskQueueConfig) {
             return;
         }
 
-
-        const availableSlots = configRef.current.concurrency - activeTasksRef.current.size;
+        const availableSlots =
+            configRef.current.concurrency - activeTasksRef.current.size;
         const tasksToProcess = queueRef.current.splice(0, availableSlots);
-
 
         await Promise.allSettled(
             tasksToProcess.map(async (task) => {
@@ -67,7 +60,10 @@ function useTask(config?: TaskQueueConfig) {
                         }, configRef.current.retryInterval);
                     } else {
                         task.status = "failed";
-                        console.error(`Task ${task.id} failed after ${task.retries} retries`, error);
+                        console.error(
+                            `Task ${task.id} failed after ${task.retries} retries`,
+                            error,
+                        );
                     }
                 } finally {
                     activeTasksRef.current.delete(task.id);
@@ -76,7 +72,6 @@ function useTask(config?: TaskQueueConfig) {
             }),
         );
     }, []);
-
 
     // 队列监听器
     const startQueue = useCallback(() => {
@@ -94,39 +89,38 @@ function useTask(config?: TaskQueueConfig) {
             });
         };
 
-
         checkQueue();
     }, [processTask]);
 
-
     // 添加任务
-    const enqueue = useCallback(<T, >(
-        task: Omit<Task<T>, "status" | "createdAt" | "retries">,
-    ): Promise<T> => {
-        return new Promise((resolve, reject) => {
-            const newTask: Task<T> = {
-                ...task,
-                status: "pending",
-                createdAt: Date.now(),
-                retries: 0,
-                invoke: async () => {
-                    try {
-                        const result = await task.invoke();
-                        resolve(result);
-                        return result;
-                    } catch (error) {
-                        reject(error);
-                        throw error;
-                    }
-                },
-            };
+    const enqueue = useCallback(
+        <T>(
+            task: Omit<Task<T>, "status" | "createdAt" | "retries">,
+        ): Promise<T> => {
+            return new Promise((resolve, reject) => {
+                const newTask: Task<T> = {
+                    ...task,
+                    status: "pending",
+                    createdAt: Date.now(),
+                    retries: 0,
+                    invoke: async () => {
+                        try {
+                            const result = await task.invoke();
+                            resolve(result);
+                            return result;
+                        } catch (error) {
+                            reject(error);
+                            throw error;
+                        }
+                    },
+                };
 
-
-            queueRef.current.push(newTask);
-            processTask();
-        });
-    }, [processTask]);
-
+                queueRef.current.push(newTask);
+                processTask();
+            });
+        },
+        [processTask],
+    );
 
     // 初始化
     useEffect(() => {
@@ -136,13 +130,11 @@ function useTask(config?: TaskQueueConfig) {
         };
     }, [startQueue]);
 
-
     return {
         enqueue,
         getQueueSize: () => queueRef.current.length,
         getActiveCount: () => activeTasksRef.current.size,
     };
 }
-
 
 export default useTask;

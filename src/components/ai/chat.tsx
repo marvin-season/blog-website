@@ -8,7 +8,7 @@ import { RichEditor } from "@site/src/components/rich-editor";
 import "./polyfill";
 import { useEffect } from "react";
 
-export default function() {
+export default function () {
     const { messages, appendMessage, removeMessage, createOrAppendContent } =
         useMessage();
 
@@ -42,7 +42,6 @@ export default function() {
         }).then(() => {
             console.log("append ok");
         });
-
     }, []);
 
     return (
