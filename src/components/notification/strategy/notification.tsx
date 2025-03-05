@@ -7,10 +7,10 @@ type Notification = {
     className: string;
 };
 
-// 提取 useGetState 方法的类型
-type StateType = ReturnType<typeof useGetState>;
+// 提取 useInitStateAction 方法的类型
+type StateType = ReturnType<typeof useInitStateAction>;
 
-function useGetState() {
+function useInitStateAction() {
     const remove = (id: number) => {
         setNotifications((prev) => prev.filter((item) => item.id !== id));
     };
@@ -39,33 +39,40 @@ function useGetState() {
     };
 }
 
-const NotificationStrategy = {
-    useGetState,
-    render(state: StateType) {
-        console.log("state", state);
-        return state?.notifications.map((notification, index) => {
-            return (
-                <div
-                    key={notification.id}
-                    className={`${notification.className} min-w-[220px] min-h-[90px] cursor-pointer border rounded-lg px-2 py-0.5 fixed right-10`}
-                    style={{
-                        top: 50 + 40 * (index + 1),
-                    }}
-                >
+function NotificationUI(state: StateType) {
+    return state?.notifications.map((notification, index) => {
+        return (
+            <div
+                key={notification.id}
+                className={`${notification.className} min-w-[220px] min-h-[90px] cursor-pointer border rounded-lg px-2 py-0.5 fixed right-10`}
+                style={{
+                    top: 50 + 40 * (index + 1),
+                }}
+            >
                     <span className={"text-sm"}>
                         {notification.message + notification.id}
                     </span>
 
-                    <button
-                        onClick={() => {
-                            state.remove(notification.id);
-                        }}
-                    >
-                        close
-                    </button>
-                </div>
-            );
-        });
+                <button
+                    onClick={() => {
+                        state.remove(notification.id);
+                    }}
+                >
+                    close
+                </button>
+            </div>
+        );
+    });
+}
+
+const NotificationStrategy = {
+    useInitStateAction,
+    UI() {
+        return {
+            render(state: StateType) {
+                return <NotificationUI {...state} />;
+            },
+        };
     },
 };
 

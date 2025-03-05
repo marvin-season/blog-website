@@ -15,10 +15,11 @@ export default function NotificationProvider({
     children: ReactNode;
 }) {
     const strategy = useContextValue();
-    const state = strategy.useGetState();
+    const state = strategy.useInitStateAction();
+    console.log('ui',strategy.UI())
     return (
         <NotificationContext.Provider value={state}>
-            {strategy.render(state)}
+            {strategy.UI().render(state)}
             {children}
         </NotificationContext.Provider>
     );
