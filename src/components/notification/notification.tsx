@@ -16,7 +16,7 @@ export default function NotificationProvider({
 }) {
     const strategy = useContextValue();
     const state = strategy.useInitStateAction();
-    console.log('ui',strategy.UI())
+
     return (
         <NotificationContext.Provider value={state}>
             {strategy.UI().render(state)}

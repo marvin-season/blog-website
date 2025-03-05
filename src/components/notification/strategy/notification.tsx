@@ -49,9 +49,9 @@ function NotificationUI(state: StateType) {
                     top: 50 + 40 * (index + 1),
                 }}
             >
-                    <span className={"text-sm"}>
-                        {notification.message + notification.id}
-                    </span>
+                <span className={"text-sm"}>
+                    {notification.message + notification.id}
+                </span>
 
                 <button
                     onClick={() => {
