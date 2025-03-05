@@ -18,14 +18,25 @@ export default function() {
     const { send } = useChat();
 
     // 额外的任务处理，放在 队列中
-    const { addTask } = useTask();
+    const { enqueue } = useTask();
     useEffect(() => {
-        addTask({
-            id: "append",
+        enqueue({
+            id: "append_init_id1",
             invoke: () => {
                 appendMessage({
-                    id: "init_id",
+                    id: "init_id1",
                     content: "shadow-lg p-4 border border-gray-200 rounded-lg",
+                });
+            },
+        }).then(() => {
+            console.log("append ok");
+        });
+        enqueue({
+            id: "append_init_id2",
+            invoke: () => {
+                appendMessage({
+                    id: "init_id2",
+                    content: "bg-blue-400 text-white text-sm",
                 });
             },
         }).then(() => {
