@@ -13,7 +13,6 @@ export type StateType = ReturnType<typeof useInitState>;
 export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
-
     return {
         open: async (render: () => ReactNode) => {
             state.idRef.current++;
@@ -52,13 +51,19 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                 <div className={"text-lg font-bold"}>这是标题</div>
                 <div className={"flex-1"}>{modal.render()}</div>
                 <div className={"flex justify-end gap-2"}>
-                    <button onClick={() => {
-                        props.close(modal.id);
-                    }}>取消
+                    <button
+                        onClick={() => {
+                            props.close(modal.id);
+                        }}
+                    >
+                        取消
                     </button>
-                    <button onClick={async () => {
-                        props.close(modal.id);
-                    }}>确认
+                    <button
+                        onClick={async () => {
+                            props.close(modal.id);
+                        }}
+                    >
+                        确认
                     </button>
                 </div>
             </div>
@@ -66,7 +71,7 @@ function ModalUI(props: StateType & ActionType): ReactNode {
     });
 }
 
-const ModalStrategy: IStrategy = {
+const ModalStrategy: IStrategy<StateType, ActionType> = {
     name: "modal",
     description: "Modal desc",
     useAction,

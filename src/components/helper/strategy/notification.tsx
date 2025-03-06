@@ -9,8 +9,8 @@ type Notification = {
 };
 
 // 提取 useInitState 方法的类型
-type StateType = ReturnType<typeof useInitState>;
-type ActionType = ReturnType<typeof useAction>;
+export type StateType = ReturnType<typeof useInitState>;
+export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
     const remove = (id: number) => {
@@ -72,7 +72,7 @@ function NotificationUI(props: StateType & ActionType): ReactNode {
     });
 }
 
-const NotificationStrategy: IStrategy = {
+const NotificationStrategy: IStrategy<StateType, ActionType> = {
     name: "notification",
     description: "notification desc",
     useAction,

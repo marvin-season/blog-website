@@ -1,20 +1,20 @@
 import NotificationStrategy from "./notification";
-import ModalStrategy, { ActionType as ModalActionType, StateType as ModalStateType } from "./modal";
+import ModalStrategy from "./modal";
 import { Dispatch, ReactNode, SetStateAction, useEffect } from "react";
 
-export interface IStrategy {
+export interface IStrategy<S extends Record<string, any>, A extends Record<string, Function>> {
     name: "notification" | "modal" | "confirm";
     description: string;
-    useInitState: () => Record<string, any>;
-    useAction: (state: Record<string, any>) => ModalActionType;
+    useInitState: () => S;
+    useAction: (state: S) => A;
     useUI: (
-        state: Record<string, any>,
-        action: Record<string, Function>,
+        state: S,
+        action: A,
     ) => ReactNode;
 }
 
 export function Strategy(
-    item: IStrategy & {
+    item: IStrategy<any, any> & {
         setActionContext: Dispatch<SetStateAction<Record<string, any>>>;
     },
 ) {

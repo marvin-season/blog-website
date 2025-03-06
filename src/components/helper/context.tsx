@@ -1,9 +1,12 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { IStrategy, Strategy, useStrategies } from "./strategy";
+import  { Strategy, useStrategies } from "./strategy";
+import { ActionType as ModalActionType } from "./strategy/modal";
+import { ActionType as NotificationActionType } from "./strategy/notification";
 
-export type ContextProps = {
-    [name in IStrategy["name"]]: ReturnType<IStrategy["useAction"]>;
-};
+export interface ContextProps {
+    "modal": ModalActionType
+    "notification": NotificationActionType
+}
 
 export default function HelperProvider({ children }: { children: ReactNode }) {
     const strategies = useStrategies();
