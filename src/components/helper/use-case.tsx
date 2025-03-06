@@ -39,6 +39,7 @@ export default function UseCase() {
                 modal
             </button>
             <button
+                id={'delete'}
                 className={
                     "cursor-pointer bg-red-400 hover:bg-red-500 text-white border-2 rounded-lg px-2 py-0.5"
                 }
