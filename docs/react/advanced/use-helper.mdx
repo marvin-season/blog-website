@@ -6,52 +6,39 @@ import {App} from  '@site/src/components/helper';
 
 <App/>
 
+## Intro
+
+Helper is a **One For All** modal interactive helper
 
 ## How to use
 ```tsx
-//@ts-ignore
 import useHelper from '.';
+const helper = useHelper();
 
-export default function UseCase() {
-    const helper = useHelper();
-    return (
-        <>
-            <button
-                className={
-                    "cursor-pointer bg-yellow-400 hover:bg-yellow-500 text-white border-2 rounded-lg px-2 py-0.5"
-                }
-                onClick={(e) => {
-                    helper.notification.warning("网络异常");
-                }}
-            >
-                警告
-            </button>
+helper.notification.warning("网络异常");
 
-            <button
-                className={
-                    "cursor-pointer bg-blue-400 hover:bg-blue-500 text-white border-2 rounded-lg px-2 py-0.5"
-                }
-                onClick={async (e) => {
-                    const result = await helper.modal.open({
-                        render: () => {
-                            return <>
-                                hi
-                            </>;
-                        },
-                        onBeforeConfirm: () => {
-                            console.log('onBeforeConfirm')
-                            return new Promise(resolve => setTimeout(resolve, 1000))
-                        },
-                        onConfirm(){
-                            console.log('onConfirm')
-                        }
-                    });
-                }}
-            >
-                modal
-            </button>
-        </>
-    );
-}
+const modal = await helper.modal.open({
+    render: () => <> hi </>,
+    onBeforeConfirm: () => {
+        console.log('onBeforeConfirm')
+    },
+    onConfirm(){
+        console.log('onConfirm')
+    }
+});
 
+```
+
+## Design
+
+**CoreContext**: 使用上下文管理状态，以便于全局调用，策略机制，以便于扩展
+
+## Pseudo
+
+```js
+const helper = Helper
+        .use('Model')
+        .use('Confirm')
+        .use('Notification')
+        .init()
 ```
