@@ -43,8 +43,9 @@ function useAction(state: StateType) {
 }
 
 function ModalUI(props: StateType & ActionType): ReactNode {
+    // only one
+    const [loading, setLoading] = useState(false);
     return props?.modals.map((modal, index) => {
-        // const [loading, setLoading] = useState(false);
         return (
             <div
                 key={modal.id}
@@ -63,15 +64,13 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                     </button>
                     <button
                         onClick={async () => {
-                            // props.promiseRef.current?.(modal);
-                            // setLoading(true)
-                            await modal.onBeforeConfirm()
-                            // setLoading(false)
+                            setLoading(true);
+                            await modal.onBeforeConfirm();
+                            setLoading(false);
                             props.close(modal.id);
                         }}
                     >
-                        a
-                        {/*{loading ? 'loading' : '确认'}*/}
+                        {loading ? 'loading' : '确认'}
                     </button>
                 </div>
             </div>
