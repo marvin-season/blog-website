@@ -45,6 +45,7 @@ export default function UseCase() {
                 }
                 onClick={async (e) => {
                     const result = await helper.confirm.open({
+                        target: e.target as HTMLElement,
                         render: () => {
                             return <>
                                 hi
@@ -57,7 +58,7 @@ export default function UseCase() {
                         onConfirm(){
                             console.log('onConfirm')
                         }
-                    }, e);
+                    });
                 }}
             >
                 删除

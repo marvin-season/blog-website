@@ -10,16 +10,17 @@ type Confirm = {
     onBeforeConfirm?: () => Promise<void> | void;
     onConfirm?: () => Promise<void> | void;
     className?: string;
+    target: React.RefObject<Element> | Element | null;
 };
 
 function useInitState() {
     const idRef = useRef(0);
-    const [modals, setModals] = useState<Confirm[]>([]);
+    const [confirm, setConfirm] = useState<Confirm>();
 
     return {
         idRef,
-        modals,
-        setModals,
+        confirm,
+        setConfirm,
     };
 }
 
@@ -29,21 +30,15 @@ export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
     return {
-        open: async (confirm: Confirm, e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-            const target = e.target as HTMLElement;
-            const rect = target.getBoundingClientRect();
-            console.log('Element position:', rect);
+        open: async (confirm: Confirm) => {
             state.idRef.current++;
-            state.setModals((prev) => {
-                // async code
-                return prev.concat({ ...confirm, id: state.idRef.current });
-            });
+            state.setConfirm({ ...confirm, id: state.idRef.current });
             return {
                 id: state.idRef.current,
             };
         },
-        close: (id: number) => {
-            state.setModals((prev) => prev.filter((item) => item.id !== id));
+        close: () => {
+            state.setConfirm(undefined);
         },
     };
 }
@@ -51,65 +46,39 @@ function useAction(state: StateType) {
 function ModalUI(props: StateType & ActionType): ReactNode {
     // only one
     const [loading, setLoading] = useState(false);
+    if (!props.confirm) {
+        return null;
+    }
     return <Tippy
         animation="shift-away"
         className="border border-blue-300 backdrop-blur backdrop-opacity-80 p-4 rounded-[12px] shadow text-sm"
-        content={
-            <div className={"flex flex-col gap-2"}>
-
-            </div>
-        }
+        render={() => {
+            return <div className={"p-2 border"}>
+                {props.confirm.render()}
+                <button onClick={async () => {
+                    setLoading(true);
+                    try {
+                        await props.confirm.onBeforeConfirm?.();
+                        props.close();
+                        props.confirm.onConfirm?.();
+                    } catch (e) {
+                    } finally {
+                        setLoading(false);
+                    }
+                    props.close();
+                }} className={"bg-red-400 text-white text-sm"}>
+                    {loading ? "loading" : "确认"}
+                </button>
+            </div>;
+        }}
         interactive
-        reference={document.getElementById('delete')}
+        reference={props.confirm.target}
         placement={"top-start"} // 将弹窗位置设置为底部
-        visible={!!props?.modals.length}
-        onClickOutside={() => {}} // 点击外部关闭弹窗
-    />
-    // return props?.modals.map((confirm, index) => {
-    //     return (
-    //         <div key={confirm.id} className={"fixed inset-0 z-999 backdrop-blur flex items-center justify-center"} onClick={() => {
-    //             props.close(confirm.id)
-    //         }}>
-    //             <div key={confirm.id} className={`fixed w-[500px] min-h-[200px] z-999
-    //             bg-[#fefefe] border border-gray-200 rounded-2xl shadow-2xl p-4 flex flex-col justify-between ${confirm.className}`}
-    //                  onClick={e => {
-    //                      e.stopPropagation()
-    //                  }}
-    //             >
-    //                 <div className={"text-lg font-bold"}>这是标题 {confirm.id}</div>
-    //                 <div className={"flex-1"}>{confirm.render()}</div>
-    //                 <div className={"flex justify-end gap-2"}>
-    //                     <button
-    //                         className={'cursor-pointer rounded border px-2.5 py-1.5 text-[#222] leading-4 text-sm'}
-    //                         onClick={() => {
-    //                             props.close(confirm.id);
-    //                         }}
-    //                     >
-    //                         取消
-    //                     </button>
-    //                     <button
-    //                         className={'cursor-pointer rounded bg-blue-500 hover:bg-blue-600 px-2.5 py-1.5 text-white leading-4 text-sm'}
-    //                         onClick={async () => {
-    //                             setLoading(true);
-    //                             try {
-    //                                 await confirm.onBeforeConfirm?.();
-    //                                 props.close(confirm.id);
-    //                                 await confirm.onConfirm?.();
-    //                             } catch (e) {
-    //                                 console.error(e);
-    //                             } finally {
-    //                                 setLoading(false);
-    //                             }
-    //                         }}
-    //                     >
-    //                         {loading ? "loading" : "确认"}
-    //                     </button>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //
-    //     );
-    // });
+        visible={!!props.confirm}
+        onClickOutside={() => {
+            props.close();
+        }} // 点击外部关闭弹窗
+    />;
 }
 
 const ConfirmStrategy: IStrategy<StateType, ActionType> = {
