@@ -66,13 +66,18 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                     <button
                         onClick={async () => {
                             setLoading(true);
-                            await modal.onBeforeConfirm?.();
-                            setLoading(false);
-                            props.close(modal.id);
-                            await modal.onConfirm?.();
+                            try {
+                                await modal.onBeforeConfirm?.();
+                                props.close(modal.id);
+                                await modal.onConfirm?.();
+                            } catch (e) {
+                                console.error(e);
+                            } finally {
+                                setLoading(false);
+                            }
                         }}
                     >
-                        {loading ? 'loading' : '确认'}
+                        {loading ? "loading" : "确认"}
                     </button>
                 </div>
             </div>
