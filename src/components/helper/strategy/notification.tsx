@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import { IStrategy } from "@site/src/components/helper/context";
+import { IStrategy } from "./index";
 
 type Notification = {
     id: number;
