@@ -14,7 +14,7 @@ const useStrategies = () => {
 };
 
 export interface IStrategy {
-    name: string;
+    name: "notification" | "modal" | "confirm";
     description: string;
     useInitState: () => Record<string, any>;
     useAction: (state: Record<string, any>) => Record<string, Function>;
@@ -23,6 +23,10 @@ export interface IStrategy {
         action: Record<string, Function>,
     ) => ReactNode;
 }
+
+export type ContextProps = {
+    [name in IStrategy["name"]]: ReturnType<IStrategy["useAction"]>;
+};
 
 function Strategy(
     item: IStrategy & {
@@ -47,7 +51,9 @@ function Strategy(
 
 export default function HelperProvider({ children }: { children: ReactNode }) {
     const strategies = useStrategies();
-    const [actionContext, setActionContext] = useState({});
+    const [actionContext, setActionContext] = useState<ContextProps>(
+        {} as ContextProps,
+    );
 
     return (
         <HelperContext.Provider value={actionContext}>
@@ -65,11 +71,7 @@ export default function HelperProvider({ children }: { children: ReactNode }) {
     );
 }
 
-export const HelperContext = createContext<any>({
-    notifications: [],
-    remove(id: number): void {},
-    warning(message: string): void {},
-});
+export const HelperContext = createContext<ContextProps>({} as ContextProps);
 
 export function useHelper() {
     return useContext(HelperContext);

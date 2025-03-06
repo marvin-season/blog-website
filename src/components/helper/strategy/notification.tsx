@@ -19,15 +19,14 @@ function useAction(state: StateType) {
     const warning = (message: string) => {
         let id = (state.notifications.at(-1)?.id || 0) + 1;
         state.setNotifications((prev) => {
-                id = (prev.at(-1)?.id || 0) + 1;
-                return prev.concat({
-                    message,
-                    id,
-                    type: "warning",
-                    className: "bg-white shadow-sm border-gray-200",
-                });
-            },
-        );
+            id = (prev.at(-1)?.id || 0) + 1;
+            return prev.concat({
+                message,
+                id,
+                type: "warning",
+                className: "bg-white shadow-sm border-gray-200",
+            });
+        });
 
         setTimeout(() => {
             remove(id);

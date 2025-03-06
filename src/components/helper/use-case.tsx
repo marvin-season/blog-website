@@ -2,6 +2,7 @@ import { useHelper } from "./index";
 
 export default function UseCase() {
     const helper = useHelper();
+    console.log(helper);
     return (
         <>
             <button
