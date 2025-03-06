@@ -5,7 +5,8 @@ type Modal = {
     id: number;
     type?: "primary";
     render: () => ReactNode;
-    onBeforeConfirm: () => Promise<void> | void;
+    onBeforeConfirm?: () => Promise<void> | void;
+    onConfirm?: () => Promise<void> | void;
     className?: string;
 };
 
@@ -26,11 +27,11 @@ export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
     return {
-        open: async ({ render, onBeforeConfirm }: Partial<Modal>) => {
+        open: async ({ render, onBeforeConfirm, onConfirm }: Partial<Modal>) => {
             state.idRef.current++;
             state.setModals((prev) => {
                 // async code
-                return prev.concat({ id: state.idRef.current, render, onBeforeConfirm });
+                return prev.concat({ id: state.idRef.current, render, onBeforeConfirm, onConfirm });
             });
             return {
                 id: state.idRef.current,
@@ -65,9 +66,10 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                     <button
                         onClick={async () => {
                             setLoading(true);
-                            await modal.onBeforeConfirm();
+                            await modal.onBeforeConfirm?.();
                             setLoading(false);
                             props.close(modal.id);
+                            await modal.onConfirm?.();
                         }}
                     >
                         {loading ? 'loading' : '确认'}
