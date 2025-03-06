@@ -2,10 +2,12 @@ import { createContext, ReactNode, useContext, useState } from "react";
 import  { Strategy, useStrategies } from "./strategy";
 import { ActionType as ModalActionType } from "./strategy/modal";
 import { ActionType as NotificationActionType } from "./strategy/notification";
+import { ActionType as ConfirmActionType } from "./strategy/confirm";
 
 export interface ContextProps {
     "modal": ModalActionType
     "notification": NotificationActionType
+    "confirm": ConfirmActionType
 }
 
 export default function HelperProvider({ children }: { children: ReactNode }) {

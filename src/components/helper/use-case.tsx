@@ -38,6 +38,29 @@ export default function UseCase() {
             >
                 modal
             </button>
+            <button
+                className={
+                    "cursor-pointer bg-red-400 hover:bg-red-500 text-white border-2 rounded-lg px-2 py-0.5"
+                }
+                onClick={async (e) => {
+                    const result = await helper.confirm.open({
+                        render: () => {
+                            return <>
+                                hi
+                            </>;
+                        },
+                        onBeforeConfirm: () => {
+                            console.log('onBeforeConfirm')
+                            return new Promise(resolve => setTimeout(resolve, 1000))
+                        },
+                        onConfirm(){
+                            console.log('onConfirm')
+                        }
+                    });
+                }}
+            >
+                删除
+            </button>
         </>
     );
 }

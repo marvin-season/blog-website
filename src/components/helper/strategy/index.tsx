@@ -1,5 +1,6 @@
 import NotificationStrategy from "./notification";
 import ModalStrategy from "./modal";
+import ConfirmStrategy from "./confirm";
 import { Dispatch, ReactNode, SetStateAction, useEffect } from "react";
 
 export interface IStrategy<S extends Record<string, any>, A extends Record<string, Function>> {
@@ -35,5 +36,5 @@ export function Strategy(
 }
 
 export const useStrategies = () => {
-    return [NotificationStrategy, ModalStrategy];
+    return [NotificationStrategy, ModalStrategy, ConfirmStrategy];
 };
