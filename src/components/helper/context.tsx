@@ -1,8 +1,16 @@
-import { createContext, ReactNode, useContext } from "react";
+import {
+    createContext,
+    Dispatch,
+    ReactNode,
+    SetStateAction,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import NotificationStrategy from "./strategy/notification";
 
-const useStrategy = () => {
-    return NotificationStrategy;
+const useStrategies = () => {
+    return [NotificationStrategy];
 };
 
 export interface IStrategy {
@@ -16,14 +24,42 @@ export interface IStrategy {
     ) => ReactNode;
 }
 
+function Strategy(
+    item: IStrategy & {
+        setActionContext: Dispatch<SetStateAction<Record<string, any>>>;
+    },
+) {
+    const state = item.useInitState();
+    const action = item.useAction(state);
+
+    useEffect(() => {
+        item.setActionContext((prev) => {
+            if (prev[item.name]) {
+                return prev;
+            }
+            prev[item.name] = action;
+            return prev;
+        });
+    }, []);
+
+    return item.useUI(state, action);
+}
+
 export default function HelperProvider({ children }: { children: ReactNode }) {
-    const strategy = useStrategy();
-    const state = strategy.useInitState();
-    const action = strategy.useAction(state);
-    console.log(action);
+    const strategies = useStrategies();
+    const [actionContext, setActionContext] = useState({});
+
     return (
-        <HelperContext.Provider value={action}>
-            {strategy.useUI(state, action)}
+        <HelperContext.Provider value={actionContext}>
+            {strategies.map((item) => {
+                return (
+                    <Strategy
+                        key={item.name}
+                        {...item}
+                        setActionContext={setActionContext}
+                    />
+                );
+            })}
             {children}
         </HelperContext.Provider>
     );
