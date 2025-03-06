@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useRef, useState } from "react";
 import { IStrategy } from "./index";
 
 type Modal = {
@@ -14,13 +14,13 @@ type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
     return {
-        open: (render: () => ReactNode) => {
-            let id: number;
+        open: async (render: () => ReactNode) => {
+            state.idRef.current++;
             state.setModals((prev) => {
-                id = (prev.at(-1)?.id || 0) + 1;
-                return prev.concat({ id: 1, render });
+                // async code
+                return prev.concat({ id: state.idRef.current, render });
             });
-            return id
+            return state.idRef.current
         },
         close: (id: number) => {
             state.setModals((prev) => prev.filter((item) => item.id !== id));
@@ -29,8 +29,10 @@ function useAction(state: StateType) {
 }
 
 function useInitState() {
+    const idRef = useRef(0);
     const [modals, setModals] = useState<Modal[]>([]);
     return {
+        idRef,
         modals,
         setModals,
     };

@@ -20,13 +20,13 @@ export default function UseCase() {
                 className={
                     "cursor-pointer bg-blue-400 hover:bg-blue-500 text-white border-2 rounded-lg px-2 py-0.5"
                 }
-                onClick={(e) => {
-                    const id = helper.modal.open(() => {
+                onClick={async (e) => {
+                    const id = await helper.modal.open(() => {
                         return <>hi</>;
                     });
                     setTimeout(() => {
                         helper.modal.close(id);
-                    }, 2000)
+                    }, 1000)
                 }}
             >
                 modal
