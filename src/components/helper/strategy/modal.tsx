@@ -9,8 +9,8 @@ type Modal = {
 };
 
 // 提取 useInitState 方法的类型
-type StateType = ReturnType<typeof useInitState>;
-type ActionType = ReturnType<typeof useAction>;
+export type StateType = ReturnType<typeof useInitState>;
+export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
 
