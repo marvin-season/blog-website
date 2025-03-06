@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
+import { IStrategy } from "@site/src/components/helper/context";
 
 type Notification = {
     id: number;
@@ -7,18 +8,17 @@ type Notification = {
     className: string;
 };
 
-// 提取 useInitStateAction 方法的类型
-type StateType = ReturnType<typeof useInitStateAction>;
+// 提取 useInitState 方法的类型
+type StateType = ReturnType<typeof useInitState>;
+type ActionType = ReturnType<typeof useAction>;
 
-function useInitStateAction() {
+function useAction(state: StateType) {
     const remove = (id: number) => {
-        setNotifications((prev) => prev.filter((item) => item.id !== id));
+        state.setNotifications((prev) => prev.filter((item) => item.id !== id));
     };
-
-    const [notifications, setNotifications] = useState<Notification[]>([]);
     const warning = (message: string) => {
-        const id = (notifications.at(-1)?.id || 0) + 1;
-        setNotifications((prev) =>
+        const id = (state.notifications.at(-1)?.id || 0) + 1;
+        state.setNotifications((prev) =>
             prev.concat({
                 message,
                 id,
@@ -31,16 +31,23 @@ function useInitStateAction() {
             remove(id);
         }, 6000);
     };
-
     return {
         remove,
         warning,
+    };
+}
+
+function useInitState() {
+    const [notifications, setNotifications] = useState<Notification[]>([]);
+
+    return {
+        setNotifications,
         notifications,
     };
 }
 
-function NotificationUI(state: StateType) {
-    return state?.notifications.map((notification, index) => {
+function NotificationUI(props: StateType & ActionType): ReactNode {
+    return props?.notifications.map((notification, index) => {
         return (
             <div
                 key={notification.id}
@@ -55,7 +62,7 @@ function NotificationUI(state: StateType) {
 
                 <button
                     onClick={() => {
-                        state.remove(notification.id);
+                        props.remove(notification.id);
                     }}
                 >
                     close
@@ -65,14 +72,13 @@ function NotificationUI(state: StateType) {
     });
 }
 
-const NotificationStrategy = {
-    useInitStateAction,
-    UI() {
-        return {
-            render(state: StateType) {
-                return <NotificationUI {...state} />;
-            },
-        };
+const NotificationStrategy: IStrategy = {
+    name: "notification",
+    description: "notification desc",
+    useAction,
+    useInitState,
+    useUI(state: StateType, action: ActionType) {
+        return <NotificationUI {...state} {...action} />;
     },
 };
 
