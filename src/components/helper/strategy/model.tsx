@@ -15,7 +15,15 @@ type ActionType = ReturnType<typeof useAction>;
 function useAction(state: StateType) {
     return {
         open: (render: () => ReactNode) => {
-            state.setModals((prev) => prev.concat({ id: 1, render }));
+            let id: number;
+            state.setModals((prev) => {
+                id = (prev.at(-1)?.id || 0) + 1;
+                return prev.concat({ id: 1, render });
+            });
+            return id
+        },
+        close: (id: number) => {
+            state.setModals((prev) => prev.filter((item) => item.id !== id));
         },
     };
 }
@@ -36,9 +44,9 @@ function NotificationUI(props: StateType & ActionType): ReactNode {
                 className={`${modal.className} fixed w-[500px] min-h-[200px] translate-x-[-250px] translate-y-[-100px] left-[50%] top-[50%] 
                 bg-[#ffe] rounded-2xl shadow-2xl p-4 flex flex-col justify-between`}
             >
-                <div className={'text-lg font-bold'}>这是标题</div>
-                <div className={'flex-1'}>{modal.render()}</div>
-                <div className={'flex justify-end gap-2'}>
+                <div className={"text-lg font-bold"}>这是标题</div>
+                <div className={"flex-1"}>{modal.render()}</div>
+                <div className={"flex justify-end gap-2"}>
                     <button>取消</button>
                     <button>确认</button>
                 </div>
