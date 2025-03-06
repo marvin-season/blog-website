@@ -56,7 +56,7 @@ export default function UseCase() {
                         onConfirm(){
                             console.log('onConfirm')
                         }
-                    });
+                    }, e);
                 }}
             >
                 删除

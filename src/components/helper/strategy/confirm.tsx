@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 import { IStrategy } from "./index";
 
 type Confirm = {
@@ -27,7 +27,10 @@ export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
     return {
-        open: async (confirm: Confirm) => {
+        open: async (confirm: Confirm, e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+            const target = e.target as HTMLElement;
+            const rect = target.getBoundingClientRect();
+            console.log('Element position:', rect);
             state.idRef.current++;
             state.setModals((prev) => {
                 // async code
