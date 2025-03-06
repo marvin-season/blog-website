@@ -46,41 +46,50 @@ function useAction(state: StateType) {
 function ModalUI(props: StateType & ActionType): ReactNode {
     // only one
     const [loading, setLoading] = useState(false);
+
     return props?.modals.map((modal, index) => {
         return (
-            <div
-                key={modal.id}
-                className={`${modal.className} fixed w-[500px] min-h-[200px] translate-x-[-250px] translate-y-[-100px] left-[50%] top-[50%] 
-                bg-[#fefefe] rounded-2xl shadow-2xl p-4 flex flex-col justify-between`}
-            >
-                <div className={"text-lg font-bold"}>这是标题 {modal.id}</div>
-                <div className={"flex-1"}>{modal.render()}</div>
-                <div className={"flex justify-end gap-2"}>
-                    <button
-                        onClick={() => {
-                            props.close(modal.id);
-                        }}
-                    >
-                        取消
-                    </button>
-                    <button
-                        onClick={async () => {
-                            setLoading(true);
-                            try {
-                                await modal.onBeforeConfirm?.();
+            <div key={modal.id} className={"fixed inset-0 z-999 backdrop-blur"} onClick={() => {
+                props.close(modal.id)
+            }}>
+                <div key={modal.id} className={`fixed w-[500px] min-h-[200px] z-1000 translate-x-[-250px] translate-y-[-100px] left-[50%] top-[50%] 
+                bg-[#fefefe] border border-gray-200 rounded-2xl shadow-2xl p-4 flex flex-col justify-between ${modal.className}`}
+                     onClick={e => {
+                         e.stopPropagation()
+                     }}
+                >
+                    <div className={"text-lg font-bold"}>这是标题 {modal.id}</div>
+                    <div className={"flex-1"}>{modal.render()}</div>
+                    <div className={"flex justify-end gap-2"}>
+                        <button
+                            className={'cursor-pointer'}
+                            onClick={() => {
                                 props.close(modal.id);
-                                await modal.onConfirm?.();
-                            } catch (e) {
-                                console.error(e);
-                            } finally {
-                                setLoading(false);
-                            }
-                        }}
-                    >
-                        {loading ? "loading" : "确认"}
-                    </button>
+                            }}
+                        >
+                            取消
+                        </button>
+                        <button
+                            className={'cursor-pointer'}
+                            onClick={async () => {
+                                setLoading(true);
+                                try {
+                                    await modal.onBeforeConfirm?.();
+                                    props.close(modal.id);
+                                    await modal.onConfirm?.();
+                                } catch (e) {
+                                    console.error(e);
+                                } finally {
+                                    setLoading(false);
+                                }
+                            }}
+                        >
+                            {loading ? "loading" : "确认"}
+                        </button>
+                    </div>
                 </div>
             </div>
+
         );
     });
 }

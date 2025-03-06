@@ -51,7 +51,7 @@ function NotificationUI(props: StateType & ActionType): ReactNode {
         return (
             <div
                 key={notification.id}
-                className={`${notification.className} min-w-[220px] min-h-[90px] cursor-pointer border rounded-lg px-2 py-0.5 fixed right-10`}
+                className={`min-w-[220px] min-h-[90px] cursor-pointer border rounded-lg px-2 py-0.5 fixed right-10 ${notification.className}`}
                 style={{
                     top: 50 + 40 * (index + 1),
                 }}
