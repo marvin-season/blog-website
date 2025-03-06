@@ -15,6 +15,19 @@ export default function UseCase() {
             >
                 警告
             </button>
+
+            <button
+                className={
+                    "cursor-pointer bg-blue-400 hover:bg-blue-500 text-white border-2 rounded-lg px-2 py-0.5"
+                }
+                onClick={(e) => {
+                    helper.modal.open(() => {
+                        return <>hi</>;
+                    });
+                }}
+            >
+                modal
+            </button>
         </>
     );
 }
