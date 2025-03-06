@@ -23,6 +23,9 @@ export default function UseCase() {
                     const result = await helper.modal.open(() => {
                         return <>hi</>;
                     });
+                    result.confirmPromise.then(msg => {
+                        console.log(msg, '确认关闭');
+                    })
                 }}
             >
                 modal

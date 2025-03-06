@@ -10,8 +10,11 @@ type Modal = {
 function useInitState() {
     const idRef = useRef(0);
     const [modals, setModals] = useState<Modal[]>([]);
+    // a promise resolver to confirm current modal
+    const promiseRef = useRef<(value?: unknown) => void>(null);
     return {
         idRef,
+        promiseRef,
         modals,
         setModals,
     };
@@ -29,8 +32,12 @@ function useAction(state: StateType) {
                 // async code
                 return prev.concat({ id: state.idRef.current, render });
             });
+            const confirmPromise = new Promise(resolve => {
+                 state.promiseRef.current = resolve
+            });
             return {
                 id: state.idRef.current,
+                confirmPromise
             };
         },
         close: (id: number) => {
@@ -59,6 +66,7 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                     </button>
                     <button
                         onClick={async () => {
+                            props.promiseRef.current?.(modal)
                             props.close(modal.id);
                         }}
                     >
