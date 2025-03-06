@@ -5,7 +5,7 @@ type Modal = {
     id: number;
     type?: "primary";
     render: () => ReactNode;
-    beforeConfirm: () => Promise<void> | void;
+    onBeforeConfirm: () => Promise<void> | void;
     className?: string;
 };
 
@@ -26,11 +26,11 @@ export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
     return {
-        open: async ({ render, beforeConfirm }: Partial<Modal>) => {
+        open: async ({ render, onBeforeConfirm }: Partial<Modal>) => {
             state.idRef.current++;
             state.setModals((prev) => {
                 // async code
-                return prev.concat({ id: state.idRef.current, render, beforeConfirm });
+                return prev.concat({ id: state.idRef.current, render, onBeforeConfirm });
             });
             return {
                 id: state.idRef.current,
@@ -44,13 +44,14 @@ function useAction(state: StateType) {
 
 function ModalUI(props: StateType & ActionType): ReactNode {
     return props?.modals.map((modal, index) => {
+        // const [loading, setLoading] = useState(false);
         return (
             <div
                 key={modal.id}
                 className={`${modal.className} fixed w-[500px] min-h-[200px] translate-x-[-250px] translate-y-[-100px] left-[50%] top-[50%] 
                 bg-[#fefefe] rounded-2xl shadow-2xl p-4 flex flex-col justify-between`}
             >
-                <div className={"text-lg font-bold"}>这是标题</div>
+                <div className={"text-lg font-bold"}>这是标题 {modal.id}</div>
                 <div className={"flex-1"}>{modal.render()}</div>
                 <div className={"flex justify-end gap-2"}>
                     <button
@@ -63,12 +64,14 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                     <button
                         onClick={async () => {
                             // props.promiseRef.current?.(modal);
-                            await modal.beforeConfirm()
-                            console.log('confirmed')
+                            // setLoading(true)
+                            await modal.onBeforeConfirm()
+                            // setLoading(false)
                             props.close(modal.id);
                         }}
                     >
-                        确认
+                        a
+                        {/*{loading ? 'loading' : '确认'}*/}
                     </button>
                 </div>
             </div>

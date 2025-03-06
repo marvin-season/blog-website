@@ -26,8 +26,8 @@ export default function UseCase() {
                                 hi
                             </>;
                         },
-                        beforeConfirm: () => {
-                            return new Promise(resolve => setTimeout(resolve, 1000));
+                        onBeforeConfirm: () => {
+                            console.log('onBeforeConfirm')
                         },
                     });
                 }}
