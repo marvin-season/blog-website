@@ -1,32 +1,32 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import NotificationStrategy from "./strategy/notification";
 
 const useStrategy = () => {
     return NotificationStrategy;
 };
 
-const useContextValue = () => {
-    return useStrategy();
-};
-
-export default function NotificationProvider({
+export default function HelperProvider({
     children,
 }: {
     children: ReactNode;
 }) {
-    const strategy = useContextValue();
+    const strategy = useStrategy();
     const state = strategy.useInitStateAction();
 
     return (
-        <NotificationContext.Provider value={state}>
+        <HelperContext.Provider value={state}>
             {strategy.UI().render(state)}
             {children}
-        </NotificationContext.Provider>
+        </HelperContext.Provider>
     );
 }
 
-export const NotificationContext = createContext<any>({
+export const HelperContext = createContext<any>({
     notifications: [],
     remove(id: number): void {},
     warning(message: string): void {},
 });
+
+export function useHelper() {
+    return useContext(HelperContext);
+}

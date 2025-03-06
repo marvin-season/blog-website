@@ -1,6 +1,7 @@
-import useNotification from "./use-notification";
+import { useHelper } from "./index";
+
 export default function UseCase() {
-    const notification = useNotification();
+    const notification = useHelper();
     return (
         <>
             <button
