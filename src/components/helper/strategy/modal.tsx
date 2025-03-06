@@ -49,10 +49,10 @@ function ModalUI(props: StateType & ActionType): ReactNode {
 
     return props?.modals.map((modal, index) => {
         return (
-            <div key={modal.id} className={"fixed inset-0 z-999 backdrop-blur"} onClick={() => {
+            <div key={modal.id} className={"fixed inset-0 z-999 backdrop-blur flex items-center justify-center"} onClick={() => {
                 props.close(modal.id)
             }}>
-                <div key={modal.id} className={`fixed w-[500px] min-h-[200px] z-1000 translate-x-[-250px] translate-y-[-100px] left-[50%] top-[50%] 
+                <div key={modal.id} className={`fixed w-[500px] min-h-[200px] z-999
                 bg-[#fefefe] border border-gray-200 rounded-2xl shadow-2xl p-4 flex flex-col justify-between ${modal.className}`}
                      onClick={e => {
                          e.stopPropagation()
@@ -62,7 +62,7 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                     <div className={"flex-1"}>{modal.render()}</div>
                     <div className={"flex justify-end gap-2"}>
                         <button
-                            className={'cursor-pointer'}
+                            className={'cursor-pointer rounded border px-2.5 py-1.5 text-[#222] leading-4 text-sm'}
                             onClick={() => {
                                 props.close(modal.id);
                             }}
@@ -70,7 +70,7 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                             取消
                         </button>
                         <button
-                            className={'cursor-pointer'}
+                            className={'cursor-pointer rounded bg-blue-500 hover:bg-blue-600 px-2.5 py-1.5 text-white leading-4 text-sm'}
                             onClick={async () => {
                                 setLoading(true);
                                 try {
