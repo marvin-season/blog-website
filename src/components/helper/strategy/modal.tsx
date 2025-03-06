@@ -5,16 +5,16 @@ type Modal = {
     id: number;
     type?: "primary";
     render: () => ReactNode;
+    beforeConfirm: () => Promise<void> | void;
     className?: string;
 };
+
 function useInitState() {
     const idRef = useRef(0);
     const [modals, setModals] = useState<Modal[]>([]);
-    // a promise resolver to confirm current modal
-    const promiseRef = useRef<(value?: unknown) => void>(null);
+
     return {
         idRef,
-        promiseRef,
         modals,
         setModals,
     };
@@ -26,18 +26,14 @@ export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
     return {
-        open: async (render: () => ReactNode) => {
+        open: async ({ render, beforeConfirm }: Partial<Modal>) => {
             state.idRef.current++;
             state.setModals((prev) => {
                 // async code
-                return prev.concat({ id: state.idRef.current, render });
-            });
-            const confirmPromise = new Promise(resolve => {
-                 state.promiseRef.current = resolve
+                return prev.concat({ id: state.idRef.current, render, beforeConfirm });
             });
             return {
                 id: state.idRef.current,
-                confirmPromise
             };
         },
         close: (id: number) => {
@@ -66,7 +62,9 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                     </button>
                     <button
                         onClick={async () => {
-                            props.promiseRef.current?.(modal)
+                            // props.promiseRef.current?.(modal);
+                            await modal.beforeConfirm()
+                            console.log('confirmed')
                             props.close(modal.id);
                         }}
                     >

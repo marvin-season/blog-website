@@ -20,12 +20,16 @@ export default function UseCase() {
                     "cursor-pointer bg-blue-400 hover:bg-blue-500 text-white border-2 rounded-lg px-2 py-0.5"
                 }
                 onClick={async (e) => {
-                    const result = await helper.modal.open(() => {
-                        return <>hi</>;
+                    const result = await helper.modal.open({
+                        render: () => {
+                            return <>
+                                hi
+                            </>;
+                        },
+                        beforeConfirm: () => {
+                            return new Promise(resolve => setTimeout(resolve, 1000));
+                        },
                     });
-                    result.confirmPromise.then(msg => {
-                        console.log(msg, '确认关闭');
-                    })
                 }}
             >
                 modal
