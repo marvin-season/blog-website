@@ -2,7 +2,7 @@ import { ReactNode, useRef, useState } from "react";
 import { IStrategy } from "./index";
 
 type Modal = {
-    id: number;
+    id?: number;
     type?: "primary";
     render: () => ReactNode;
     onBeforeConfirm?: () => Promise<void> | void;
@@ -27,11 +27,11 @@ export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
     return {
-        open: async ({ render, onBeforeConfirm, onConfirm }: Partial<Modal>) => {
+        open: async (modal: Modal) => {
             state.idRef.current++;
             state.setModals((prev) => {
                 // async code
-                return prev.concat({ id: state.idRef.current, render, onBeforeConfirm, onConfirm });
+                return prev.concat({ ...modal, id: state.idRef.current });
             });
             return {
                 id: state.idRef.current,
