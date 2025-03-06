@@ -7,6 +7,15 @@ type Modal = {
     render: () => ReactNode;
     className?: string;
 };
+function useInitState() {
+    const idRef = useRef(0);
+    const [modals, setModals] = useState<Modal[]>([]);
+    return {
+        idRef,
+        modals,
+        setModals,
+    };
+}
 
 // 提取 useInitState 方法的类型
 export type StateType = ReturnType<typeof useInitState>;
@@ -27,16 +36,6 @@ function useAction(state: StateType) {
         close: (id: number) => {
             state.setModals((prev) => prev.filter((item) => item.id !== id));
         },
-    };
-}
-
-function useInitState() {
-    const idRef = useRef(0);
-    const [modals, setModals] = useState<Modal[]>([]);
-    return {
-        idRef,
-        modals,
-        setModals,
     };
 }
 
