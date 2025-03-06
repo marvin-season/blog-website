@@ -24,7 +24,7 @@ function useAction(state: StateType) {
                 message,
                 id,
                 type: "warning",
-                className: "bg-white shadow-sm border-gray-200",
+                className: "bg-white",
             });
         });
 
@@ -51,22 +51,28 @@ function NotificationUI(props: StateType & ActionType): ReactNode {
         return (
             <div
                 key={notification.id}
-                className={`min-w-[220px] min-h-[90px] cursor-pointer border rounded-lg px-2 py-0.5 fixed right-10 ${notification.className}`}
+                className={`transition-all duration-500 shadow-[2px_2px_12px_rgba(0,0,0,0.25)] 
+                    min-w-[320px] min-h-[40px] rounded-lg p-4 fixed top-0 right-20 z-999 opacity-80 hover:opacity-100 hover:z-1000
+                    hover:translate-y-[-20px] hover:translate-x-[4px] ${notification.className}
+                `}
                 style={{
-                    top: 50 + 40 * (index + 1),
+                    transform: `translateY(${40 + 40 * index}px)`
                 }}
             >
-                <span className={"text-sm"}>
-                    {notification.message + notification.id}
-                </span>
+                <div className={"text-lg font-bold"}>Notification</div>
+                <div className={"text-sm flex justify-between"}>
+                    <span>{notification.message + notification.id}</span>
+                    <button
+                        className={'cursor-pointer'}
+                        onClick={() => {
+                            props.remove(notification.id);
+                        }}
+                    >
+                        X
+                    </button>
+                </div>
 
-                <button
-                    onClick={() => {
-                        props.remove(notification.id);
-                    }}
-                >
-                    close
-                </button>
+
             </div>
         );
     });
