@@ -17,14 +17,16 @@ function useAction(state: StateType) {
         state.setNotifications((prev) => prev.filter((item) => item.id !== id));
     };
     const warning = (message: string) => {
-        const id = (state.notifications.at(-1)?.id || 0) + 1;
-        state.setNotifications((prev) =>
-            prev.concat({
-                message,
-                id,
-                type: "warning",
-                className: "bg-white shadow-sm border-gray-200",
-            }),
+        let id = (state.notifications.at(-1)?.id || 0) + 1;
+        state.setNotifications((prev) => {
+                id = (prev.at(-1)?.id || 0) + 1;
+                return prev.concat({
+                    message,
+                    id,
+                    type: "warning",
+                    className: "bg-white shadow-sm border-gray-200",
+                });
+            },
         );
 
         setTimeout(() => {
@@ -39,7 +41,6 @@ function useAction(state: StateType) {
 
 function useInitState() {
     const [notifications, setNotifications] = useState<Notification[]>([]);
-
     return {
         setNotifications,
         notifications,
