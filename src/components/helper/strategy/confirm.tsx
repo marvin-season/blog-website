@@ -5,12 +5,12 @@ import "tippy.js/animations/shift-away.css"; // 过渡动画
 
 type Confirm = {
     id?: number;
-    type?: "primary";
+    type?: "danger" | "warning";
     render: () => ReactNode;
     onBeforeConfirm?: () => Promise<void> | void;
     onConfirm?: () => Promise<void> | void;
     className?: string;
-    target: React.RefObject<Element> | Element | null;
+    target?: React.RefObject<Element> | Element | null;
 };
 
 function useInitState() {
@@ -30,9 +30,13 @@ export type ActionType = ReturnType<typeof useAction>;
 
 function useAction(state: StateType) {
     return {
-        open: async (confirm: Confirm) => {
+        warning: async (confirm: Confirm) => {
             state.idRef.current++;
-            state.setConfirm({ ...confirm, id: state.idRef.current });
+            state.setConfirm({
+                id: state.idRef.current,
+                target: document.activeElement,
+                ...confirm,
+            });
             return {
                 id: state.idRef.current,
             };
@@ -43,42 +47,47 @@ function useAction(state: StateType) {
     };
 }
 
-function ModalUI(props: StateType & ActionType): ReactNode {
+function ConfirmUI(props: StateType & ActionType): ReactNode {
     // only one
     const [loading, setLoading] = useState(false);
     if (!props.confirm) {
         return null;
     }
-    return <Tippy
-        animation="shift-away"
-        className="border border-blue-300 backdrop-blur backdrop-opacity-80 p-4 rounded-[12px] shadow text-sm"
-        render={() => {
-            return <div className={"p-2 border"}>
-                {props.confirm.render()}
-                <button onClick={async () => {
-                    setLoading(true);
-                    try {
-                        await props.confirm.onBeforeConfirm?.();
-                        props.close();
-                        props.confirm.onConfirm?.();
-                    } catch (e) {
-                    } finally {
-                        setLoading(false);
-                    }
-                    props.close();
-                }} className={"bg-red-400 text-white text-sm"}>
-                    {loading ? "loading" : "确认"}
-                </button>
-            </div>;
-        }}
-        interactive
-        reference={props.confirm.target}
-        placement={"top-start"} // 将弹窗位置设置为底部
-        visible={!!props.confirm}
-        onClickOutside={() => {
-            props.close();
-        }} // 点击外部关闭弹窗
-    />;
+    return (
+        <Tippy
+            animation="shift-away"
+            className="backdrop-blur backdrop-opacity-80 p-2 rounded-lg shadow text-sm w-[100px]"
+            content={
+                <div className={"flex gap-2 justify-between"}>
+                    {props.confirm.render()}
+                    <button
+                        onClick={async () => {
+                            setLoading(true);
+                            try {
+                                await props.confirm.onBeforeConfirm?.();
+                                props.close();
+                                props.confirm.onConfirm?.();
+                            } catch (e) {
+                            } finally {
+                                setLoading(false);
+                            }
+                            props.close();
+                        }}
+                        className={"text-red-400 text-sm"}
+                    >
+                        {loading ? "loading" : "确认"}
+                    </button>
+                </div>
+            }
+            interactive
+            reference={props.confirm.target}
+            placement={"top-start"} // 将弹窗位置设置为底部
+            visible={!!props.confirm}
+            onClickOutside={() => {
+                props.close();
+            }} // 点击外部关闭弹窗
+        />
+    );
 }
 
 const ConfirmStrategy: IStrategy<StateType, ActionType> = {
@@ -87,7 +96,7 @@ const ConfirmStrategy: IStrategy<StateType, ActionType> = {
     useAction,
     useInitState,
     useUI(state: StateType, action: ActionType) {
-        return <ModalUI {...state} {...action} />;
+        return <ConfirmUI {...state} {...action} />;
     },
 };
 

@@ -22,42 +22,41 @@ export default function UseCase() {
                 onClick={async (e) => {
                     const result = await helper.modal.open({
                         render: () => {
-                            return <>
-                                hi
-                            </>;
+                            return <>hi</>;
                         },
                         onBeforeConfirm: () => {
-                            console.log('onBeforeConfirm')
-                            return new Promise(resolve => setTimeout(resolve, 1000))
+                            console.log("onBeforeConfirm");
+                            return new Promise((resolve) =>
+                                setTimeout(resolve, 1000),
+                            );
                         },
-                        onConfirm(){
-                            console.log('onConfirm')
-                        }
+                        onConfirm() {
+                            console.log("onConfirm");
+                        },
                     });
                 }}
             >
                 modal
             </button>
             <button
-                id={'delete'}
+                id={"delete"}
                 className={
                     "cursor-pointer bg-red-400 hover:bg-red-500 text-white border-2 rounded-lg px-2 py-0.5"
                 }
                 onClick={async (e) => {
-                    const result = await helper.confirm.open({
-                        target: e.target as HTMLElement,
+                    const result = await helper.confirm.warning({
                         render: () => {
-                            return <>
-                                hi
-                            </>;
+                            return <>hi</>;
                         },
                         onBeforeConfirm: () => {
-                            console.log('onBeforeConfirm')
-                            return new Promise(resolve => setTimeout(resolve, 1000))
+                            console.log("onBeforeConfirm");
+                            return new Promise((resolve) =>
+                                setTimeout(resolve, 1000),
+                            );
                         },
-                        onConfirm(){
-                            console.log('onConfirm')
-                        }
+                        onConfirm() {
+                            console.log("onConfirm");
+                        },
                     });
                 }}
             >

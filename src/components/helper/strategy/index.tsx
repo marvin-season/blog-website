@@ -3,15 +3,15 @@ import ModalStrategy from "./modal";
 import ConfirmStrategy from "./confirm";
 import { Dispatch, ReactNode, SetStateAction, useEffect } from "react";
 
-export interface IStrategy<S extends Record<string, any>, A extends Record<string, Function>> {
+export interface IStrategy<
+    S extends Record<string, any>,
+    A extends Record<string, Function>,
+> {
     name: "notification" | "modal" | "confirm";
     description: string;
     useInitState: () => S;
     useAction: (state: S) => A;
-    useUI: (
-        state: S,
-        action: A,
-    ) => ReactNode;
+    useUI: (state: S, action: A) => ReactNode;
 }
 
 export function Strategy(

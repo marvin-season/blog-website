@@ -56,14 +56,14 @@ function NotificationUI(props: StateType & ActionType): ReactNode {
                     hover:translate-y-[-20px] hover:translate-x-[4px] ${notification.className}
                 `}
                 style={{
-                    transform: `translateY(${40 + 40 * index}px)`
+                    transform: `translateY(${40 + 40 * index}px)`,
                 }}
             >
                 <div className={"text-lg font-bold"}>Notification</div>
                 <div className={"text-sm flex justify-between"}>
                     <span>{notification.message + notification.id}</span>
                     <button
-                        className={'cursor-pointer'}
+                        className={"cursor-pointer"}
                         onClick={() => {
                             props.remove(notification.id);
                         }}
@@ -71,8 +71,6 @@ function NotificationUI(props: StateType & ActionType): ReactNode {
                         X
                     </button>
                 </div>
-
-
             </div>
         );
     });
