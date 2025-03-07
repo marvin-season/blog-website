@@ -60,8 +60,11 @@ function ModalUI(props: StateType & ActionType): ReactNode {
             >
                 <div
                     key={modal.id}
-                    className={`fixed w-[500px] min-h-[200px] z-999
-                bg-[#fefefe] border border-gray-200 rounded-2xl shadow-2xl p-4 flex flex-col justify-between ${modal.className}`}
+                    style={{
+                        transform: `translate(${20 * index}px, ${30 * index}px)`,
+                    }}
+                    className={`w-[500px] min-h-[200px] z-999
+                    bg-[#fefefe] border border-gray-200 rounded-2xl shadow-2xl p-4 flex flex-col justify-between ${modal.className}`}
                     onClick={(e) => {
                         e.stopPropagation();
                     }}

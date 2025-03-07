@@ -22,7 +22,15 @@ export default function UseCase() {
                 onClick={async (e) => {
                     const result = await helper.modal.open({
                         render: () => {
-                            return <>hi</>;
+                            return <div>
+                                <button className={"cursor-pointer bg-blue-400 hover:bg-blue-500 text-white border-2 rounded-lg px-2 py-0.5"} onClick={() => {
+                                    helper.modal.open({
+                                        render(){
+                                            return <>inner</>
+                                        }
+                                    })
+                                }}>Again</button>
+                            </div>;
                         },
                         onBeforeConfirm: () => {
                             console.log("onBeforeConfirm");
