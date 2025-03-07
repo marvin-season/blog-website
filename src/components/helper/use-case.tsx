@@ -1,5 +1,30 @@
 import { useHelper } from "./index";
 
+const InfiniteModal = () => {
+    const helper = useHelper();
+    return <button
+        className={
+            "cursor-pointer bg-blue-400 hover:bg-blue-500 text-white border-2 rounded-lg px-2 py-0.5"
+        }
+        onClick={async (e) => {
+            const result = await helper.modal.open({
+                render: InfiniteModal,
+                onBeforeConfirm: () => {
+                    console.log("onBeforeConfirm");
+                    return new Promise((resolve) =>
+                        setTimeout(resolve, 1000),
+                    );
+                },
+                onConfirm() {
+                    console.log("onConfirm");
+                },
+            });
+        }}
+    >
+        modal
+    </button>;
+};
+
 export default function UseCase() {
     const helper = useHelper();
     return (
@@ -15,37 +40,7 @@ export default function UseCase() {
                 警告
             </button>
 
-            <button
-                className={
-                    "cursor-pointer bg-blue-400 hover:bg-blue-500 text-white border-2 rounded-lg px-2 py-0.5"
-                }
-                onClick={async (e) => {
-                    const result = await helper.modal.open({
-                        render: () => {
-                            return <div>
-                                <button className={"cursor-pointer bg-blue-400 hover:bg-blue-500 text-white border-2 rounded-lg px-2 py-0.5"} onClick={() => {
-                                    helper.modal.open({
-                                        render(){
-                                            return <>inner</>
-                                        }
-                                    })
-                                }}>Again</button>
-                            </div>;
-                        },
-                        onBeforeConfirm: () => {
-                            console.log("onBeforeConfirm");
-                            return new Promise((resolve) =>
-                                setTimeout(resolve, 1000),
-                            );
-                        },
-                        onConfirm() {
-                            console.log("onConfirm");
-                        },
-                    });
-                }}
-            >
-                modal
-            </button>
+            <InfiniteModal />
             <button
                 id={"delete"}
                 className={
