@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "docusaurus start --port=6888 --host=10.3.73.76",
+    "start": "docusaurus start --port=6888",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "GIT_USER=marvin-season USE_SSH=true docusaurus deploy",
