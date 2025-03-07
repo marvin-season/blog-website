@@ -9,7 +9,7 @@ type Modal = {
     onConfirm?: () => Promise<void> | void;
     className?: string;
 };
-const Direction = [-1, 1, 1, -1]
+const Direction = [1, -1, 1, -1]
 function transferToDirection(i: number) {
     const index = i % Direction.length;
     return [Direction[index], Direction[(index + 1) % Direction.length]];
@@ -54,6 +54,7 @@ function ModalUI(props: StateType & ActionType): ReactNode {
 
     return props?.modals.map((modal, index) => {
         const [i1, i2] = transferToDirection(index)
+        console.log(i1, i2)
         return (
             <div
                 key={modal.id}
@@ -67,7 +68,7 @@ function ModalUI(props: StateType & ActionType): ReactNode {
                 <div
                     key={modal.id}
                     style={{
-                        transform: `translate(${20 * i1}px, ${30 * i2}px)`,
+                        transform: `translate(${20 * i1}px, ${20 * i2}px)`,
                     }}
                     className={`w-[500px] min-h-[200px] z-999
                     bg-[#fefefe] border border-gray-200 rounded-2xl shadow-2xl p-4 flex flex-col justify-between ${modal.className}`}
