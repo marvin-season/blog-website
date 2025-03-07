@@ -22,7 +22,7 @@ export default function UseCase() {
                 onClick={async (e) => {
                     const result = await helper.modal.open({
                         render: () => {
-                            return <>hi</>;
+                            return <div>hi</div>;
                         },
                         onBeforeConfirm: () => {
                             console.log("onBeforeConfirm");
@@ -46,7 +46,7 @@ export default function UseCase() {
                 onClick={async (e) => {
                     const result = await helper.confirm.warning({
                         render: () => {
-                            return <>hi</>;
+                            return <div className={""}>hi</div>;
                         },
                         onBeforeConfirm: () => {
                             console.log("onBeforeConfirm");
