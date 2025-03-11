@@ -1,5 +1,4 @@
-import HelperProvider from "./context";
-import UseCase from "./use-case";
+import { HelperProvider, UseCase } from "aio-modal";
 
 export { default as Helper, useHelper } from "./context";
 
