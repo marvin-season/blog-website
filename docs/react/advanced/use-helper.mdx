@@ -11,23 +11,8 @@ import {App} from  '@site/src/components/helper';
 Helper is a **One For All** modal interactive helper
 
 ## How to use
-```tsx
-import useHelper from '.';
-const helper = useHelper();
 
-helper.notification.warning("网络异常");
-
-const modal = await helper.modal.open({
-    render: () => <> hi </>,
-    onBeforeConfirm: () => {
-        console.log('onBeforeConfirm')
-    },
-    onConfirm(){
-        console.log('onConfirm')
-    }
-});
-
-```
+[Reference](https://www.npmjs.com/package/aio-modal)
 
 ## Design
 
