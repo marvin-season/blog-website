@@ -3354,6 +3354,11 @@ aio-modal@0.0.2006-testing:
     react-dom "^18.3.1"
     tippy.js "^6.3.7"
 
+aio-tool@0.0.102-testing:
+  version "0.0.102-testing"
+  resolved "https://registry.yarnpkg.com/aio-tool/-/aio-tool-0.0.102-testing.tgz#d0562cb898e5a8d078af8fc4c8ff7a64c3d65449"
+  integrity sha512-O1Sy/9NV5WQqBTqEyPwMO7HQPFkbF/qXHeAWgCfXwk6wbPzkBr49pvg4+uFmTy3h79/1Zgn9YXvM6BvsaIZFcQ==
+
 ajv-formats@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmmirror.com/ajv-formats/-/ajv-formats-2.1.1.tgz#6e669400659eb74973bbf2e33327180a0996b520"
