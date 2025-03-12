@@ -8,3 +8,35 @@ tags: [javascript, lazy-load]
 import App from  '@site/src/components/lazy-load';
 
 <App/>
+
+## How
+借助 IntersectionObserver API,监听最底部的 dom，当 dom 出现在视图中时，加载更多
+
+## Pseudo
+
+```tsx
+const observer = new IntersectionObserver((entries, observer) => {
+    if('discover'){
+        // load more: setCeil
+    }
+})
+
+observer.observe('bottom_dom' as HTMLElement)
+
+const renderPages = (
+    pages = [],
+    ceil = 10,
+    observer
+) => {
+
+    return pages .slice(0, ceil)
+            .map(item =>
+                <div
+                    key={item.id}
+                    ref={dom => {
+                        observer.observe(dom)
+                    }}>
+                </div>
+            )
+}
+```
