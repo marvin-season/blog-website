@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 export default function App() {
     const [row, setRow] = useState(10);
     return <>
-        <Layout />
         <div>
             {"Vertical: "}
             {row}
@@ -12,23 +11,6 @@ export default function App() {
     </>;
 }
 
-/**
- * 一定宽度后自动换行
- * @constructor
- */
-function Layout() {
-    return <>
-        <div className={"flex justify-between w-1/3 flex-wrap border"}>
-            <div className={"min-h-[24px] flex-1 border max-w-[100%]"}>
-                <div contentEditable={true} className={"w-auto"}></div>
-            </div>
-            <div className={"flex ml-auto"}>
-                <div>@</div>
-                <div>#</div>
-            </div>
-        </div>
-    </>;
-}
 
 export const Vertical = ({ row = 1000000 }) => {
     const rootRef = useRef(null);
