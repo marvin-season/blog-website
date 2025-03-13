@@ -8,22 +8,25 @@ import {App} from  '@site/src/components/modal-helper';
 
 ## Intro
 
-Helper is a **One For All** modal interactive helper
+ModelHelper is a **One For All** modal interactive helper
 
 ## How to use
 
 [Reference](https://www.npmjs.com/package/aio-modal)
 
-## Design
+## Feature
+**Context Manage** & **Declarative** & **Customize**
 
-**CoreContext**: 使用上下文管理状态，以便于全局调用，策略机制，以便于扩展
-
-## Pseudo
+## Pseudo of definition
 
 ```js
-const helper = Helper
-        .use('Model')
-        .use('Confirm')
-        .use('Notification')
-        .init()
+const modelHelper = ModelHelper
+        .connect('Model')
+        .connect('Confirm')
+        .connect('Notification')
+        .new()
+```
+## Using case
+```tsx
+modelHelper.modal.open(<div>Your Modal</>)
 ```
