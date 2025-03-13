@@ -5,9 +5,9 @@ authors: [marvin-season]
 tags: [javascript, lazy-load]
 ---
 ## 虚拟列表
-import App from  '@site/src/components/lazy-load';
+import {VirtualPage} from  '@site/src/components/lazy-load';
 
-<App/>
+<VirtualPage/>
 
 ### How
 借助 IntersectionObserver API, 监听将要进入视口内的dom，当该 dom 出现在视口中时，加载更多！
