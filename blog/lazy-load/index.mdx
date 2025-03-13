@@ -4,15 +4,14 @@ title: LazyLoad
 authors: [marvin-season]
 tags: [javascript, lazy-load]
 ---
-
+## 虚拟列表
 import App from  '@site/src/components/lazy-load';
 
 <App/>
 
-## How
-借助 IntersectionObserver API,监听最底部的 dom，当 dom 出现在视图中时，加载更多
-
-## Pseudo
+### How
+借助 IntersectionObserver API, 监听将要进入视口内的dom，当该 dom 出现在视口中时，加载更多！
+### Pseudo
 ```tsx
 const observer = new IntersectionObserver((entries, observer) => {
     if('discover'){
@@ -22,3 +21,5 @@ const observer = new IntersectionObserver((entries, observer) => {
 
 observer.observe('dom' as HTMLElement)
 ```
+
+## 图片懒加载
