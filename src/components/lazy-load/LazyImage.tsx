@@ -1,3 +1,4 @@
+// @ts-ignore
 import Logo from '@site/static/img/logo.png'
 
 export default function LazyImage() {
