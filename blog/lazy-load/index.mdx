@@ -4,7 +4,9 @@ title: LazyLoad
 authors: [marvin-season]
 tags: [javascript, lazy-load]
 ---
-## 虚拟列表
+## 参考资料
+https://developer.mozilla.org/en-US/docs/Web/Performance/Guides/Lazy_loading
+## Intersection Observer API
 import {VirtualPage} from  '@site/src/components/lazy-load';
 
 <VirtualPage/>
@@ -22,4 +24,16 @@ const observer = new IntersectionObserver((entries, observer) => {
 observer.observe('dom' as HTMLElement)
 ```
 
-## 图片懒加载
+## Images and iframes
+import {LazyImage} from  '@site/src/components/lazy-load';
+
+<LazyImage/>
+
+以图片为例，打开控制台，筛选网络中的图片，然后滚动上述视口，当图片靠近视口区域时，可以看到图片资源加载
+
+`loading="lazy"`
+
+```html
+<img loading="lazy" src="image.jpg" alt="..." />
+<iframe loading="lazy" src="video-player.html" title="..."></iframe>
+```
