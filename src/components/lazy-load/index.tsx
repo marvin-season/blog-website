@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
 export default function App() {
-    const [row, setRow] = useState(10);
+    const [row, setRow] = useState(100);
     return <>
         <div>
             {"Vertical: "}
@@ -39,10 +39,10 @@ export const Vertical = ({ row = 1000000 }) => {
         };
     }, []);
 
-    return <div className={"h-[300px] overflow-y-auto border"} ref={rootRef}>
+    return <div className={"h-[200px] overflow-y-auto border"} ref={rootRef}>
         {
             new Array(row).fill(0).slice(0, pageCeil).map((_, index) => {
-                return <div className={"h-[100px] border border-gray-300"} key={index}>{index}</div>;
+                return <div className={"h-[50px] border border-gray-300"} key={index}>{index}</div>;
             })
         }
 
