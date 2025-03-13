@@ -1,125 +1,30 @@
 ---
-title: GitHub Actions & Pages 部署指南
-slug: github-actions-pages-deploy-guide
+title: GitHub Pages 托管
+slug: github-pages
 authors: [marvin-season]
 tags: [github, actions, pages]
 date: 2025-02-26
 ---
 ## 参考
+- [GitHub Pages 配置](https://github.com/marvin-season/aio-tool/settings/pages)
 - [GitHub Actions 官方文档](https://docs.github.com/actions)
 - [GitHub Pages 域名配置指南](https://docs.github.com/pages/configuring-a-custom-domain-for-your-github-pages-site)
 
 ## 托管静态资源到GithubPage
 - 通过github action， 从action产物部署
 - 推送到 gh-pages, 从分支部署
-## GitHub Actions 核心语法
-文件名: .github/workflows/deploy.yml
-```yml
-name: Deploy to GitHub Pages  # 工作流名称
 
-on:
-  push:                     # 触发条件：代码推送
-    branches: [main]        # 仅在 main 分支推送时触发
+## 两种部署模式对比
+- 分支推送模式：生成 gh-pages 分支，GitHub 自动从该分支拉取内容
+- 直接部署模式：通过 upload-pages-artifact + deploy-pages 直接托管，无需维护分支
 
-jobs:
-  build:                    # 第一个任务：构建代码
-    runs-on: ubuntu-latest  # 运行环境
-    steps:
-      - uses: actions/checkout@v4
-      - run: echo "安装依赖并构建..."
-
-  deploy:                   # 第二个任务：部署
-    needs: build            # 依赖 build 任务
-    environment:            # 声明部署目标环境
-      name: github-pages    # 环境名称
-      url: ${{ steps.deployment.outputs.page_url }}  # 动态URL
-    steps:
-      - name: Deploy
-        id: deployment      # 步骤ID（用于引用输出）
-        uses: actions/deploy-pages@v4
-```
-
-## 关键概念解析
-
-**环境变量 `${{ steps.deployment.outputs.page_url }}`**
-
-- 作用：引用 deployment 步骤的输出结果（Pages 站点 URL）
-- 输出来源：actions/deploy-pages 官方 Action 内置字段
-- 验证方法：
-```yml
-- name: Show URL
-  run: echo "${{ steps.deployment.outputs.page_url }}"
-```
-
-**环境配置 (environment)**
-```yml
-environment:  
-    name: github-pages    # 纯标识符  
-    url: ${{ ... }}       # 动态生成的访问地址
-```
-**核心作用：**
-- 在 GitHub UI 中分类显示部署记录
-- 支持环境保护规则（如审批流程、分支限制）
-- 快速跳转到部署后的页面（需配置 URL）
-
-**环境保护规则错误解析**
-
+## 常见问题排查
 `错误信息：Branch "main" is not allowed to deploy due to environment protection rules`
-
-**解决方案：**
 
 - 进入仓库设置：Settings → Environments → github-pages
 - 修改 Deployment branches：允许 main 分支
 - 关闭 Required reviewers 或添加审批者（如有必要）
 
-## GitHub Pages 完整流程
-**核心工作机制**
-```mermaid
-graph LR
-    A[代码 Push 到 main 分支] --> B(触发 GitHub Actions)
-    B --> C[执行构建任务]
-    C --> D[上传构建产物]
-    D --> E[部署到 gh-pages 分支/GitHub Pages 服务]
-    E --> F[用户访问 xxx.github.io]
-```
-**两种部署模式对比**
-- 分支推送模式：生成 gh-pages 分支，GitHub 自动从该分支拉取内容
-- 直接部署模式：通过 upload-pages-artifact + deploy-pages 直接托管，无需维护分支
-
-**自定义域名配置**
-- 在仓库根目录添加 CNAME 文件（内容为域名，如 example.com）
-- 配置 DNS 解析：
-    - 类型：CNAME
-    - 值：`<username>.github.io`
-- 等待 1-5 分钟 HTTPS 证书自动签发
-
-## 常见问题排查
-**部署后显示 404**
+`部署后显示 404`
 - 检查构建路径是否正确（如 Docusaurus 默认输出到 build 文件夹）
 - 验证仓库设置的 Pages 来源：Settings → Pages → Build and deployment → Branch
-
-**HTTPS 证书未生效**
-- 确保 CNAME 文件存在且内容正确
-- 访问 `https://<username>.github.io 测试基础配置是否正常`
-
-**Actions 缓存污染**
-```yml
--   name: Clean cache  
-    run: |
-        yarn cache clean    
-        rm -rf node_modules
-```
-
-## 最佳实践
-**分支策略**
-- main：存放源码
-- gh-pages：仅存储构建产物（自动更新）
-
-**敏感信息管理**
-- 通过仓库 Secrets 注入密钥： 
-    env:
-      API_KEY: `${{ secrets.PROD_API_KEY }}`
-
-**多环境场景**
-- dev 环境：允许 dev 分支自动部署（测试用）
-- prod 环境：仅允许 main 分支 + 人工审批
