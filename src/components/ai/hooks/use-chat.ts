@@ -1,7 +1,5 @@
 import { createMockStream, SSEMessageGenerator } from "aio-tool";
 
-console.log(SSEMessageGenerator);
-
 export default function useChat() {
     async function* send(value: string, {} = {}) {
         // will be replaced fetch response
