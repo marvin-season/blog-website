@@ -3344,10 +3344,10 @@ ahooks@^3.8.4:
     screenfull "^5.0.0"
     tslib "^2.4.1"
 
-aio-modal@0.0.3001-modal-dev:
-  version "0.0.3001-modal-dev"
-  resolved "https://registry.yarnpkg.com/aio-modal/-/aio-modal-0.0.3001-modal-dev.tgz#8656b03b5f5b880f63faa87a66dd7efb1874011a"
-  integrity sha512-AahRC5ewzIcayG7LgDO7Y7hVMp6pPOQaJdesoJXTpoo+HKl26jMWCDTgJGtMarcj2h605eA/lHI4jBshZgauWw==
+aio-modal@0.0.4001-modal-custom:
+  version "0.0.4001-modal-custom"
+  resolved "https://registry.yarnpkg.com/aio-modal/-/aio-modal-0.0.4001-modal-custom.tgz#ce4e2b98a2da6b0be3f764e94b557f7b1b138e64"
+  integrity sha512-8y1pyU5I+zMJ9WdF/JrcsDN45LOaLKsIIZMve0O7kNB+4vmNgXEdDp3hrwY5dS1gpzZC5h4Fwo0NmCt93Z0g/Q==
   dependencies:
     "@tippyjs/react" "^4.2.6"
     react "^18.3.1"
