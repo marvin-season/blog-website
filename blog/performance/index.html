@@ -4,8 +4,74 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<script defer src="./index.js"></script>
+<style>
+    .list-container {
+        position: relative;
+        width: 300px;
+        height: 200px;
+        margin: 20px auto;
+        overflow: hidden;
+        border: 1px solid #ccc;
+    }
+
+    .toggle-btn {
+        cursor: pointer;
+        padding: 8px;
+        background: #eee;
+        border: none;
+    }
+
+    .list {
+        max-height: 100px;
+        overflow-y: scroll;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        opacity: 0;            /* 初始不可见 */
+        transform: translateY(-100%); /* 向上移动 */
+        transition: all 0.3s ease-out; /* 平滑过渡 */
+        will-change: opacity, transform; /* 提示浏览器优化 */
+        background: #ccc;
+    }
+
+    .list.active { /* 通过类名触发展开状态 */
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* 高性能动画：使用 GPU 加速 */
+    .list-item {
+        transition: transform 0.2s ease;
+    }
+
+    .list-item:hover {
+        transform: translateY(-2px); /* 悬停微交互 */
+    }
+
+</style>
+
 <body>
-<div id="root">root</div>
+<button class="toggle-btn">展开列表</button>
+
+<div class="list-container" tabindex="0">
+    <ul class="list">
+        <li class="list-item">列表项 1</li>
+        <li class="list-item">列表项 2</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+        <li class="list-item">列表项 3</li>
+    </ul>
+</div>
+
+<script src="./index.js"></script>
 </body>
 </html>
