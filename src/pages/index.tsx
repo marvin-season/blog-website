@@ -54,7 +54,7 @@ function UserAvatar() {
             target={"_blank"}
         >
             <img
-                src={"img/loopy_smile.jpg"}
+                src={"img/loopy-smile.jpg"}
                 alt={""}
                 className={`h-[100px] w-[100px] rounded-full object-cover 
                                 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 border-2 border-white 
@@ -78,8 +78,13 @@ export default function Home(): ReactNode {
                         <UserAvatar />
                     </Dropdown>
                 </div>
-                <div className={`mt-10 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 
-                    text-transparent bg-clip-text text-4xl font-bold`}>{siteConfig.tagline}</div>
+                <div className={`
+                    mt-10 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500
+                    text-transparent bg-clip-text text-4xl font-bold
+                    whitespace-nowrap overflow-hidden
+                    border-r-4 border-r-green-500
+                    w-0 animate-typing-infinite
+                `}>{siteConfig.tagline}</div>
             </div>
         </Layout>
     );
