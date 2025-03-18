@@ -17,12 +17,12 @@ function createIntersectionObserver({
     options,
     onIntersecting,
     targets = [],
-    callback
+    callback,
 }: {
     options: IntersectionObserverInit;
     targets: HTMLElement[];
     onIntersecting: (entries: IntersectionObserverEntry[]) => void;
-    callback?: IntersectionObserverCallback
+    callback?: IntersectionObserverCallback;
 }) {
     const observer = new IntersectionObserver((entries) => {
         const intersectionObserverEntries = entries.filter(

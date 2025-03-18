@@ -91,7 +91,7 @@ const config: Config = {
         { to: '/personal', label: 'Personal', position: 'left' }, // 新增
         { to: '/reference', label: 'Reference', position: 'left' }, // 新增
         {
-          href: 'https://github.com/marvin-season/danny-website',
+          to: 'https://github.com/marvin-season/danny-website',
           label: 'GitHub',
           position: 'right',
         },
