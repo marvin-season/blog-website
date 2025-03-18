@@ -4,16 +4,18 @@ export default {
     theme: {
         extend: {
             animation: {
-                'typing-infinite': 'typing 6s steps(24) infinite',
+                'typing-infinite': 'typing 5s steps(20) infinite, cursor 0.8s step-end infinite',
             },
             keyframes: {
                 typing: {
                     '0%': { width: '0' },
-                    '50%': { width: '390px' },
-                    '55%': { width: '390px' }, // Pause at full width
-                    '75%': { width: '0' },
-                    '85%': { width: '0' }, // Pause before restarting
+                    '45%': { width: '390px' },
+                    '55%': { width: '390px' }, // slight pause at full text
+                    '70%': { width: '0' },
                     '100%': { width: '0' }
+                },
+                cursor: {
+                    '50%': { 'border-color': 'transparent' }
                 }
             }
         },
