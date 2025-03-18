@@ -78,7 +78,8 @@ export default function Home(): ReactNode {
                         <UserAvatar />
                     </Dropdown>
                 </div>
-                <div>{siteConfig.tagline}</div>
+                <div className={`mt-10 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 
+                    text-transparent bg-clip-text text-4xl font-bold`}>{siteConfig.tagline}</div>
             </div>
         </Layout>
     );
