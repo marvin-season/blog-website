@@ -94,7 +94,7 @@ export const Vertical = ({ row = 1000000, startIndex = 0, length = 2, accelerati
                                     }
                                 }
                             }}
-                            className={"h-[100px] border border-gray-300"}
+                            className={"h-[30px] border border-gray-300"}
                             key={item}
                         >
                             {item}
