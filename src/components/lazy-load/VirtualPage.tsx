@@ -48,14 +48,14 @@ export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, accelerati
 
     const [range, setRange] = useState({
         startIndex,
-        endIndex: startIndex + length,
+        end: startIndex + length,
     });
 
     const rows = useMemo(() => {
         return new Array(row)
             .fill(0)
             .map((_, i) => i)
-            .slice(Math.max(0, range.startIndex - buffer), Math.min(range.endIndex + buffer, row));
+            .slice(Math.max(0, range.startIndex - buffer), Math.min(range.end + buffer, row));
     }, [row, range]);
 
     console.log(rows);
@@ -75,7 +75,7 @@ export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, accelerati
                         setRange((prev) => {
                             return {
                                 startIndex: Math.max(0, prev.startIndex - acceleration),
-                                endIndex: prev.endIndex,
+                                end: prev.end,
                             };
                         });
                         // rootRef.current.scrollTo({
@@ -86,7 +86,7 @@ export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, accelerati
                         setRange((prev) => {
                             return {
                                 startIndex: prev.startIndex,
-                                endIndex: Math.min(row, prev.endIndex + acceleration),
+                                end: Math.min(row, prev.end + acceleration),
                             };
                         });
                     }
@@ -104,7 +104,7 @@ export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, accelerati
                 ref={topTargetRef}
                 className={"text-center text-sm text-gray-500"}
             >
-                {range.endIndex === row ? "暂无更多" : "下拉加载更多"}
+                {range.end === row ? "暂无更多" : "下拉加载更多"}
             </div>
             {rows.map((item, index) => {
                 return (
@@ -121,7 +121,7 @@ export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, accelerati
                 ref={bottomTargetRef}
                 className={"text-center text-sm text-gray-500"}
             >
-                {range.endIndex === row ? "暂无更多" : "加载更多"}
+                {range.end === row ? "暂无更多" : "加载更多"}
             </div>
         </div>
     );
