@@ -41,7 +41,7 @@ function createIntersectionObserver({
     return observer;
 }
 
-export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, acceleration = 1, buffer = 1 }) => {
+export const Vertical = ({ row = 1000000, startIndex = 4, length = 2, acceleration = 1, buffer = 1 }) => {
     const rootRef = useRef<HTMLDivElement>(null);
     const bottomTargetRef = useRef(null);
     const topTargetRef = useRef(null);
@@ -58,8 +58,6 @@ export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, accelerati
             .slice(Math.max(0, range.startIndex - buffer), Math.min(range.end + buffer, row));
     }, [row, range]);
 
-    console.log(rows);
-
     useEffect(() => {
         const observer = createIntersectionObserver({
             options: {
@@ -69,7 +67,6 @@ export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, accelerati
             },
             targets: [bottomTargetRef.current, topTargetRef.current],
             onIntersecting: (entries) => {
-                console.log(entries);
                 entries.forEach((entry) => {
                     if (entry.target === topTargetRef.current) {
                         setRange((prev) => {
@@ -78,10 +75,6 @@ export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, accelerati
                                 end: prev.end,
                             };
                         });
-                        // rootRef.current.scrollTo({
-                        //     top: 100,
-                        // });
-                        console.log(rootRef.current.scrollTop);
                     } else if (entry.target === bottomTargetRef.current) {
                         setRange((prev) => {
                             return {
@@ -109,6 +102,16 @@ export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, accelerati
             {rows.map((item, index) => {
                 return (
                     <div
+                        ref={dom => {
+                            if(dom) {
+                                // 滚动到顶部时，向上滚动
+                                if(range.startIndex !== 0 && index - buffer < 0 && dom.parentElement.scrollTop <= 0) {
+                                    dom.parentElement.scrollTo({
+                                        top: dom.clientHeight
+                                    })
+                                }
+                            }
+                        }}
                         className={"h-[100px] border border-gray-300"}
                         key={item}
                     >
