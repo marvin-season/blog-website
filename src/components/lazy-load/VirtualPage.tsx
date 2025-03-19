@@ -1,24 +1,24 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function VirtualPage() {
-    const [row, setRow] = useState(1000000);
+    const [row, setRow] = useState(10);
     return (
         <>
             <div>
                 {"Vertical: "}
                 {row}
             </div>
-            <Vertical row={row} startIndex={10} length={5} />
+            <Vertical row={row} />
         </>
     );
 }
 
 function createIntersectionObserver({
-    options,
-    onIntersecting,
-    targets = [],
-    callback,
-}: {
+                                        options,
+                                        onIntersecting,
+                                        targets = [],
+                                        callback,
+                                    }: {
     options: IntersectionObserverInit;
     targets: HTMLElement[];
     onIntersecting: (entries: IntersectionObserverEntry[]) => void;
@@ -41,8 +41,8 @@ function createIntersectionObserver({
     return observer;
 }
 
-export const Vertical = ({ row = 1000000, startIndex = 0, length = 5, acceleration = 2 }) => {
-    const rootRef = useRef(null);
+export const Vertical = ({ row = 1000000, startIndex = 3, length = 2, acceleration = 1, buffer = 1 }) => {
+    const rootRef = useRef<HTMLDivElement>(null);
     const bottomTargetRef = useRef(null);
     const topTargetRef = useRef(null);
 
@@ -55,7 +55,7 @@ export const Vertical = ({ row = 1000000, startIndex = 0, length = 5, accelerati
         return new Array(row)
             .fill(0)
             .map((_, i) => i)
-            .slice(range.startIndex, range.endIndex);
+            .slice(Math.max(0, range.startIndex - buffer), Math.min(range.endIndex + buffer, row));
     }, [row, range]);
 
     console.log(rows);
@@ -73,28 +73,20 @@ export const Vertical = ({ row = 1000000, startIndex = 0, length = 5, accelerati
                 entries.forEach((entry) => {
                     if (entry.target === topTargetRef.current) {
                         setRange((prev) => {
-                            if (prev.startIndex - acceleration <= 0) {
-                                return {
-                                    startIndex: 0,
-                                    endIndex: prev.endIndex,
-                                };
-                            }
                             return {
-                                startIndex: prev.startIndex - acceleration,
+                                startIndex: Math.max(0, prev.startIndex - acceleration),
                                 endIndex: prev.endIndex,
                             };
                         });
+                        // rootRef.current.scrollTo({
+                        //     top: 100,
+                        // });
+                        console.log(rootRef.current.scrollTop);
                     } else if (entry.target === bottomTargetRef.current) {
                         setRange((prev) => {
-                            if (prev.startIndex + acceleration >= row) {
-                                return {
-                                    startIndex: row,
-                                    endIndex: prev.endIndex,
-                                };
-                            }
                             return {
                                 startIndex: prev.startIndex,
-                                endIndex: prev.endIndex + acceleration,
+                                endIndex: Math.min(row, prev.endIndex + acceleration),
                             };
                         });
                     }
