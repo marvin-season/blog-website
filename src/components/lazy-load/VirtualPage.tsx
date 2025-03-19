@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createIntersectionObserver } from 'aio-tool';
+import useVirtualScroll from "@site/src/components/lazy-load/useVirtualScroll";
 export default function VirtualPage() {
     const [idKey, setIdKey] = useState(Date.now);
     return (
@@ -14,55 +15,56 @@ export default function VirtualPage() {
 
 
 export const Vertical = ({ row = 1000000, startIndex = 0, length = 2, acceleration = 1, buffer = 1 }) => {
-    const rootRef = useRef<HTMLDivElement>(null);
-    const bottomTargetRef = useRef(null);
-    const topTargetRef = useRef(null);
-
-    const [range, setRange] = useState({
-        startIndex: startIndex - acceleration + buffer, // TODO: solve the problem of the first scroll
-        end: startIndex - acceleration + buffer + length,
-    });
-
-    const rows = useMemo(() => {
-        return new Array(row)
-            .fill(0)
-            .map((_, i) => i)
-            .slice(Math.max(0, range.startIndex - buffer), Math.min(range.end + buffer, row));
-    }, [row, range]);
-
-    useEffect(() => {
-        const observer = createIntersectionObserver({
-            options: {
-                root: rootRef.current,
-                threshold: 1,
-                rootMargin: "0px 0px 20px 0px",
-            },
-            targets: [bottomTargetRef.current, topTargetRef.current],
-            onIntersecting: (entries) => {
-                entries.forEach((entry) => {
-                    console.log(entry);
-                    if (entry.target === topTargetRef.current) {
-                        setRange((prev) => {
-                            return {
-                                startIndex: Math.max(0, prev.startIndex - acceleration),
-                                end: prev.end,
-                            };
-                        });
-                    } else if (entry.target === bottomTargetRef.current) {
-                        setRange((prev) => {
-                            return {
-                                startIndex: prev.startIndex,
-                                end: Math.min(row, prev.end + acceleration),
-                            };
-                        });
-                    }
-                });
-            },
-        });
-        return () => {
-            observer?.disconnect();
-        };
-    }, []);
+    const {rootRef, bottomTargetRef, topTargetRef, rows, range} = useVirtualScroll({ row, startIndex, length, acceleration, buffer });
+    // const rootRef = useRef<HTMLDivElement>(null);
+    // const bottomTargetRef = useRef(null);
+    // const topTargetRef = useRef(null);
+    //
+    // const [range, setRange] = useState({
+    //     startIndex: startIndex - acceleration + buffer, // TODO: solve the problem of the first scroll
+    //     end: startIndex - acceleration + buffer + length,
+    // });
+    //
+    // const rows = useMemo(() => {
+    //     return new Array(row)
+    //         .fill(0)
+    //         .map((_, i) => i)
+    //         .slice(Math.max(0, range.startIndex - buffer), Math.min(range.end + buffer, row));
+    // }, [row, range]);
+    //
+    // useEffect(() => {
+    //     const observer = createIntersectionObserver({
+    //         options: {
+    //             root: rootRef.current,
+    //             threshold: 1,
+    //             rootMargin: "0px 0px 20px 0px",
+    //         },
+    //         targets: [bottomTargetRef.current, topTargetRef.current],
+    //         onIntersecting: (entries) => {
+    //             entries.forEach((entry) => {
+    //                 console.log(entry);
+    //                 if (entry.target === topTargetRef.current) {
+    //                     setRange((prev) => {
+    //                         return {
+    //                             startIndex: Math.max(0, prev.startIndex - acceleration),
+    //                             end: prev.end,
+    //                         };
+    //                     });
+    //                 } else if (entry.target === bottomTargetRef.current) {
+    //                     setRange((prev) => {
+    //                         return {
+    //                             startIndex: prev.startIndex,
+    //                             end: Math.min(row, prev.end + acceleration),
+    //                         };
+    //                     });
+    //                 }
+    //             });
+    //         },
+    //     });
+    //     return () => {
+    //         observer?.disconnect();
+    //     };
+    // }, []);
     return (
         <div>
             <ul className={"h-[190px] overflow-y-scroll"}>
