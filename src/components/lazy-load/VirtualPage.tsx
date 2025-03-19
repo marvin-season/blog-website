@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-
+import { createIntersectionObserver } from 'aio-tool';
 export default function VirtualPage() {
     const [row, setRow] = useState(100);
     return (
@@ -13,33 +13,6 @@ export default function VirtualPage() {
     );
 }
 
-function createIntersectionObserver({
-                                        options,
-                                        onIntersecting,
-                                        targets = [],
-                                        callback,
-                                    }: {
-    options: IntersectionObserverInit;
-    targets: HTMLElement[];
-    onIntersecting: (entries: IntersectionObserverEntry[]) => void;
-    callback?: IntersectionObserverCallback;
-}) {
-    const observer = new IntersectionObserver((entries) => {
-        const intersectionObserverEntries = entries.filter(
-            (item) => item.isIntersecting,
-        );
-        if (intersectionObserverEntries.length > 0) {
-            onIntersecting(intersectionObserverEntries);
-        }
-        callback && callback(entries, observer);
-    }, options);
-
-    targets.forEach((target) => {
-        observer.observe(target);
-    });
-
-    return observer;
-}
 
 export const Vertical = ({ row = 1000000, startIndex = 0, length = 2, acceleration = 1, buffer = 1 }) => {
     const rootRef = useRef<HTMLDivElement>(null);
