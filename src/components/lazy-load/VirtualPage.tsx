@@ -8,7 +8,7 @@ export default function VirtualPage() {
                 {"Vertical: "}
                 {row}
             </div>
-            <Vertical row={row} startIndex={50} buffer={0} length={8} acceleration={1}/>
+            <Vertical row={row} startIndex={50} buffer={0} length={8} acceleration={5}/>
         </>
     );
 }
@@ -82,7 +82,7 @@ export const Vertical = ({ row = 1000000, startIndex = 0, length = 2, accelerati
                                 if(range.startIndex !== 0 && dom.parentElement.scrollTop <= 0) {
                                     console.log('scroll', dom)
                                     dom.parentElement.scrollTo({
-                                        top: dom.clientHeight
+                                        top: dom.clientHeight * acceleration //TODO: scroll at the first time is not correct
                                     })
                                 }
                             }
