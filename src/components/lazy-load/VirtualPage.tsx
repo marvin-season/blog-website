@@ -20,8 +20,8 @@ export const Vertical = ({ row = 1000000, startIndex = 0, length = 2, accelerati
     const topTargetRef = useRef(null);
 
     const [range, setRange] = useState({
-        startIndex,
-        end: startIndex + length,
+        startIndex: startIndex - acceleration, // TODO: solve the problem of the first scroll
+        end: startIndex - acceleration + length,
     });
 
     const rows = useMemo(() => {
