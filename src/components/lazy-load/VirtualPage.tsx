@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import useVirtualScroll from "@site/src/components/lazy-load/useVirtualScroll";
 
 export default function VirtualPage() {
@@ -10,36 +10,37 @@ export default function VirtualPage() {
                         setIdKey(Date.now());
                     }}>Reset
             </button>
-            <Vertical key={idKey} row={10000} startIndex={50} buffer={2} length={5} acceleration={2} />
+            <Vertical key={idKey} />
         </>
     );
 }
 
 
-export const Vertical = ({ row = 1000000, startIndex = 0, length = 2, acceleration = 1, buffer = 1 }) => {
-    const { rootRef, render, handleItemRef, rows, range } = useVirtualScroll({ row, startIndex, length, acceleration, buffer });
+export const Vertical = () => {
+    const originRows = Array.from({length: 10000}).map((_, i) => {
+        return {
+            id: i,
+            renderItem: (handleItemRef: any) => <div
+                ref={handleItemRef}
+                className={"h-[30px] border border-gray-300"}
+                key={i}
+            >
+                {i}
+            </div>,
+        }
+    });
+    const { rootRef, render, handleItemRef, rows, devtoolsRender } = useVirtualScroll<{
+        id: number;
+        renderItem: (handleItemRef: any) => ReactNode;
+    }>({ originRows});
+
     return (
         <div>
-            {/*<ul className={"h-[190px] overflow-y-scroll"}>*/}
-            {/*    <li>row: {row}</li>*/}
-            {/*    <li>startIndex: {range.startIndex}</li>*/}
-            {/*    <li>end: {range.end}</li>*/}
-            {/*    <li>acceleration: {acceleration}</li>*/}
-            {/*    <li>buffer: {buffer}</li>*/}
-            {/*    <li>rows: {JSON.stringify(rows)}</li>*/}
-            {/*</ul>*/}
+            {devtoolsRender()}
             <div className={"h-[200px] overflow-y-auto border"} ref={rootRef}>
                 {
                     render(rows.map((item, index) => {
-                        return (
-                            <div
-                                ref={handleItemRef}
-                                className={"h-[30px] border border-gray-300"}
-                                key={item}
-                            >
-                                {item}
-                            </div>
-                        );
+                        return item.renderItem(handleItemRef);
                     }))
                 }
 

@@ -1,30 +1,31 @@
 import React, { ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createIntersectionObserver } from "aio-tool";
 
-export interface VirtualScrollOptions {
-    row?: number;
+export interface VirtualScrollOptions<T> {
+    originRows?: T[];
     startIndex?: number;
     length?: number;
     acceleration?: number;
     buffer?: number;
 }
 
-export interface VirtualScrollResult {
+export interface VirtualScrollResult<T> {
     rootRef: React.RefObject<HTMLDivElement>;
     topTargetRef: React.RefObject<HTMLDivElement>;
     bottomTargetRef: React.RefObject<HTMLDivElement>;
-    rows: number[];
+    rows: T[];
     range: { startIndex: number; end: number };
     render: (children: ReactNode) => ReactNode;
     handleItemRef: (dom: HTMLDivElement) => void;
+    devtoolsRender: () => ReactNode;
 }
 
-export default function useVirtualScroll(options?: VirtualScrollOptions): VirtualScrollResult {
+export default function useVirtualScroll<T>(options?: VirtualScrollOptions<T>): VirtualScrollResult<T> {
     const {
-        row = 1000000,
-        startIndex = 0,
-        length = 2,
-        acceleration = 1,
+        originRows = [],
+        startIndex = 10,
+        length = 10,
+        acceleration = 2,
         buffer = 1,
     } = options || {};
 
@@ -36,15 +37,15 @@ export default function useVirtualScroll(options?: VirtualScrollOptions): Virtua
         startIndex: startIndex - acceleration + buffer,
         end: startIndex - acceleration + buffer + length,
     });
+    const row = useMemo(() => {
+        return originRows.length;
+    }, [originRows]);
 
     const rows = useMemo(() => {
         const sliceStart = Math.max(0, range.startIndex - buffer);
         const sliceEnd = Math.min(range.end + buffer, row);
-        return new Array(row)
-            .fill(0)
-            .map((_, i) => i)
-            .slice(sliceStart, sliceEnd);
-    }, [row, range, buffer]);
+        return originRows.slice(sliceStart, sliceEnd);
+    }, [originRows, range, buffer, row]);
 
     useEffect(() => {
         const observer = createIntersectionObserver({
@@ -105,6 +106,17 @@ export default function useVirtualScroll(options?: VirtualScrollOptions): Virtua
         }
     }, [range])
 
-    return { rootRef, topTargetRef, bottomTargetRef, rows, range, render, handleItemRef };
+    const devtoolsRender = useCallback(() => {
+        return <ul className={"h-[190px] overflow-y-scroll"}>
+            <li>row: {row}</li>
+            <li>startIndex: {range.startIndex}</li>
+            <li>end: {range.end}</li>
+            <li>acceleration: {acceleration}</li>
+            <li>buffer: {buffer}</li>
+            <li>rows: {JSON.stringify(rows)}</li>
+        </ul>
+    }, [row, range, acceleration, rows, buffer])
+
+    return { rootRef, topTargetRef, bottomTargetRef, rows, range, render, handleItemRef, devtoolsRender };
 }
 
