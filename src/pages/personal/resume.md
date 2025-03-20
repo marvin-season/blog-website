@@ -1,10 +1,11 @@
 # 💼 **简历**
 
 ## 📝 **基本信息**
-- **姓名：** XXX
+- **姓名：** 马文澍
 - **职位：** 前端全栈开发工程师
-- **联系方式：** xxx@gmail.com | +86-123-4567-8901
+- **联系方式：** 2764876579@qq.com | +86-15623192717
 - **GitHub：** [marvin-season](https://github.com/marvin-season?tab=repositories)
+- **WebSite：** http://www.fuelstack.icu/  https://marvin-season.github.io/danny-website/
 
 ---
 
@@ -36,10 +37,11 @@
 *2023.6 – 至今*
 
 #### 🌟 **项目 1：AI 智能应用开发**
-- **技术栈：** Node.js + Express + Ollama（本地部署大模型） + React 18 + Fetch
+- **技术栈：** Node.js + Express + Ollama（本地部署大模型） + React 18
 - **项目概述：**
     - 基于大模型实现问答对话、文本生成等 AI 应用
     - 支持 RAG（检索增强生成）、工具调用等高级特性
+    - AI智能书写
 - **主要工作：**
     - ✅ **后端接口开发：** 搭建基于 Express 的 RESTful API，实现流式数据处理
     - ✅ **前端开发：** 使用 React 18 构建交互界面，基于 Fetch 实现流式对话体验
@@ -48,11 +50,14 @@
 ---
 
 #### 🌐 **项目 2：CMS、官网与 AI 平台开发**
-- **技术栈：** Next.js + Strapi + Vue 3 + React 18 + Tailwind CSS + Shadcn UI
+- **技术栈：** Next.js + Shadcn UI + Vue 3 + React 18 + Tailwind CSS + Strapi
 - **项目概述：**
     - 官网开发与 CMS 系统维护
-    - 内网 AI 平台（AIGC 自研项目，已上线）
+    - AI平台开发已上线 [online](https://smartvision.dcclouds.com/)
 - **主要工作：**
+    - ✅ **Admin后台开发**
+        - 使用vue3 + element plus 开发后台管理系统
+        - 实现用户管理、权限管理、数据统计等功能
     - ✅ **官网开发：**
         - 使用 Next.js + Tailwind 构建 SEO 友好的官网
         - 集成 CMS（Strapi）实现后台数据管理
