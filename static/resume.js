@@ -100,7 +100,7 @@ const data = {
             projects: [
                 {
                     name: "神州问学",
-                    description: "整套平台解决方案，包含官网、管理系统及学习平台",
+                    description: "综合平台解决方案，包括官网、管理系统和学习平台",
                     responsibilities: [
                         {
                             area: "管理后台开发",
@@ -108,10 +108,10 @@ const data = {
                                 "Vue2, ECharts, ElementUI, VueRouter"
                             ],
                             tasks: [
-                                "使用 Vue2 开发管理后台",
-                                "角色权限管理系统",
-                                "资源监控",
-                                "数据模块管理"
+                                "基于 Vue2 开发管理后台系统",
+                                "实现角色权限管理功能",
+                                "开发资源监控模块",
+                                "优化数据模块管理"
                             ]
                         },
                         {
@@ -124,16 +124,15 @@ const data = {
                                     feature: "AI聊天系统",
                                     details: [
                                         "实现流式聊天接口",
-                                        "设计实现多角色聊天组件",
+                                        "设计并开发多角色聊天组件",
                                         "开发富文本输入系统",
-                                        "实现多媒体消息输出面板",
-                                        "设计消息输入与引导系统",
+                                        "实现多媒体消息面板"
                                     ]
                                 },
                                 {
                                     feature: "文档处理",
                                     details: [
-                                        "实现 PDF 渲染与交互",
+                                        "实现 PDF 渲染与交互功能",
                                         "开发 Excel 数据解析与虚拟化显示",
                                         "设计 Markdown 渲染与高亮系统"
                                     ]
@@ -141,75 +140,68 @@ const data = {
                                 {
                                     feature: "国际化方案",
                                     details: [
-                                        "Vite 插件开发 + Babel: vite 的插件提供了丰富的 hook,在对应的 transform hook 中， 可以访问到对应的 tsx | ts 文件， 使用 babel 提供的\n" +
-                                        "工具，将代码转换为 ast, 采用其提供的访问者模式来修改 ast，完成后将 ast 反编译称源代码 code => ast =>\n" +
-                                        "code\n" +
-                                        "_",
+                                        "基于 Vite 和 Babel 开发插件，利用 transform hook 访问 TSX 文件并修改 AST，最终反编译回源代码",
                                         "开发自动化国际化字符提取工具",
-                                        "实现 CSV 导出与配置生成",
+                                        "实现 CSV 导出和配置生成",
                                         "标准化国际化流程"
                                     ]
                                 },
                                 {
                                     feature: "新用户引导",
                                     details: [
-                                        "新用户引导方案设计实现",
-                                        "高阶组件开发",
-                                        "引导位置算法设计实现",
+                                        "设计并实现新用户引导方案",
+                                        "开发高阶组件",
+                                        "实现引导位置算法"
                                     ]
                                 },
                                 {
                                     feature: "工作流系统",
                                     details: [
-                                        "设计实现工作流模型系统",
+                                        "设计并实现工作流模型",
                                         "设计流程图数据结构",
-                                        "开发工作流组件",
+                                        "开发工作流组件"
                                     ]
-                                },
-                                {
-
                                 },
                                 {
                                     feature: "性能优化",
                                     details: [
-                                        "组件性能优化",
-                                        "资源懒加载与数据虚拟化",
-                                        "打包体积优化与代码分割",
+                                        "优化组件性能",
+                                        "实现资源懒加载和数据虚拟化",
+                                        "优化打包体积和实现代码分割"
                                     ]
                                 },
                                 {
                                     feature: "业余技能",
                                     details: [
-                                        "Docker Docker-Compose 个人使用",
+                                        "个人使用 Docker 和 Docker-Compose",
                                         "Nginx 部署个人网站",
-                                        "Github Action CI/CD",
-                                        "Github Pages 静态网站托管部署"
+                                        "使用 Github Actions 实现 CI/CD",
+                                        "使用 Github Pages 部署静态网站"
                                     ]
                                 }
                             ]
                         },
                         {
-                            area: "官网",
-                            stack: [ "Next.js, TailwindCSS, ShadcnUI, SSR, ISR, Strapi-CMS" ],
-
+                            area: "官网开发",
+                            stack: ["Next.js, TailwindCSS, ShadcnUI, SSR, ISR, Strapi-CMS"],
                             tasks: [
                                 {
-                                    feature: "CMS系统",
+                                    feature: "CMS 系统",
                                     details: [
-                                        "开源Strapi-CMS 部署实践",
-                                        "模型设计与E-R实体创建"
+                                        "部署开源 Strapi-CMS",
+                                        "进行模型设计和 E-R 实体创建"
                                     ]
                                 },
                                 {
                                     feature: "官网开发",
                                     details: [
                                         "使用 Next.js 开发响应式官网",
-                                        "SEO优化",
+                                        "进行 SEO 优化",
                                         "实现 ISR/SSR 预渲染"
                                     ]
                                 }
                             ]
-                        },
+                        }
                     ]
                 },
                 {
@@ -220,16 +212,15 @@ const data = {
                             area: "架构设计",
                             stack: ["ExpressJs, React18, Prisma, PostgresSQL, RAG, TailwindCSS"],
                             tasks: [
-                                "使用 Node.js + Express 开发后端服务",
-                                "ORM 框架 Prisma 与 PostgresSQL 数据库环境搭建与开发",
+                                "使用 Node.js 和 Express 开发后端服务",
+                                "搭建并开发 Prisma 和 PostgresSQL 环境",
                                 "使用 React18 开发前端应用",
                                 "集成 Ollama 实现本地大模型部署",
                                 "实现 RAG 检索增强与工具调用特性",
-                                "富文本编辑器开发与AI智能书写系统",
-                                "支持DeepSeek-R1深度思考"
+                                "开发富文本编辑器与 AI 智能书写系统",
+                                "支持 DeepSeek-R1 深度思考功能"
                             ]
-                        },
-
+                        }
                     ]
                 }
             ]
