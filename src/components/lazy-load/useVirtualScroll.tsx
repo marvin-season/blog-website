@@ -80,16 +80,16 @@ export default function useVirtualScroll<T>(options?: VirtualScrollOptions<T>): 
         return <>
             <div
                 ref={topTargetRef}
-                className={"text-center text-sm text-gray-500"}
+                className={"text-center text-sm text-gray-500 h-[1px]"}
             >
-                {range.end === row ? "暂无更多" : "下拉加载更多"}
+                {/*{range.end === row ? "暂无更多" : "下拉加载更多"}*/}
             </div>
             {children}
             <div
                 ref={bottomTargetRef}
-                className={"text-center text-sm text-gray-500"}
+                className={"text-center text-sm text-gray-500 h-[1px]"}
             >
-                {range.end === row ? "暂无更多" : "加载更多"}
+                {/*{range.end === row ? "暂无更多" : "加载更多"}*/}
             </div>
         </>
     }, [range, row])
