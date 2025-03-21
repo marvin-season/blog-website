@@ -234,6 +234,66 @@ const data = {
                     ]
                 }
             ]
+        },
+        {
+            title: "Web开发工程师",
+            company: "武汉兆日科技有限责任公司",
+            date: "2022.7-2023.6",
+            projects: [
+                {
+                    name: "巨实惠",
+                    description: "电商平台",
+                    responsibilities: [
+                        {
+                            area: "小程序开发",
+                            stack: ["Vue2, UniApp, Vuex, VantUI"],
+                            tasks: [
+                                "实现商品管理系统",
+                                "开发购物车和订单系统",
+                            ]
+                        },
+                        {
+                            area: "管理后台开发",
+                            stack: ["React.js, AntDesign, React-Router, Redux"],
+                            tasks: [
+                                "用户管理系统",
+                                "首页装修系统-低代码",
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            title: "Java开发工程师",
+            company: "健康星球国际科技有限公司",
+            date: "2021.6-2022.5",
+            projects: [{
+                name: "健康星球",
+                description: "健康星球是一款健康管理软件",
+                responsibilities: [
+                    {
+                        area: "接口开发",
+                        stack: ["SpringBoot, Mybatis, MySQL"],
+                        tasks: [
+                            "会员模块接口开发",
+                            "优惠券模块接口开发",
+                            "会员信息统计",
+                            "优惠券配发",
+                            "收银台打印小票功能"
+                        ]
+                    },
+                    {
+                        area: "前端开发",
+                        stack: ["Vue2, ElementUI"],
+                        tasks: [
+                            "会员管理系统",
+                            "优惠券管理系统"
+                        ]
+                    }
+                ]
+        }]
         }
+
     ]
 };
