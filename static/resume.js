@@ -201,6 +201,16 @@ const data = {
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            area: "独立应用开发维护",
+                            stack: ["React.js, ShadcnUI, TailwindCSS, Vite"],
+                            tasks: [
+                                "入门生成型应用",
+                                "基础对话型应用",
+                                "强化增强型应用(Web与H5)",
+                                "综合智能体应用(Web与H5)",
+                            ]
                         }
                     ]
                 },
