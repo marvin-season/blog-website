@@ -25,7 +25,7 @@ export default function useVirtualScroll<T>(options?: VirtualScrollOptions<T>): 
         originRows = [],
         startIndex = 10,
         length = 10,
-        acceleration = 2,
+        acceleration = 4,
         buffer = 1,
     } = options || {};
 
@@ -98,9 +98,16 @@ export default function useVirtualScroll<T>(options?: VirtualScrollOptions<T>): 
         if (dom) {
             // 滚动到顶部时，向上滚动
             if (range.startIndex !== 0 && dom.parentElement.scrollTop <= 0) {
-                console.log("scroll", dom);
+                console.log("scroll", dom.clientHeight * acceleration, dom.clientHeight);
+                const target = dom.parentElement.children.item(acceleration + 1);
+                let top = 0;
+                if(target) {
+                    top = target.getBoundingClientRect().top - dom.parentElement.getBoundingClientRect().top
+                } else {
+                    top = dom.clientHeight * acceleration + topTargetRef.current.clientHeight
+                }
                 dom.parentElement.scrollTo({
-                    top: dom.clientHeight * acceleration, //TODO: scroll at the first time is not correct
+                    top, //TODO: scroll at the first time is not correct
                 });
             }
         }
