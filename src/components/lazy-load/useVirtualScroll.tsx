@@ -52,7 +52,7 @@ export default function useVirtualScroll<T>(options?: VirtualScrollOptions<T>): 
             options: {
                 root: rootRef.current,
                 threshold: 1,
-                rootMargin: "0px 0px 20px 0px",
+                rootMargin: "20px 0px 20px 0px",
             },
             targets: [topTargetRef.current, bottomTargetRef.current],
             onIntersecting: (entries) => {
