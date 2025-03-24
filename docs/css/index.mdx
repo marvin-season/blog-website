@@ -1,7 +1,7 @@
 ---
-title: Flex
+title: CSS Collection
 ---
-
+## Auto Wrap Layout
 ```tsx
 function AutoWrap() {
     return <>
@@ -22,3 +22,42 @@ function AutoWrap() {
 import {AutoWrap} from  '@site/src/components/css';
 
 <AutoWrap/>
+
+## Dropdown
+
+```css
+.draw-container {
+    position: relative;
+
+    &:hover {
+        .draw-body {
+            transform: translateY(1rem);
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    .draw-body {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-12px);
+        transition: all 0.3s ease-in-out;
+
+        position: absolute;
+        left: 0;
+        z-index: 999;
+        width: 100%;
+
+
+        background: linear-gradient(to bottom, theme('colors.card.DEFAULT'), theme('colors.white'));
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        border-radius: 12px;
+        max-height: 20rem;
+        overflow-y: scroll;
+
+        padding: 20px;
+        list-style-type: disc;
+
+    }
+}
+```
