@@ -91,6 +91,11 @@ const config: Config = {
         { to: '/personal', label: 'Personal', position: 'left' }, // 新增
         { to: '/reference', label: 'Reference', position: 'left' }, // 新增
         {
+          to: 'http://resume.fuelstack.icu/',
+          label: 'Resume',
+          position: 'right',
+        },
+        {
           to: 'https://github.com/marvin-season/danny-website',
           label: 'GitHub',
           position: 'right',
