@@ -19,7 +19,7 @@ export default function StreamRender() {
         for (const char of s) {
             if (promiseRef.current === "cancel") break;
             remainRef.current += char;
-            await sleep(20);
+            await sleep(10);
         }
         setLoading(false);
     };
@@ -34,7 +34,6 @@ export default function StreamRender() {
         } else if (promiseRef.current === "abort") {
             await new Promise((resolve) => {
                 promiseRef.current = (node: any) => {
-                    console.log(node);
                     resolve(true);
                 };
             });
@@ -54,12 +53,10 @@ export default function StreamRender() {
             onIntersecting: () => {},
             callback: (entries) => {
                 if (entries[0].isIntersecting) {
-                    console.log("continue");
                     typeof promiseRef.current === "function" &&
                         promiseRef.current(entries[0].target);
                     promiseRef.current = "continue";
                 } else {
-                    console.log("abort");
                     promiseRef.current = "abort";
                 }
             },
