@@ -1,16 +1,55 @@
 ---
 slug: stream-render
-title: StreamRender
+title: 流数据渲染优化
 authors: [marvin-season]
 tags: [javascript, ai]
 date: "2024-06-06"
 ---
 
-##
+## 切入点
+如何对流失数据优化，提高渲染性能。从以下两点切入:
+
+**懒加载渲染：** 可视区外部的信息不用渲染，当滚动到可视区时再渲染。
+*注意，此时需要一个buff来缓冲渲染到页面的信息，防止给用户造成流暂停的假象*。
+
+**增量式渲染：** 已经渲染到页面上的数据不用重复渲染，只渲染新增的数据。
 
 {/* truncate */}
-
+## 示例
 import App from  '@site/src/components/stream-render';
 
 <App/>
 
+## 原理详解
+
+### 懒加载渲染伪代码
+
+```js
+let content = '';
+let buffer = ''
+function updateState(chunk) {
+    buffer = chunk;
+    if('in view'){
+        content += buffer;
+        buffer = ''
+    } else if("out of view") {
+        buffer += chunk
+    }
+    requestAnimationFrame(updateState)
+}
+
+for (const chunk of "hello world") {
+  updateState(chunk)
+}
+```
+
+### 增量式渲染伪代码
+
+```jsx
+const increasingRender = (content, size) => {
+    return content.match(/.{1,size}/g)
+        .map((item, index) => {
+            return <span key={index}>{item}</span>;; // render jsx with key
+        })
+}
+```
