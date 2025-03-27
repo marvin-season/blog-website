@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, useTransition } from "react";
-import { createIntersectionObserver, parseThinkContent, sleep } from "aio-tool";
+import { useEffect, useRef, useState } from "react";
+import { createIntersectionObserver, sleep } from "aio-tool";
 
 const s: string = `<think>The central idea of React's API is to think of updates as if they cause the entire app to re-render. This allows the developer to reason declaratively, rather than worry about how to efficiently transition the app from any particular state to another (A to B, B to C, C to A, and so on).
 
@@ -12,12 +12,12 @@ export default function StreamRender() {
     const promiseRef = useRef<any>("");
     const remainRef = useRef<string>("");
     const start = async () => {
-        if(loading) return;
+        if (loading) return;
         setLoading(true);
         promiseRef.current = "continue";
         consumer().then();
         for (const char of s) {
-            if(promiseRef.current === "cancel") break;
+            if (promiseRef.current === "cancel") break;
             remainRef.current += char;
             await sleep(20);
         }
@@ -69,21 +69,25 @@ export default function StreamRender() {
             observer.disconnect();
         };
     }, []);
-    const contentObject = parseThinkContent(content);
+    // const contentObject = parseThinkContent(content);
     return <>
         <button className={"border px-2"} onClick={start}>start</button>
         <button className={"border px-2"} onClick={() => {
             setContent("");
             setLoading(false);
-            promiseRef.current = "cancel"
+            promiseRef.current = "cancel";
         }}>clean
         </button>
         <div className={"text-gray-600 p-4"}>
             <em>Note: 打开控制台检查正在输出的元素</em>
         </div>
         <div ref={rootRef} className={"h-[50px] overflow-y-scroll border rounded"}>
-            <div className={"text-sm text-gray-500"}>{contentObject.think_content}</div>
-            <div>{contentObject.content}</div>
+            {/*<div className={"text-sm text-gray-500"}>{contentObject.think_content}</div>*/}
+            <div>{content.match(/.{1,50}/g)?.map((item, index) => {
+                return <span key={index}>
+                    {item}
+                </span>;
+            })}</div>
             <div ref={targetRef}></div>
         </div>
     </>;
