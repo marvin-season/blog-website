@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import { createIntersectionObserver, sleep } from "aio-tool";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { createIntersectionObserver, parseThinkContent, sleep } from "aio-tool";
 
-const s: string = `The central idea of React's API is to think of updates as if they cause the entire app to re-render. This allows the developer to reason declaratively, rather than worry about how to efficiently transition the app from any particular state to another (A to B, B to C, C to A, and so on).
+const s: string = `<think>The central idea of React's API is to think of updates as if they cause the entire app to re-render. This allows the developer to reason declaratively, rather than worry about how to efficiently transition the app from any particular state to another (A to B, B to C, C to A, and so on).
 
 Actually re-rendering the entire app on each change only works for the most trivial apps; in a real-world app, it's prohibitively costly in terms of performance. React has optimizations which create the appearance of whole app re-rendering while maintaining great performance. The bulk of these optimizations are part of a process called reconciliation.
 
@@ -56,11 +56,12 @@ export default function StreamRender() {
             observer.disconnect();
         };
     }, []);
-
+    const contentObject = parseThinkContent(content);
     return <>
         <button className={"border px-2"} onClick={start}>start</button>
         <div ref={rootRef} className={"h-[100px] overflow-y-scroll border"}>
-            {content}
+            <div className={"text-sm text-gray-500"}>{contentObject.think_content}</div>
+            <div>{contentObject.content}</div>
             <div ref={targetRef}></div>
         </div>
     </>;
