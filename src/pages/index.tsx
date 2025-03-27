@@ -29,7 +29,11 @@ const Dropdown = ({ children, content }) => {
 function UserLink() {
     const links = [
         { href: "docs/intro", label: "Docs" },
-        { href: "http://ai.fuelstack.icu", label: "AI Editor", target: "_blank" },
+        {
+            href: "http://ai.fuelstack.icu",
+            label: "AI Editor",
+            target: "_blank",
+        },
     ];
     return (
         <div className={"flex flex-col p-4"}>
@@ -78,13 +82,17 @@ export default function Home(): ReactNode {
                         <UserAvatar />
                     </Dropdown>
                 </div>
-                <div className={`
+                <div
+                    className={`
                     mt-10 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500
                     text-transparent bg-clip-text text-4xl font-bold
                     whitespace-nowrap overflow-hidden
                     border-r-4 border-r-green-500
                     w-0 animate-typing-infinite
-                `}>{siteConfig.tagline}</div>
+                `}
+                >
+                    {siteConfig.tagline}
+                </div>
             </div>
         </Layout>
     );

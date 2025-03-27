@@ -26,13 +26,13 @@ export default function StreamRender() {
 
     const consumer = async () => {
         if (promiseRef.current === "continue") {
-            setContent(prev => {
+            setContent((prev) => {
                 const result = prev + remainRef.current;
                 remainRef.current = "";
                 return result;
             });
         } else if (promiseRef.current === "abort") {
-            await new Promise(resolve => {
+            await new Promise((resolve) => {
                 promiseRef.current = (node: any) => {
                     console.log(node);
                     resolve(true);
@@ -51,12 +51,12 @@ export default function StreamRender() {
                 root: rootRef.current,
                 rootMargin: "50%",
             },
-            onIntersecting: () => {
-            },
+            onIntersecting: () => {},
             callback: (entries) => {
                 if (entries[0].isIntersecting) {
                     console.log("continue");
-                    typeof promiseRef.current === "function" && promiseRef.current(entries[0].target);
+                    typeof promiseRef.current === "function" &&
+                        promiseRef.current(entries[0].target);
                     promiseRef.current = "continue";
                 } else {
                     console.log("abort");
@@ -70,25 +70,36 @@ export default function StreamRender() {
         };
     }, []);
     // const contentObject = parseThinkContent(content);
-    return <>
-        <button className={"border px-2"} onClick={start}>start</button>
-        <button className={"border px-2"} onClick={() => {
-            setContent("");
-            setLoading(false);
-            promiseRef.current = "cancel";
-        }}>clean
-        </button>
-        <div className={"text-gray-600 p-4"}>
-            <em>Note: 打开控制台检查正在输出的元素</em>
-        </div>
-        <div ref={rootRef} className={"h-[50px] overflow-y-scroll border rounded"}>
-            {/*<div className={"text-sm text-gray-500"}>{contentObject.think_content}</div>*/}
-            <div>{content.match(/.{1,50}/g)?.map((item, index) => {
-                return <span key={index}>
-                    {item}
-                </span>;
-            })}</div>
-            <div ref={targetRef}></div>
-        </div>
-    </>;
+    return (
+        <>
+            <button className={"border px-2"} onClick={start}>
+                start
+            </button>
+            <button
+                className={"border px-2"}
+                onClick={() => {
+                    setContent("");
+                    setLoading(false);
+                    promiseRef.current = "cancel";
+                }}
+            >
+                clean
+            </button>
+            <div className={"text-gray-600 p-4"}>
+                <em>Note: 打开控制台检查正在输出的元素</em>
+            </div>
+            <div
+                ref={rootRef}
+                className={"h-[50px] overflow-y-scroll border rounded"}
+            >
+                {/*<div className={"text-sm text-gray-500"}>{contentObject.think_content}</div>*/}
+                <div>
+                    {content.match(/.{1,50}/g)?.map((item, index) => {
+                        return <span key={index}>{item}</span>;
+                    })}
+                </div>
+                <div ref={targetRef}></div>
+            </div>
+        </>
+    );
 }
