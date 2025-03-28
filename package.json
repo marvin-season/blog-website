@@ -28,7 +28,7 @@
     "@tiptap/starter-kit": "^2.10.4",
     "ahooks": "^3.8.4",
     "aio-modal": "0.0.4001-modal-custom",
-    "aio-tool": "0.0.107",
+    "aio-tool": "0.0.108",
     "clsx": "^2.0.0",
     "lodash-es": "^4.17.21",
     "prism-react-renderer": "^2.3.0",

@@ -17,7 +17,7 @@ export default function useIntersectionObserver<
 
         observerRef.current = createIntersectionObserver({
             targets: [targetRef.current],
-            options: {
+            rootInit: {
                 root: rootRef.current,
                 ...configs.rootOptions,
             },
