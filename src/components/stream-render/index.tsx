@@ -3,7 +3,7 @@ import { sleep } from "aio-tool";
 
 import s from "./s";
 import useIntersectionObserver from "@site/src/hooks/use-intersection-observer";
-import useIncreasingRender from "@site/src/hooks/use-increasing-render";
+import useIncreasingRender, { PromiseState } from "@site/src/hooks/use-increasing-render";
 
 export default function StreamRender() {
     const [content, setContent] = useState("");
@@ -35,10 +35,10 @@ export default function StreamRender() {
         onIntersecting(entries) {
             typeof promiseRef.current === "function" &&
                 promiseRef.current(entries[0].target);
-            promiseRef.current = "continue";
+            promiseRef.current = PromiseState.Continue;
         },
         onDisIntersecting(entries) {
-            promiseRef.current = "abort";
+            promiseRef.current = PromiseState.Abort;
         },
     });
 

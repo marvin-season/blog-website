@@ -1,12 +1,17 @@
 import { useCallback, useRef } from "react";
 
+export enum PromiseState {
+    Continue = 'continue',
+    Abort = 'abort',
+    Cancel = 'cancel'
+}
 export default function useIncreasingRender({
     onContinue,
 }: {
     onContinue?: (value: string) => void;
 }) {
     // Ref to control the consumer flow
-    const promiseRef = useRef<any>("");
+    const promiseRef = useRef<PromiseState | Function>(PromiseState.Cancel);
     // Buffer for accumulating incoming characters
     const remainRef = useRef<string>("");
     // Store the requestAnimationFrame handle so it can be canceled when needed
@@ -34,11 +39,11 @@ export default function useIncreasingRender({
             renderLoopRef.current = null;
         }
         remainRef.current = "";
-        promiseRef.current = "cancel";
+        promiseRef.current = PromiseState.Cancel;
     }, []);
 
     const start = useCallback(() => {
-        promiseRef.current = "continue";
+        promiseRef.current = PromiseState.Continue;
         render().then();
     }, []);
 
