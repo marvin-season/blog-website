@@ -40,3 +40,13 @@
     font-family: "Times New Roman", Times, serif;
     font-size: 1.1rem;
 }
+
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #c7bcbc;
+    border-radius: 8px;
+}
