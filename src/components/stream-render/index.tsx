@@ -1,42 +1,34 @@
-import { useEffect, useRef, useState } from "react";
-import { createIntersectionObserver, sleep } from "aio-tool";
+import { useState } from "react";
+import { sleep } from "aio-tool";
 
 import s from "./s";
 import useIntersectionObserver from "@site/src/hooks/use-intersection-observer";
+import useIncreasingRender from "@site/src/hooks/use-increasing-render";
 
 export default function StreamRender() {
     const [content, setContent] = useState("");
     const [loading, setLoading] = useState(false);
-    const promiseRef = useRef<any>("");
-    const remainRef = useRef<string>("");
-    const start = async () => {
+    const {
+        promiseRef,
+        remainRef,
+        start,
+        cancel
+    } = useIncreasingRender({
+        onContinue(value) {
+            setContent((prev) => prev + value);
+        },
+    })
+    const handleStart = async () => {
         if (loading) return;
         setLoading(true);
         promiseRef.current = "continue";
-        consumer().then();
+        start()
         for (const char of s) {
             if (promiseRef.current === "cancel") break;
             remainRef.current += char;
             await sleep(10);
         }
         setLoading(false);
-    };
-
-    const consumer = async () => {
-        if (promiseRef.current === "continue") {
-            setContent((prev) => {
-                const result = prev + remainRef.current;
-                remainRef.current = "";
-                return result;
-            });
-        } else if (promiseRef.current === "abort") {
-            await new Promise((resolve) => {
-                promiseRef.current = (node: any) => {
-                    resolve(true);
-                };
-            });
-        }
-        requestAnimationFrame(consumer);
     };
 
     const {
@@ -59,7 +51,7 @@ export default function StreamRender() {
     // const contentObject = parseThinkContent(content);
     return (
         <>
-            <button className={"border px-2"} onClick={start}>
+            <button className={"border px-2"} onClick={handleStart}>
                 start
             </button>
             <button
@@ -68,6 +60,7 @@ export default function StreamRender() {
                     setContent("");
                     setLoading(false);
                     promiseRef.current = "cancel";
+                    cancel();
                 }}
             >
                 clean
