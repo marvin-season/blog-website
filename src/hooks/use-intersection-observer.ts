@@ -12,23 +12,25 @@ export default function useIntersectionObserver<
 }) {
     const targetRef = useRef<T>(null);
     const rootRef = useRef<R>(null);
-    const observer = createIntersectionObserver({
-        ...configs,
-        targets: [targetRef.current],
-        options: {
-            ...configs.options,
-            root: rootRef.current,
-        },
-    });
+    const observerRef = useRef<IntersectionObserver>(null);
     useEffect(() => {
+
+        observerRef.current = createIntersectionObserver({
+            ...configs,
+            targets: [targetRef.current],
+            options: {
+                ...configs.options,
+                root: rootRef.current,
+            },
+        });
         return () => {
-            observer.disconnect();
+            observerRef.current.disconnect();
         };
-    }, [observer]);
+    }, []);
 
     return {
-        observer,
         rootRef,
+        observerRef,
         targetRef,
     };
 }

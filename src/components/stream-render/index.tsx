@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { createIntersectionObserver, sleep } from "aio-tool";
 
 import s from "./s";
+import useIntersectionObserver from "@site/src/hooks/use-intersection-observer";
 
 export default function StreamRender() {
     const [content, setContent] = useState("");
@@ -38,31 +39,24 @@ export default function StreamRender() {
         requestAnimationFrame(consumer);
     };
 
-    const targetRef = useRef<HTMLDivElement>(null);
-    const rootRef = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        const observer = createIntersectionObserver({
-            targets: [targetRef.current],
-            options: {
-                root: rootRef.current,
-                rootMargin: "50%",
-            },
-            onIntersecting: () => {},
-            callback: (entries) => {
-                if (entries[0].isIntersecting) {
-                    typeof promiseRef.current === "function" &&
-                        promiseRef.current(entries[0].target);
-                    promiseRef.current = "continue";
-                } else {
-                    promiseRef.current = "abort";
-                }
-            },
-        });
+    const {
+        targetRef,
+        rootRef,
+    } = useIntersectionObserver<HTMLDivElement, HTMLDivElement>({
+        options: {
+            rootMargin: "50%",
+        },
+        callback: (entries) => {
+            if (entries[0].isIntersecting) {
+                typeof promiseRef.current === "function" &&
+                promiseRef.current(entries[0].target);
+                promiseRef.current = "continue";
+            } else {
+                promiseRef.current = "abort";
+            }
+        },
+    })
 
-        return () => {
-            observer.disconnect();
-        };
-    }, []);
     // const contentObject = parseThinkContent(content);
     return (
         <>
