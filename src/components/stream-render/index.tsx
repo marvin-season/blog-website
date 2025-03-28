@@ -8,20 +8,15 @@ import useIncreasingRender from "@site/src/hooks/use-increasing-render";
 export default function StreamRender() {
     const [content, setContent] = useState("");
     const [loading, setLoading] = useState(false);
-    const {
-        promiseRef,
-        remainRef,
-        start,
-        cancel
-    } = useIncreasingRender({
+    const { promiseRef, remainRef, start, cancel } = useIncreasingRender({
         onContinue(value) {
             setContent((prev) => prev + value);
         },
-    })
+    });
     const handleStart = async () => {
         if (loading) return;
         setLoading(true);
-        start()
+        start();
         for (const char of s) {
             if (promiseRef.current === "cancel") break;
             remainRef.current += char;
@@ -30,22 +25,22 @@ export default function StreamRender() {
         setLoading(false);
     };
 
-    const {
-        targetRef,
-        rootRef,
-    } = useIntersectionObserver<HTMLDivElement, HTMLDivElement>({
+    const { targetRef, rootRef } = useIntersectionObserver<
+        HTMLDivElement,
+        HTMLDivElement
+    >({
         rootOptions: {
             rootMargin: "50%",
         },
-        onIntersecting(entries){
+        onIntersecting(entries) {
             typeof promiseRef.current === "function" &&
-            promiseRef.current(entries[0].target);
+                promiseRef.current(entries[0].target);
             promiseRef.current = "continue";
         },
-        onDisIntersecting(entries){
+        onDisIntersecting(entries) {
             promiseRef.current = "abort";
         },
-    })
+    });
 
     // const contentObject = parseThinkContent(content);
     return (

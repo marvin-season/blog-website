@@ -14,7 +14,6 @@ export default function useIntersectionObserver<
     const rootRef = useRef<R>(null);
     const observerRef = useRef<IntersectionObserver>(null);
     useEffect(() => {
-
         observerRef.current = createIntersectionObserver({
             targets: [targetRef.current],
             rootInit: {

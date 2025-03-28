@@ -1,13 +1,10 @@
 import { useCallback, useRef } from "react";
 
-export default function useIncreasingRender(
-    {
-        onContinue
-    }:
-    {
-        onContinue?: (value: string) => void;
-    }
-) {
+export default function useIncreasingRender({
+    onContinue,
+}: {
+    onContinue?: (value: string) => void;
+}) {
     // Ref to control the consumer flow
     const promiseRef = useRef<any>("");
     // Buffer for accumulating incoming characters
@@ -37,10 +34,8 @@ export default function useIncreasingRender(
             renderLoopRef.current = null;
         }
         remainRef.current = "";
-        promiseRef.current = "cancel"
+        promiseRef.current = "cancel";
     }, []);
-
-
 
     const start = useCallback(() => {
         promiseRef.current = "continue";
@@ -52,5 +47,5 @@ export default function useIncreasingRender(
         cancel,
         promiseRef,
         remainRef,
-    }
+    };
 }
