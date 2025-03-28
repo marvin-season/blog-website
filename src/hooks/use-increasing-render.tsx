@@ -1,4 +1,4 @@
-import { useCallback, useRef } from "react";
+import { useCallback, useRef, useEffect } from "react";
 import { sleep } from "aio-tool";
 
 export enum PromiseState {
@@ -52,6 +52,10 @@ export default function useIncreasingRender({
         if (promiseRef.current === "cancel") return true;
         remainRef.current += value;
         await sleep(0);
+    }, []);
+
+    useEffect(() => {
+        return cancel;
     }, [])
 
     return {
