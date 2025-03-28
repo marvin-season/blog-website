@@ -19,12 +19,6 @@ export default function useIncreasingRender(
         if (promiseRef.current === "continue") {
             onContinue(remainRef.current);
             remainRef.current = "";
-            // Update content with characters in the buffer and clear the buffer
-            // setContent((prev) => {
-            //     const result = prev + remainRef.current;
-            //     remainRef.current = "";
-            //     return result;
-            // });
         } else if (promiseRef.current === "abort") {
             // Wait for an external signal to resume
             await new Promise((resolve) => {
@@ -42,12 +36,14 @@ export default function useIncreasingRender(
             cancelAnimationFrame(renderLoopRef.current);
             renderLoopRef.current = null;
         }
+        remainRef.current = "";
+        promiseRef.current = "cancel"
     }, []);
 
 
 
     const start = useCallback(() => {
-
+        promiseRef.current = "continue";
         render().then();
     }, []);
 

@@ -21,7 +21,6 @@ export default function StreamRender() {
     const handleStart = async () => {
         if (loading) return;
         setLoading(true);
-        promiseRef.current = "continue";
         start()
         for (const char of s) {
             if (promiseRef.current === "cancel") break;
@@ -59,11 +58,10 @@ export default function StreamRender() {
                 onClick={() => {
                     setContent("");
                     setLoading(false);
-                    promiseRef.current = "cancel";
                     cancel();
                 }}
             >
-                clean
+                reset
             </button>
             <div className={"text-gray-600 text-xs"}>
                 <em>Note: 打开控制台检查正在输出的元素</em>
