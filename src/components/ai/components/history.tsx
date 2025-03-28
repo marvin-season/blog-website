@@ -93,7 +93,7 @@ export function History({
         <div
             ref={containerRef}
             className={
-                "relative h-[120px] overflow-y-auto border border-gray-200 rounded-lg"
+                "relative flex-grow overflow-y-auto border border-gray-200 rounded-lg"
             }
         >
             {messages.map((message, index) => {
