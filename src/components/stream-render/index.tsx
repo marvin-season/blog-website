@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createIntersectionObserver, sleep } from "aio-tool";
 
-import s from './s';
+import s from "./s";
 
 export default function StreamRender() {
     const [content, setContent] = useState("");
@@ -85,11 +85,12 @@ export default function StreamRender() {
                     <em>Full String:</em>
                     {s}
                 </div>
-
             </div>
             <div
                 ref={rootRef}
-                className={"h-[80px] overflow-y-scroll border rounded text-gray-600 p-4"}
+                className={
+                    "h-[80px] overflow-y-scroll border rounded text-gray-600 p-4"
+                }
             >
                 {/*<div className={"text-sm text-gray-500"}>{contentObject.think_content}</div>*/}
                 <div>

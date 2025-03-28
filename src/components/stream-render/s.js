@@ -22,6 +22,6 @@ The reason it can support so many targets is because React is designed so that r
 This separation means that React DOM and React Native can use their own renderers while sharing the same reconciler, provided by React core.
 
 Fiber reimplements the reconciler. It is not principally concerned with rendering, though renderers will need to change to support (and take advantage of) the new architecture.
-`
+`;
 
-export default s
+export default s;

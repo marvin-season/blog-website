@@ -3354,10 +3354,10 @@ aio-modal@0.0.4001-modal-custom:
     react-dom "^18.3.1"
     tippy.js "^6.3.7"
 
-aio-tool@0.0.106:
-  version "0.0.106"
-  resolved "https://registry.yarnpkg.com/aio-tool/-/aio-tool-0.0.106.tgz#0c48f17abe59500b18b65f526fe1f6ac78e9d18a"
-  integrity sha512-RePQ90BccOpGZboBvTAVdM5WP3VPovrqJgonLI0aTacWv+e7uPOFx7YHXheBedWdZsf6qAfwbPu12mYZUNKzLg==
+aio-tool@0.0.107:
+  version "0.0.107"
+  resolved "https://registry.yarnpkg.com/aio-tool/-/aio-tool-0.0.107.tgz#708eec1a97e565aa6bdc4248c5d1d745e112af85"
+  integrity sha512-WAkjzRAoAcHZ66f2h6C/9pLf3CjwVNXvOoMsrHv7Gl0m32sKTuNmlSUT4lBVCQsdNM9sbvF8hQtsXsQAUQho8Q==
 
 ajv-formats@^2.1.1:
   version "2.1.1"
