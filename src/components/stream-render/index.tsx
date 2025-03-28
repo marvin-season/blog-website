@@ -3,7 +3,9 @@ import { sleep } from "aio-tool";
 
 import s from "./s";
 import useIntersectionObserver from "@site/src/hooks/use-intersection-observer";
-import useIncreasingRender, { PromiseState } from "@site/src/hooks/use-increasing-render";
+import useIncreasingRender, {
+    PromiseState,
+} from "@site/src/hooks/use-increasing-render";
 
 export default function StreamRender() {
     const [content, setContent] = useState("");
@@ -18,9 +20,9 @@ export default function StreamRender() {
         setLoading(true);
         start();
         for (const char of s) {
-            const hasCanceled = await consume(char)
+            const hasCanceled = await consume(char);
             if (hasCanceled) {
-                break
+                break;
             }
         }
         setLoading(false);
@@ -61,11 +63,9 @@ export default function StreamRender() {
             </button>
             <div className={"text-gray-600 text-sm"}>
                 <em>Note: 打开控制台检查正在输出的元素</em>
-                <br/>
+                <br />
                 <em>Full String:</em>
-                <div className={"h-[150px] overflow-y-scroll border"}>
-                    {s}
-                </div>
+                <div className={"h-[150px] overflow-y-scroll border"}>{s}</div>
             </div>
             <div
                 ref={rootRef}

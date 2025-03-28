@@ -2,9 +2,9 @@ import { useCallback, useRef, useEffect } from "react";
 import { sleep } from "aio-tool";
 
 export enum PromiseState {
-    Resume = 'resume',
-    Suspense = 'suspense',
-    Cancel = 'cancel'
+    Resume = "resume",
+    Suspense = "suspense",
+    Cancel = "cancel",
 }
 export default function useIncreasingRender({
     onContinue,
@@ -56,7 +56,7 @@ export default function useIncreasingRender({
 
     useEffect(() => {
         return cancel;
-    }, [])
+    }, []);
 
     return {
         start,
