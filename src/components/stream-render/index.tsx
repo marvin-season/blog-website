@@ -36,7 +36,7 @@ export default function StreamRender() {
         onIntersecting(entries) {
             typeof promiseRef.current === "function" &&
                 promiseRef.current(entries[0].target);
-            promiseRef.current = PromiseState.Continue;
+            promiseRef.current = PromiseState.Resume;
         },
         onDisIntersecting(entries) {
             promiseRef.current = PromiseState.Suspense;

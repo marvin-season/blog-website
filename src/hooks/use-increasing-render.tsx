@@ -2,7 +2,7 @@ import { useCallback, useRef, useEffect } from "react";
 import { sleep } from "aio-tool";
 
 export enum PromiseState {
-    Continue = 'continue',
+    Resume = 'resume',
     Suspense = 'suspense',
     Cancel = 'cancel'
 }
@@ -19,7 +19,7 @@ export default function useIncreasingRender({
     const renderLoopRef = useRef<number | null>(null);
 
     const updater = useCallback(async () => {
-        if (promiseRef.current === "continue") {
+        if (promiseRef.current === PromiseState.Resume) {
             onContinue(remainRef.current);
             remainRef.current = "";
         } else if (promiseRef.current === PromiseState.Suspense) {
@@ -44,7 +44,7 @@ export default function useIncreasingRender({
     }, []);
 
     const start = useCallback(() => {
-        promiseRef.current = PromiseState.Continue;
+        promiseRef.current = PromiseState.Resume;
         updater().then();
     }, []);
 
