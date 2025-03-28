@@ -3,7 +3,7 @@ import { sleep } from "aio-tool";
 
 export enum PromiseState {
     Continue = 'continue',
-    Abort = 'abort',
+    Suspense = 'suspense',
     Cancel = 'cancel'
 }
 export default function useIncreasingRender({
@@ -22,7 +22,7 @@ export default function useIncreasingRender({
         if (promiseRef.current === "continue") {
             onContinue(remainRef.current);
             remainRef.current = "";
-        } else if (promiseRef.current === "abort") {
+        } else if (promiseRef.current === PromiseState.Suspense) {
             // Wait for an external signal to resume
             await new Promise((resolve) => {
                 promiseRef.current = (node: any) => {
@@ -49,7 +49,7 @@ export default function useIncreasingRender({
     }, []);
 
     const consume = useCallback(async (value: string) => {
-        if (promiseRef.current === "cancel") return true;
+        if (promiseRef.current === PromiseState.Cancel) return true;
         remainRef.current += value;
         await sleep(0);
     }, []);

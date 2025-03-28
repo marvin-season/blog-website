@@ -39,7 +39,7 @@ export default function StreamRender() {
             promiseRef.current = PromiseState.Continue;
         },
         onDisIntersecting(entries) {
-            promiseRef.current = PromiseState.Abort;
+            promiseRef.current = PromiseState.Suspense;
         },
     });
 
