@@ -43,17 +43,16 @@ export default function StreamRender() {
         targetRef,
         rootRef,
     } = useIntersectionObserver<HTMLDivElement, HTMLDivElement>({
-        options: {
+        rootOptions: {
             rootMargin: "50%",
         },
-        callback: (entries) => {
-            if (entries[0].isIntersecting) {
-                typeof promiseRef.current === "function" &&
-                promiseRef.current(entries[0].target);
-                promiseRef.current = "continue";
-            } else {
-                promiseRef.current = "abort";
-            }
+        onIntersecting(entries){
+            typeof promiseRef.current === "function" &&
+            promiseRef.current(entries[0].target);
+            promiseRef.current = "continue";
+        },
+        onDisIntersecting(entries){
+            promiseRef.current = "abort";
         },
     })
 
