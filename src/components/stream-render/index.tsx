@@ -8,7 +8,7 @@ import useIncreasingRender, { PromiseState } from "@site/src/hooks/use-increasin
 export default function StreamRender() {
     const [content, setContent] = useState("");
     const [loading, setLoading] = useState(false);
-    const { promiseRef, remainRef, start, cancel } = useIncreasingRender({
+    const { promiseRef, consume, start, cancel } = useIncreasingRender({
         onContinue(value) {
             setContent((prev) => prev + value);
         },
@@ -18,9 +18,10 @@ export default function StreamRender() {
         setLoading(true);
         start();
         for (const char of s) {
-            if (promiseRef.current === "cancel") break;
-            remainRef.current += char;
-            await sleep(10);
+            const hasCanceled = await consume(char)
+            if (hasCanceled) {
+                break
+            }
         }
         setLoading(false);
     };

@@ -1,4 +1,5 @@
 import { useCallback, useRef } from "react";
+import { sleep } from "aio-tool";
 
 export enum PromiseState {
     Continue = 'continue',
@@ -17,7 +18,7 @@ export default function useIncreasingRender({
     // Store the requestAnimationFrame handle so it can be canceled when needed
     const renderLoopRef = useRef<number | null>(null);
 
-    const render = useCallback(async () => {
+    const updater = useCallback(async () => {
         if (promiseRef.current === "continue") {
             onContinue(remainRef.current);
             remainRef.current = "";
@@ -30,7 +31,7 @@ export default function useIncreasingRender({
             });
         }
         // Schedule next iteration in the next animation frame
-        renderLoopRef.current = requestAnimationFrame(render);
+        renderLoopRef.current = requestAnimationFrame(updater);
     }, []);
 
     const cancel = useCallback(() => {
@@ -44,12 +45,19 @@ export default function useIncreasingRender({
 
     const start = useCallback(() => {
         promiseRef.current = PromiseState.Continue;
-        render().then();
+        updater().then();
     }, []);
+
+    const consume = useCallback(async (value: string) => {
+        if (promiseRef.current === "cancel") return true;
+        remainRef.current += value;
+        await sleep(0);
+    }, [])
 
     return {
         start,
         cancel,
+        consume,
         promiseRef,
         remainRef,
     };
