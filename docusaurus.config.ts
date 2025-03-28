@@ -79,6 +79,7 @@ const config: Config = {
         src: 'img/loopy.png',
       },
       items: [
+        {to: '/ai', label: 'AI', position: 'left'},
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
