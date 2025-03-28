@@ -59,17 +59,18 @@ export default function StreamRender() {
             >
                 reset
             </button>
-            <div className={"text-gray-600 text-xs"}>
+            <div className={"text-gray-600 text-sm"}>
                 <em>Note: 打开控制台检查正在输出的元素</em>
+                <br/>
+                <em>Full String:</em>
                 <div className={"h-[150px] overflow-y-scroll border"}>
-                    <em>Full String:</em>
                     {s}
                 </div>
             </div>
             <div
                 ref={rootRef}
                 className={
-                    "h-[80px] overflow-y-scroll border rounded text-gray-600 p-4"
+                    "h-[100px] overflow-y-scroll border rounded text-gray-600 p-4"
                 }
             >
                 {/*<div className={"text-sm text-gray-500"}>{contentObject.think_content}</div>*/}
