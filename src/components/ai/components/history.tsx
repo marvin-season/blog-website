@@ -1,6 +1,7 @@
 import { Message } from "../type";
 import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { debounce } from "lodash-es";
+import useIntersectionObserver from "@site/src/hooks/use-intersection-observer";
 
 interface HistoryProps {
     citeMessage?: Message;
@@ -10,7 +11,6 @@ interface HistoryProps {
 }
 
 export function Historical({
-    citeMessage,
     isLast,
     message,
     onCite,
@@ -45,32 +45,29 @@ export function History({
     ...restProps
 }: { messages: Message[] } & HistoryProps) {
     const [isAtBottom, setIsAtBottom] = useState(true);
-    const containerRef = useRef(null);
-    const anchorRef = useRef(null);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries, observer) => {
-                setIsAtBottom(!!entries[0]?.isIntersecting);
-            },
-            {
-                root: containerRef.current,
-                rootMargin: "30px",
-            },
-        );
-        if (anchorRef.current) {
-            observer.observe(anchorRef.current);
+    const {
+        rootRef,
+        targetRef,
+        observerRef
+    } = useIntersectionObserver<HTMLDivElement, HTMLDivElement>({
+        rootOptions: {
+            rootMargin: "30px",
+        },
+        onIntersecting(){
+            setIsAtBottom(true);
+        },
+        onDisIntersecting(){
+            setIsAtBottom(false);
         }
-        return () => {
-            observer.disconnect();
-        };
-    }, [containerRef, anchorRef]);
+    })
+
 
     const scrollToBottom = useCallback(
         debounce(
             () => {
-                containerRef.current.scrollTo({
-                    top: containerRef.current.scrollHeight,
+                rootRef.current.scrollTo({
+                    top: rootRef.current.scrollHeight,
                     behavior: "smooth",
                 });
             },
@@ -79,11 +76,11 @@ export function History({
                 leading: true,
             },
         ),
-        [containerRef],
+        [rootRef],
     );
 
     useEffect(() => {
-        if (!containerRef.current) {
+        if (!rootRef.current) {
             return;
         }
         isAtBottom && scrollToBottom();
@@ -91,9 +88,9 @@ export function History({
 
     return (
         <div
-            ref={containerRef}
+            ref={rootRef}
             className={
-                "relative h-[200px] overflow-y-auto border border-gray-200 rounded-lg"
+                "relative h-[100px] overflow-y-auto border border-gray-200 rounded-lg"
             }
         >
             {messages.map((message, index) => {
@@ -115,7 +112,7 @@ export function History({
                     <span onClick={scrollToBottom}>DOWN</span>
                 </div>
             )}
-            <div ref={anchorRef}></div>
+            <div ref={targetRef}></div>
         </div>
     );
 }
