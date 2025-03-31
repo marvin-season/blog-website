@@ -70,7 +70,16 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'interview',
+        path: 'interview',
+        routeBasePath: 'interview',
+      },
+    ],
+  ],
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
@@ -90,7 +99,12 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {to: '/blog/tags', label: 'Tags', position: 'left'},
-        { to: '/interview', label: 'Interview', position: 'left' }, // 新增
+        {
+          to: '/interview',
+          label: 'Interview',
+          position: 'left',
+          activeBaseRegex: `/interview`,
+        },
         { to: '/personal', label: 'Personal', position: 'left' }, // 新增
         { to: '/reference', label: 'Reference', position: 'left' }, // 新增
         {
