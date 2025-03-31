@@ -55,8 +55,10 @@ const config: Config = {
           blogSidebarCount: 'ALL',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          // editUrl:
-          //   'https://github.com/marvin-season/danny-website/tree/main/create-docusaurus/templates/shared/',
+          editUrl: ({permalink, blogPath, blogDirPath, locale}) => {
+            // https://github.com/marvin-season/danny-website/tree/main/create-docusaurus/templates/shared/
+            return `https://github.com/marvin-season/danny-website/tree/main/blog/${blogPath}`;
+          },
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
