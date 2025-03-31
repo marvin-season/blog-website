@@ -81,7 +81,7 @@ const config: Config = {
         src: 'img/loopy.png',
       },
       items: [
-        {to: '/ai-seek', label: 'AISeek', position: 'left'},
+        // {to: '/ai-seek', label: 'AISeek', position: 'left'},
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
