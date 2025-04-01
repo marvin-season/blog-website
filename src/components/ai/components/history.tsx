@@ -46,22 +46,20 @@ export function History({
 }: { messages: Message[] } & HistoryProps) {
     const [isAtBottom, setIsAtBottom] = useState(true);
 
-    const {
-        rootRef,
-        targetRef,
-        observerRef
-    } = useIntersectionObserver<HTMLDivElement, HTMLDivElement>({
+    const { rootRef, targetRef, observerRef } = useIntersectionObserver<
+        HTMLDivElement,
+        HTMLDivElement
+    >({
         rootOptions: {
             rootMargin: "30px",
         },
-        onIntersecting(){
+        onIntersecting() {
             setIsAtBottom(true);
         },
-        onDisIntersecting(){
+        onDisIntersecting() {
             setIsAtBottom(false);
-        }
-    })
-
+        },
+    });
 
     const scrollToBottom = useCallback(
         debounce(

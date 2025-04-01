@@ -21,7 +21,11 @@ export default function AI() {
             title={`AI Helper`}
             description="Personal Information"
         >
-            <div className={"shadow-lg p-4 border border-gray-200 rounded-lg h-full flex flex-col justify-end"}>
+            <div
+                className={
+                    "shadow-lg p-4 border border-gray-200 rounded-lg h-full flex flex-col justify-end"
+                }
+            >
                 <History
                     citeMessage={citeMessage}
                     messages={messages}
