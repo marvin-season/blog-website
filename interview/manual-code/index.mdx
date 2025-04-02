@@ -24,3 +24,13 @@ import TabItem from '@theme/TabItem';
 
     </TabItem>
 </Tabs>
+
+### new_
+原型链 + this指向
+```js
+function new_(func, ...params) {
+    const obj = Object.create(func.prototype);
+    const result = func.apply(obj, params);
+    return typeof result === "object" ? result : obj;
+}
+```
