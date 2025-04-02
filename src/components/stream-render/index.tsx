@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { sleep } from "aio-tool";
+import { FunctionComponent, useState } from "react";
 
 import s from "./s";
 import useIntersectionObserver from "@site/src/hooks/use-intersection-observer";

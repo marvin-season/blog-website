@@ -1,4 +1,5 @@
-## 深度思考信息展示
+## 深度思考功能
+### 提取思考信息
 `<think>这是思考内容</think> hello`
 以流或者整体的方式处理上述字符串，将think标签包裹的部份提取为单独的字段，最终输出为：
 ```json
@@ -52,4 +53,44 @@ console.log(processContent("<think>这是思考内容</think> hello"));
 
 console.log(processContent("<think>这是思考内容 hello"));
 // Expected output: { content: "", think_content: "这是思考内容 hello" }
+```
+
+### 扩展组件
+```tsx
+function ThinkComponent1({ content = "a" }) {
+    return <div>think1: {content}</div>;
+}
+
+function ThinkComponent2({ content = "a" }) {
+    return <div>think2: {content}</div>;
+}
+
+const withThink = <
+P extends object,
+>(
+    Component: ComponentType<P>,
+    ThinkComponent: FunctionComponent<{ content: string }>,
+) => {
+    return (props: P & { fullContent: string }) => {
+        const { content, think_content } = parseThinkContent(props.fullContent);
+        return (
+            <>
+                <ThinkComponent content={think_content} />
+                <Component {...props} content={content} />
+            </>
+        );
+    };
+};
+
+const PlainContent = ({ content = '', age = 10 }) => <div>{content}</div>;
+const MultiContent = withThink(
+    PlainContent,
+    ThinkComponent2,
+);
+
+<MultiContent
+    fullContent={
+        "<think>借助 IntersectionObserver API, 监听将要进入视口内的dom，当该 dom</think>hello world"
+    }
+/>
 ```
