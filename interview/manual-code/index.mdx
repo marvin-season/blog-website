@@ -34,3 +34,41 @@ function new_(func, ...params) {
     return typeof result === "object" ? result : obj;
 }
 ```
+
+### 防抖节流
+防抖：截停动作频繁触发
+
+节流：降低动作频次
+
+```js
+function throttle(func, timeout) {
+    let timer = null
+    return function(...props) {
+        if(timer) {
+            return
+        }
+        timer = setTimeout(() => {
+            func(...props);
+            clearTimeout(timer)
+            timer = null
+        }, timeout)
+    }
+}
+```
+
+```js
+function debounce(func, timeout) {
+  let timer = null
+  return () => {
+    if(timer){
+        clearTimeout(timer);
+    }
+
+    timer = setTimeout(() => {
+        func(...props);
+        clearTimeout(timer)
+        timer = null
+    }, timeout)
+  }
+}
+```
