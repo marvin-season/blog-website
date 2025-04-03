@@ -4,17 +4,14 @@
  * @return {number}
  */
 const removeElement = function(nums, val) {
-    let fast = nums.length - 1;
-    let slow = nums.length - 1;
-    while (fast >= 0) {
-        if (nums[fast] === val) {
-            nums[fast] = nums[slow];
-            slow--;
+    let slow = 0;
+    for (let fast = 0; fast < nums.length; fast++) {
+        if (nums[fast] !== val) {
+            nums[slow] = nums[fast];
+            slow++;
         }
-        fast--;
     }
-
-    return slow + 1
+    return slow;
 };
 
-console.log(removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2));
+console.log(removeElement([0, 1, 2, 2, 3, 0, 4, 2], 2)); // 输出: 5
