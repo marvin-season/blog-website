@@ -73,11 +73,9 @@ export default function StreamRender() {
                 }
             >
                 {/*<div className={"text-sm text-gray-500"}>{contentObject.think_content}</div>*/}
-                <div>
-                    {content.match(/.{1,50}/g)?.map((item, index) => {
-                        return <span key={index}>{item}</span>;
-                    })}
-                </div>
+                {content.match(/.{1,50}/g)?.map((item, index) => {
+                    return <span key={index}>{item}</span>;
+                })}
                 <div ref={targetRef}></div>
             </div>
         </>
