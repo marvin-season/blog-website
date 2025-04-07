@@ -51,7 +51,7 @@ export default function useIncreasingRender({
     const consume = useCallback(async (value: string) => {
         if (promiseRef.current === PromiseState.Cancel) return true;
         remainRef.current += value;
-        await sleep(0);
+        await sleep(10);
     }, []);
 
     useEffect(() => {

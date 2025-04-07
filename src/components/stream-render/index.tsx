@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from "react";
+import { Fragment, FunctionComponent, useState } from "react";
 
 import s from "./s";
 import useIntersectionObserver from "@site/src/hooks/use-intersection-observer";
@@ -69,12 +69,12 @@ export default function StreamRender() {
             <div
                 ref={rootRef}
                 className={
-                    "h-[100px] overflow-y-scroll border rounded text-gray-600 p-4"
+                    "h-[200px] w-[300px] overflow-y-scroll border rounded text-gray-600 p-4"
                 }
             >
                 {/*<div className={"text-sm text-gray-500"}>{contentObject.think_content}</div>*/}
-                {content.match(/.{1,50}/g)?.map((item, index) => {
-                    return <span key={index}>{item}</span>;
+                {content.split(/(?=[?,.!])/g)?.map((item, index) => {
+                    return <Fragment key={index}>{item}</Fragment>;
                 })}
                 <div ref={targetRef}></div>
             </div>
