@@ -16,6 +16,8 @@ React 的并发渲染模式（Concurrent Mode）可能导致**不一致的订阅
 
 ---
 
+{/* truncate */}
+
 ## 🔧 语法
 
 ```ts
@@ -25,8 +27,4 @@ const state = useSyncExternalStore(
   getServerSnapshot?: () => any // 可选，仅用于 SSR
 );
 ```
-{/* truncate */}
 
-import SyncExternalStore from  '@site/src/components/state-manager/SyncExternalStore';
-
-<SyncExternalStore />
