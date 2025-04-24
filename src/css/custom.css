@@ -50,3 +50,26 @@
     background-color: #c7bcbc;
     border-radius: 8px;
 }
+
+/* 全局 CSS 文件（如 globals.css） */
+@keyframes ripple {
+    0% {
+        transform: scale(0.1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.1;
+    }
+
+    100% {
+        transform: scale(0.1);
+        opacity: 1;
+    }
+}
+
+.animate-ripple {
+    animation: ripple 3.2s infinite reverse;
+    transform-origin: 50% 49%;
+}

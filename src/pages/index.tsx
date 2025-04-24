@@ -14,11 +14,13 @@ const Dropdown = ({ children, content }) => {
         >
             {children}
             <div
-                className={`absolute top-full left-0 bg-white shadow-lg rounded-md min-w-[160px] transition-all duration-500 ease-in-out ${
-                    isOpen
-                        ? "opacity-100 translate-y-[12px] visible"
-                        : "opacity-0 -translate-y-4 invisible"
-                }`}
+                // style={{
+                //     translate: 'calc(-50% + 50px)'
+                // }}
+                className={`absolute translate-x-[calc(50px-50%)] top-full left-0 bg-white shadow-lg rounded-md min-w-[160px] transition-all duration-500 ease-in-out ${isOpen
+                    ? "opacity-100 translate-y-[12px] visible"
+                    : "opacity-0 -translate-y-4 invisible"
+                    }`}
             >
                 {content}
             </div>
@@ -40,7 +42,7 @@ function UserLink() {
             {links.map((link, index) => (
                 <a
                     key={index}
-                    className={"!no-underline hover:bg-green-50 p-1"}
+                    className={"!no-underline hover:bg-green-50 px-2 py-1 rounded"}
                     href={link.href}
                     target={link.target || "_self"}
                 >
@@ -77,9 +79,10 @@ export default function Home(): ReactNode {
             description="Description will go into a meta tag in <head />"
         >
             <div className={"flex flex-col justify-center items-center"}>
-                <div className={"flex justify-around pt-12"}>
+                <div className={"flex justify-around pt-12 relative"}>
                     <Dropdown content={<UserLink />}>
                         <UserAvatar />
+                        <span className="absolute inset-0 rounded-full bg-white/30 animate-ripple"></span>
                     </Dropdown>
                 </div>
                 <div
