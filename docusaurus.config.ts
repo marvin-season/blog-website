@@ -112,6 +112,11 @@ const config: Config = {
           position: 'right',
         },
         {
+          to: 'http://ai.fuelstack.icu/',
+          label: 'AI Seek',
+          position: 'right',
+        },
+        {
           to: 'https://github.com/marvin-season/danny-website',
           label: 'GitHub',
           position: 'right',
