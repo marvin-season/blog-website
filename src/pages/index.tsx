@@ -3,30 +3,6 @@ import React, { useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 
-const Dropdown = ({ children, content }) => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    return (
-        <div
-            className="relative inline-block cursor-pointer"
-            onMouseEnter={() => setIsOpen(true)}
-            onMouseLeave={() => setIsOpen(false)}
-        >
-            {children}
-            <div
-                // style={{
-                //     translate: 'calc(-50% + 50px)'
-                // }}
-                className={`absolute translate-x-[calc(50px-50%)] top-full left-0 bg-white shadow-lg rounded-md min-w-[160px] transition-all duration-500 ease-in-out ${isOpen
-                    ? "opacity-100 translate-y-[12px] visible"
-                    : "opacity-0 -translate-y-4 invisible"
-                    }`}
-            >
-                {content}
-            </div>
-        </div>
-    );
-};
 
 function UserLink() {
     const links = [
@@ -80,22 +56,11 @@ export default function Home(): ReactNode {
         >
             <div className={"flex flex-col justify-center items-center"}>
                 <div className={"flex justify-around pt-12 relative"}>
-                    <Dropdown content={<UserLink />}>
-                        <UserAvatar />
-                        <span className="absolute inset-0 rounded-full bg-white/30 animate-ripple"></span>
-                    </Dropdown>
+                    <UserAvatar />
                 </div>
-                <div
-                    className={`
-                    mt-10 bg-gradient-to-r from-purple-500 via-pink-500 to-red-500
-                    text-transparent bg-clip-text text-4xl font-bold
-                    whitespace-nowrap overflow-hidden
-                    border-r-4 border-r-green-500
-                    w-0 animate-typing-infinite
-                `}
-                >
-                    {siteConfig.tagline}
-                </div>
+                <button className="mt-4 border rounded px-2 py-0.5 border-gray-200 hover:bg-gray-100">
+                    <a className="!text-blue-500 !no-underline" href="http://ai.fuelstack.icu/">ai seek</a>
+                </button>
             </div>
         </Layout>
     );
