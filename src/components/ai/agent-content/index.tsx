@@ -24,6 +24,7 @@ const components: Components & {
 }
 
 export default function ReactMarkdownTest({ }: Props) {
+    const containerRef = useRef<HTMLDivElement>(null);
     const [loading, setLoading] = useState(false);
     const [contents, setContents] = useState<ContentType[]>([]);
     const contentValue = useMemo(() => contents.map(c => c.text).join('\n'), [contents]);
@@ -37,6 +38,13 @@ export default function ReactMarkdownTest({ }: Props) {
             if (isAgent) {
                 const agentMessage = { id, text, type: 'agent' } as ContentType
                 setContents(prev => [...prev, agentMessage]);
+                // scroll to top
+                requestIdleCallback(() => {
+                    containerRef.current.scrollTo({
+                        top: containerRef.current.scrollHeight,
+                        behavior: 'smooth',
+                    });
+                })
                 await sleep(3000);
                 agentMessage.text = '<agent data-status="success" data-description="hello"></agent>'
                 setContents(prev => {
@@ -75,7 +83,7 @@ export default function ReactMarkdownTest({ }: Props) {
                 }
                 }>清空</button>
             </div>
-            <div className='w-full h-[300px] overflow-y-auto border p-2 rounded-lg bg-gray-100'>
+            <div id="container" ref={containerRef} className='w-full h-[300px] overflow-y-auto border p-2 rounded-lg bg-gray-100'>
                 <Markdown rehypePlugins={[rehypeRaw]} components={components}>
                     {contentValue}
                 </Markdown>

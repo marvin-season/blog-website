@@ -7,6 +7,33 @@ tags: [javascript, ai]
 
 {/* truncate */}
 
-import App from  '@site/src/components/ai/agent-content';
+import App from '@site/src/components/ai/agent-content';
 
 <App/>
+
+## 细化处理单个消息
+```ts
+type Content = {
+    type: 'text',
+    text: string;
+} | {
+    type: 'agent',
+    agent: string; // custom html tag, just like <agent attr="attr"></agent>
+}
+```
+
+## 映射富文本组件
+md也是富文本的一种
+```ts
+const components: Components & {
+    agent?: React.ElementType
+} = {
+    agent: ({ node, ...props }) => <Agent {...props} />,
+}
+
+<Markdown rehypePlugins={[rehypeRaw]} components={components}>
+    {contentValue}
+</Markdown>
+```
+
+`rehypeRaw` 允许解析 html, `components` 允许自定义组件
