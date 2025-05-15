@@ -7,7 +7,7 @@ import Agent from './Agent'
 
 type Props = {}
 
-type ContentType = { id: string; text: string; type?: 'agent' }
+type ContentType = { id: number; text: string; type?: 'agent' }
 
 const source = `
 # Hello, *world*!
@@ -32,7 +32,7 @@ export default function ReactMarkdownTest({ }: Props) {
         const stream = createMockStream(source, /\n/);
         // @ts-ignore
         for await (const element of stream) {
-            const id = crypto.randomUUID();
+            const id = Date.now();;
             const text = element.text;
             const isAgent = text.includes('<agent');
             if (isAgent) {
@@ -61,7 +61,7 @@ export default function ReactMarkdownTest({ }: Props) {
                 // @ts-ignore
                 for await (const element of stream) {
                     await sleep(100);
-                    const id = crypto.randomUUID();
+                    const id = Date.now();
                     const text = element.text;
                     setContents(prev => [...prev, { id, text }]);
 
