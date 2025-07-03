@@ -1,8 +1,6 @@
 import type { ReactNode } from "react";
-import React, { useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-
 
 function UserLink() {
     const links = [
@@ -18,7 +16,9 @@ function UserLink() {
             {links.map((link, index) => (
                 <a
                     key={index}
-                    className={"!no-underline hover:bg-green-50 px-2 py-1 rounded"}
+                    className={
+                        "!no-underline hover:bg-green-50 px-2 py-1 rounded"
+                    }
                     href={link.href}
                     target={link.target || "_self"}
                 >
@@ -32,7 +32,7 @@ function UserLink() {
 function UserAvatar() {
     return (
         <a
-            href="https://github.com/marvin-season/danny-website"
+            href="https://github.com/marvin-season/blog-website"
             target={"_blank"}
         >
             <img
@@ -59,7 +59,12 @@ export default function Home(): ReactNode {
                     <UserAvatar />
                 </div>
                 <button className="mt-4 border rounded px-2 py-0.5 border-gray-200 hover:bg-gray-100">
-                    <a className="!text-blue-500 !no-underline" href="http://ai.fuelstack.icu/">ai seek</a>
+                    <a
+                        className="!text-blue-500 !no-underline"
+                        href="http://ai.fuelstack.icu/"
+                    >
+                        ai seek
+                    </a>
                 </button>
             </div>
         </Layout>

@@ -39,7 +39,7 @@ const data = {
                             description: "文档网站搭建与知识管理",
                             links: [
                                 { label: "🌐 WebSite", href: "http://fuelstack.icu" },
-                                { label: "🌐 github pages", href: "https://marvin-season.github.io/danny-website/" },
+                                { label: "🌐 github pages", href: "https://marvin-season.github.io/blog-website/" },
                             ],
                         },
                         {

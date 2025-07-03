@@ -3,12 +3,15 @@ title: Website Deploy
 ---
 
 ## Static Website
+
 **借助Nginx来完成部署静态站点。**
-+ 编写docker-compose 
-+ 配置 nginx
-+ docker-compose up -d
+
+- 编写docker-compose
+- 配置 nginx
+- docker-compose up -d
 
 `docker-compose.yml`
+
 ```shell
 services:
   nginx:
@@ -26,7 +29,9 @@ networks:
   common_network:
     external: true
 ```
+
 `nginx.conf`
+
 ```shell
 server {
     listen 80;
@@ -37,16 +42,18 @@ server {
     }
     location / {
         root /usr/share/nginx/html;
-        try_files $uri $uri/ /index.html; 
+        try_files $uri $uri/ /index.html;
         index index.html;
     }
 }
 ```
 
 ## Main WebSite
+
 配置一个主站点。分发或导航到其他子站点, 例如：`fuelstack.icu`, `sub.fuelstack.icu`。
 
 `nginx.conf`
+
 ```shell
 events {
     worker_connections 1024;
@@ -56,22 +63,22 @@ http {
     # 主站点配置
     server {
         listen 80;
-        server_name fuelstack.icu;   
+        server_name fuelstack.icu;
         include mime.types;
-        
-        # 将 /danny-website 路径映射到网站根目录
-        location /danny-website {
+
+        # 将 /blog-website 路径映射到网站根目录
+        location /blog-website {
             # With alias, your files should be directly in /usr/share/nginx/html/
-            # With root, your files should be in /usr/share/nginx/html/danny-website/
+            # With root, your files should be in /usr/share/nginx/html/blog-website/
             alias /usr/share/nginx/html;
             index index.html;
-            try_files $uri $uri/ /danny-website/index.html;
+            try_files $uri $uri/ /blog-website/index.html;
             add_header Cache-Control "public, max-age=3600";
         }
 
-        # 重定向根路径到 /danny-website
+        # 重定向根路径到 /blog-website
         location = / {
-            return 301 /danny-website/;
+            return 301 /blog-website/;
         }
         # 添加 404 错误页面映射
         error_page 404 /404.html;
@@ -105,9 +112,11 @@ http {
 ```
 
 ## Deploy script
+
 本地构建产物，并将产物推送到服务器，然后在服务器上解压并重启容器。
 
 `deploy.sh`
+
 ```shell
 #!/bin/bash
 # pnpm build

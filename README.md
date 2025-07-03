@@ -2,11 +2,9 @@
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
-[在线Demo 地址1](https://marvin-season.github.io/danny-website/)
+[在线Demo 地址1](https://marvin-season.github.io/blog-website/)
 
-[在线 Demo 地址 2](http://www.fuelstack.icu/danny-website/)
-
-    
+[在线 Demo 地址 2](http://www.fuelstack.icu/blog-website/)
 
 ### Installation
 
