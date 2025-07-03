@@ -54,3 +54,18 @@ pnpm run build
 ```sh
 pnpm run publish
 ```
+
+### Self-Host
+
+config ssh
+
+```sh
+Host fuelstack
+  HostName fuelstack.icu
+  User root
+  IdentityFile ~/.ssh/macmini.pem # 你的登陆私钥
+  IdentitiesOnly yes
+
+```
+
+`ssh fuelstack`执行测试连接

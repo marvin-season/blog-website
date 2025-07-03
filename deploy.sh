@@ -2,7 +2,7 @@
 # pnpm build
 
 # 服务器信息
-SERVER="root@fuelstack.icu"
+SERVER="fuelstack"
 TARGET_DIR="/root/projects/nginx"
 
 # 检查远程目录是否存在，如果不存在则创建
