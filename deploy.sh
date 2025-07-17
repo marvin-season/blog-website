@@ -21,7 +21,7 @@ zip -r $ZIP_FILE ./build -x "*/__MACOSX*" "*/.DS_Store"
 # 上传 zip 文件到服务器
 echo "上传 $ZIP_FILE 到服务器..."
 scp $ZIP_FILE $SERVER:$TARGET_DIR/
-scp docker-compose.yml $SERVER:$TARGET_DIR/
+scp docker-compose.yaml $SERVER:$TARGET_DIR/
 scp nginx.conf $SERVER:$TARGET_DIR/
 
 # 在服务器上解压并替换 build 目录
