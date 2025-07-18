@@ -58,6 +58,9 @@ export default {
                 'bounce-gentle': 'bounceGentle 2s infinite',
                 'pulse-slow': 'pulse 3s infinite',
                 'float': 'float 3s ease-in-out infinite',
+                'spin-slow': 'spin 8s linear infinite',
+                'shimmer': 'shimmer 2s infinite',
+                'glow': 'glow 2s ease-in-out infinite',
             },
             keyframes: {
                 typing: {
@@ -89,6 +92,14 @@ export default {
                 float: {
                     '0%, 100%': { transform: 'translateY(0px)' },
                     '50%': { transform: 'translateY(-10px)' }
+                },
+                shimmer: {
+                    '0%': { transform: 'translateX(-100%)' },
+                    '100%': { transform: 'translateX(100%)' }
+                },
+                glow: {
+                    '0%, 100%': { boxShadow: '0 0 5px rgba(59, 130, 246, 0.3)' },
+                    '50%': { boxShadow: '0 0 20px rgba(59, 130, 246, 0.6)' }
                 }
             },
             boxShadow: {
