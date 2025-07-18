@@ -26,9 +26,10 @@ export function SearchBox() {
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                 />
-                <div className="absolute right-4 text-xs text-gray-400 dark:text-gray-500">
-                    ⌘K
-                </div>
+                {/* beta icon */}
+                <span className="absolute right-4 text-xs text-gray-400 dark:text-gray-500">
+                    Beta
+                </span>
             </div>
         </div>
     );

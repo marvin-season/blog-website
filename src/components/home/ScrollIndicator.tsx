@@ -15,7 +15,7 @@ export function ScrollIndicator() {
     const progress = maxScroll > 0 ? (scrollY / maxScroll) * 100 : 0;
 
     return (
-        <div className="fixed top-0 left-0 w-full h-1 bg-gray-200 dark:bg-gray-700 z-50">
+        <div className="fixed top-0 left-0 w-full h-0.5 rounded-2xl bg-gray-200 dark:bg-gray-700 z-50">
             <div
                 className="h-full bg-gradient-to-r from-primary-500 to-secondary-500 transition-all duration-300 ease-out"
                 style={{ width: `${progress}%` }}

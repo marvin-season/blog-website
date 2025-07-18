@@ -15,7 +15,10 @@ export function FooterInfo() {
             </div>
 
             <div className="mt-6 text-xs text-gray-500 dark:text-gray-500">
-                <p>© 2024 Marvin's Blog. 用 ❤️ 和 React 构建</p>
+                <p>
+                    © {new Date().getFullYear()} Marvin's Blog. 用 ❤️ 和 React
+                    构建
+                </p>
                 <p className="mt-1">Powered by Docusaurus & Tailwind CSS</p>
             </div>
         </div>

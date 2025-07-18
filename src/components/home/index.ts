@@ -9,4 +9,5 @@ export * from "./TechStack";
 export * from "./RecentActivity";
 export * from "./SocialLinks";
 export * from "./FooterInfo";
-export * from "./KeyboardShortcuts";
+export * from "./DecorativeBackground";
+export * from "./ArticleNavigation";
