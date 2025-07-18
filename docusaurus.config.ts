@@ -152,66 +152,11 @@ const config: Config = {
             style: "dark",
             links: [
                 {
-                    title: "📚 文档",
-                    items: [
-                        {
-                            label: "技术文档",
-                            to: "/docs/effective",
-                        },
-                        {
-                            label: "React 教程",
-                            to: "/docs/react",
-                        },
-                        {
-                            label: "JavaScript 指南",
-                            to: "/docs/javascript",
-                        },
-                    ],
-                },
-                {
-                    title: "💼 面试",
-                    items: [
-                        {
-                            label: "前端面试",
-                            to: "/interview",
-                        },
-                        {
-                            label: "React 面试",
-                            to: "/interview/react",
-                        },
-                        {
-                            label: "TypeScript",
-                            to: "/interview/ts",
-                        },
-                    ],
-                },
-                {
-                    title: "🔗 外部链接",
-                    items: [
-                        {
-                            label: "📄 在线简历",
-                            href: "http://resume.fuelstack.icu/",
-                        },
-                        {
-                            label: "🤖 AI 编程助手",
-                            href: "http://ai.fuelstack.icu/",
-                        },
-                        {
-                            label: "📦 GitHub 仓库",
-                            href: "https://github.com/marvin-season/blog-website",
-                        },
-                    ],
-                },
-                {
-                    title: "📋 备案信息",
+                    title: "备案信息",
                     items: [
                         {
                             label: "ICP备案号：陇ICP备2025016591号",
                             href: "https://beian.miit.gov.cn/",
-                        },
-                        {
-                            label: "公安备案号：待补充",
-                            href: "#",
                         },
                     ],
                 },

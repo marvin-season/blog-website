@@ -18,7 +18,17 @@
 
 }
 
+.footer__col, .footer__link-item {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    gap: 10px;
+    justify-content: center;
+}
 
+.footer__title {
+    margin: 0;
+}
 /* 滚动条样式 */
 *::-webkit-scrollbar {
     display: none;
