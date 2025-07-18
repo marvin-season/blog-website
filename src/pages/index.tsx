@@ -4,7 +4,6 @@ import Layout from "@theme/Layout";
 import {
     UserAvatar,
     StatCard,
-    ScrollIndicator,
     ParticleBackground,
     SearchBox,
     TechStack,
@@ -21,8 +20,6 @@ export default function Home(): ReactNode {
             title={siteConfig.title}
             description="知识收集站 - 技术文档、博客文章、面试题库和AI助手"
         >
-            <ScrollIndicator />
-
             {/* 英雄区域 */}
             <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
                 {/* 背景渐变 */}
