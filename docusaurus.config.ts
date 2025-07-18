@@ -70,16 +70,7 @@ const config: Config = {
             } satisfies Preset.Options,
         ],
     ],
-    plugins: [
-        [
-            "@docusaurus/plugin-content-docs",
-            {
-                id: "interview",
-                path: "interview",
-                routeBasePath: "interview",
-            },
-        ],
-    ],
+    plugins: [],
     themeConfig: {
         // Replace with your project's social card
         image: "img/docusaurus-social-card.jpg",
@@ -104,12 +95,6 @@ const config: Config = {
                     to: "/blog",
                     label: "Blog",
                     position: "left",
-                },
-                {
-                    to: "/interview",
-                    label: "Interview",
-                    position: "left",
-                    activeBaseRegex: `/interview`,
                 },
                 {
                     to: "/personal",
