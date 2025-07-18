@@ -31,8 +31,8 @@ const config: Config = {
     // useful metadata like html lang. For example, if your site is Chinese, you
     // may want to replace "en" with "zh-Hans".
     i18n: {
-        defaultLocale: "en",
-        locales: ["en"],
+        defaultLocale: "zh-Hans",
+        locales: ["zh-Hans", "en"],
     },
 
     presets: [
@@ -83,86 +83,173 @@ const config: Config = {
     themeConfig: {
         // Replace with your project's social card
         image: "img/docusaurus-social-card.jpg",
+
+        // 现代化导航栏配置
         navbar: {
-            title: "Home",
+            title: "知识收集站",
             logo: {
-                alt: "My Site Logo",
+                alt: "Knowledge Collections Logo",
                 src: "img/loopy.png",
+                srcDark: "img/loopy.png",
             },
+            hideOnScroll: false,
+            style: "primary",
             items: [
-                // {to: '/ai-seek', label: 'AISeek', position: 'left'},
                 {
                     type: "docSidebar",
                     sidebarId: "tutorialSidebar",
                     position: "left",
-                    label: "Tutorial",
+                    label: "📚 文档",
                 },
-                { to: "/blog", label: "Blog", position: "left" },
+                {
+                    to: "/blog",
+                    label: "✍️ 博客",
+                    position: "left",
+                },
                 {
                     to: "/interview",
-                    label: "Interview",
+                    label: "💼 面试",
                     position: "left",
                     activeBaseRegex: `/interview`,
                 },
-                { to: "/personal", label: "Personal", position: "left" }, // 新增
-                { to: "/reference", label: "Reference", position: "left" }, // 新增
                 {
-                    to: "http://resume.fuelstack.icu/",
-                    label: "Resume",
-                    position: "right",
+                    to: "/personal",
+                    label: "👤 个人",
+                    position: "left",
                 },
                 {
-                    to: "http://ai.fuelstack.icu/",
-                    label: "AI Seek",
-                    position: "right",
+                    to: "/reference",
+                    label: "🔍 参考",
+                    position: "left",
                 },
                 {
-                    to: "https://github.com/marvin-season/blog-website",
-                    label: "GitHub",
+                    type: "dropdown",
+                    label: "🔗 链接",
                     position: "right",
-                },
-            ],
-        },
-        footer: {
-            style: "dark",
-            links: [
-                {
-                    title: "Docs",
                     items: [
                         {
-                            label: "Tutorial",
-                            to: "/docs/effective",
+                            label: "📄 简历",
+                            to: "http://resume.fuelstack.icu/",
+                        },
+                        {
+                            label: "🤖 AI 助手",
+                            to: "http://ai.fuelstack.icu/",
+                        },
+                        {
+                            label: "📦 GitHub",
+                            to: "https://github.com/marvin-season/blog-website",
                         },
                     ],
                 },
                 {
-                    title: "备案信息",
+                    type: "search",
+                    position: "right",
+                },
+            ],
+        },
+
+        // 现代化页脚配置
+        footer: {
+            style: "dark",
+            links: [
+                {
+                    title: "📚 文档",
+                    items: [
+                        {
+                            label: "技术文档",
+                            to: "/docs/effective",
+                        },
+                        {
+                            label: "React 教程",
+                            to: "/docs/react",
+                        },
+                        {
+                            label: "JavaScript 指南",
+                            to: "/docs/javascript",
+                        },
+                    ],
+                },
+                {
+                    title: "💼 面试",
+                    items: [
+                        {
+                            label: "前端面试",
+                            to: "/interview",
+                        },
+                        {
+                            label: "React 面试",
+                            to: "/interview/react",
+                        },
+                        {
+                            label: "TypeScript",
+                            to: "/interview/ts",
+                        },
+                    ],
+                },
+                {
+                    title: "🔗 外部链接",
+                    items: [
+                        {
+                            label: "📄 在线简历",
+                            href: "http://resume.fuelstack.icu/",
+                        },
+                        {
+                            label: "🤖 AI 编程助手",
+                            href: "http://ai.fuelstack.icu/",
+                        },
+                        {
+                            label: "📦 GitHub 仓库",
+                            href: "https://github.com/marvin-season/blog-website",
+                        },
+                    ],
+                },
+                {
+                    title: "📋 备案信息",
                     items: [
                         {
                             label: "ICP备案号：陇ICP备2025016591号",
                             href: "https://beian.miit.gov.cn/",
                         },
-                    ],
-                },
-                {
-                    title: "More",
-                    items: [
                         {
-                            label: "Blog",
-                            to: "/blog",
-                        },
-                        {
-                            label: "GitHub",
-                            href: "https://github.com/marvin-season/blog-website",
+                            label: "公安备案号：待补充",
+                            href: "#",
                         },
                     ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus. `,
+            copyright: `Copyright © ${new Date().getFullYear()} Marvin's Knowledge Collections. Built with ❤️ and Docusaurus.`,
         },
+
+        // 代码高亮主题
         prism: {
             theme: prismThemes.oneDark,
             darkTheme: prismThemes.oneDark,
+        },
+
+        // 颜色模式配置
+        colorMode: {
+            defaultMode: "light",
+            disableSwitch: false,
+            respectPrefersColorScheme: true,
+        },
+
+        // 元数据
+        metadata: [
+            {
+                name: "keywords",
+                content:
+                    "前端开发, React, JavaScript, TypeScript, 面试题, 技术文档",
+            },
+            {
+                name: "description",
+                content: "知识收集站 - 技术文档、博客文章、面试题库和AI助手",
+            },
+            { name: "author", content: "Marvin" },
+        ],
+
+        // 社交卡片
+        socials: {
+            github: "https://github.com/marvin-season/blog-website",
         },
     } satisfies Preset.ThemeConfig,
 };
