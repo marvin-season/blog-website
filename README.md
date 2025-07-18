@@ -2,20 +2,20 @@
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
 
-[在线Demo 地址1](https://marvin-season.github.io/blog-website/)
+[在线地址1](https://marvin-season.github.io/blog-website/)
 
-[在线 Demo 地址 2](http://www.fuelstack.icu/blog-website/)
+[在线地址 2](http://www.fuelstack.icu/blog-website/)
 
 ### Installation
 
 ```
-pnpm install
+yarn install
 ```
 
 ### Local Development
 
 ```
-pnpm start
+yarn start
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
@@ -23,37 +23,16 @@ This command starts a local development server and opens up a browser window. Mo
 ### Build
 
 ```
-pnpm build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
+yarn build
 ```
 
 If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
 
-### Local Static Deployment
+### Github Pages Deployment
 
-```ssh
+auto deploy when push to `main` branch
 
-pnpm run build
-```
-
-```sh
-pnpm run publish
-```
+look up `.github/workflows/deploy.yml`
 
 ### Self-Host
 
