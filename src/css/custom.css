@@ -29,10 +29,11 @@
     --ifm-background-surface-color: #f8fafc;
     --ifm-background-surface-color-dark: #f1f5f9;
     
-    /* 文字颜色 */
+    /* 文字颜色 - 确保高对比度 */
     --ifm-font-color-base: #1e293b;
     --ifm-font-color-base-inverse: #f8fafc;
-    --ifm-font-color-secondary: #64748b;
+    --ifm-font-color-secondary: #475569;
+    --ifm-font-color-emphasis: #0f172a;
     
     /* 边框和阴影 */
     --ifm-border-color: #e2e8f0;
@@ -77,6 +78,7 @@
     --ifm-font-color-base: #f1f5f9;
     --ifm-font-color-base-inverse: #1e293b;
     --ifm-font-color-secondary: #94a3b8;
+    --ifm-font-color-emphasis: #ffffff;
     
     /* 边框和阴影 */
     --ifm-border-color: #334155;
@@ -111,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.3;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    color: var(--ifm-font-color-base);
+    color: var(--ifm-font-color-emphasis);
 }
 
 h1 {
@@ -126,36 +128,41 @@ h2 {
     font-size: 2rem;
     border-bottom: 2px solid var(--ifm-border-color);
     padding-bottom: 0.5rem;
+    color: var(--ifm-font-color-emphasis);
 }
 
 h3 {
     font-size: 1.5rem;
+    color: var(--ifm-font-color-emphasis);
 }
 
-/* 链接样式 */
+/* 链接样式 - 确保高对比度 */
 a {
-    color: var(--ifm-color-primary);
+    color: var(--ifm-color-primary-dark);
     text-decoration: none;
     transition: all var(--ifm-transition-fast);
     border-radius: 4px;
     padding: 2px 4px;
+    font-weight: 500;
 }
 
 a:hover {
-    color: var(--ifm-color-primary-dark);
+    color: var(--ifm-color-primary-darkest);
     background-color: var(--ifm-color-primary-lightest);
     text-decoration: none;
+    transform: translateY(-1px);
 }
 
 /* 代码样式 */
 code {
     background-color: var(--ifm-code-background);
-    color: var(--ifm-color-primary-dark);
+    color: var(--ifm-color-primary-darkest);
     padding: 0.2rem 0.4rem;
     border-radius: 6px;
     font-size: var(--ifm-code-font-size);
     font-family: var(--ifm-font-family-monospace);
     border: 1px solid var(--ifm-border-color);
+    font-weight: 500;
 }
 
 pre {
@@ -200,12 +207,12 @@ pre code {
 
 .button--secondary {
     background: transparent;
-    color: var(--ifm-color-primary);
-    border-color: var(--ifm-color-primary);
+    color: var(--ifm-color-primary-dark);
+    border-color: var(--ifm-color-primary-dark);
 }
 
 .button--secondary:hover {
-    background: var(--ifm-color-primary);
+    background: var(--ifm-color-primary-dark);
     color: white;
 }
 
@@ -239,14 +246,17 @@ pre code {
 .navbar__brand {
     font-weight: 700;
     font-size: 1.25rem;
+    color: var(--ifm-font-color-emphasis);
 }
 
 .navbar__item {
     transition: all var(--ifm-transition-fast);
+    color: var(--ifm-font-color-base);
 }
 
 .navbar__item:hover {
     transform: translateY(-1px);
+    color: var(--ifm-color-primary-dark);
 }
 
 /* 侧边栏样式 */
@@ -258,17 +268,18 @@ pre code {
     border-radius: 8px;
     margin: 2px 0;
     transition: all var(--ifm-transition-fast);
+    color: var(--ifm-font-color-base);
+    font-weight: 500;
 }
 
 .menu__link:hover {
     background-color: var(--ifm-color-primary-lightest);
-    transform: translateX(4px);
+    color: var(--ifm-color-primary-dark);
 }
 
 .menu__link--active {
-    background: linear-gradient(135deg, var(--ifm-color-primary), var(--ifm-color-secondary));
-    color: white !important;
-    font-weight: 600;
+    background-color: var(--ifm-color-primary-lightest);
+    color: var(--ifm-color-primary-dark);
 }
 
 /* 表格样式 */
@@ -285,12 +296,13 @@ th, td {
     padding: 0.75rem 1rem;
     text-align: left;
     border-bottom: 1px solid var(--ifm-border-color);
+    color: var(--ifm-font-color-base);
 }
 
 th {
     background-color: var(--ifm-color-primary-lightest);
     font-weight: 600;
-    color: var(--ifm-color-primary-dark);
+    color: var(--ifm-color-primary-darkest);
 }
 
 tr:hover {
@@ -384,4 +396,57 @@ tr:hover {
 [data-theme="dark"] .glass-effect {
     background: rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 修复亮色主题下的文字对比度问题 */
+[data-theme="light"] {
+    /* 确保所有文字都有足够的对比度 */
+    --ifm-font-color-base: #1e293b;
+    --ifm-font-color-emphasis: #0f172a;
+    --ifm-font-color-secondary: #475569;
+}
+
+[data-theme="light"] .navbar__item {
+    color: #1e293b;
+}
+
+[data-theme="light"] .navbar__item:hover {
+    color: #1d4ed8;
+}
+
+[data-theme="light"] .menu__link {
+    color: #1e293b;
+}
+
+[data-theme="light"] .menu__link:hover {
+    color: #1d4ed8;
+    background-color: #dbeafe;
+}
+
+[data-theme="light"] a {
+    color: #1d4ed8;
+}
+
+[data-theme="light"] a:hover {
+    color: #1e40af;
+    background-color: #dbeafe;
+}
+
+[data-theme="light"] code {
+    color: #1e40af;
+    background-color: #f1f5f9;
+    border-color: #e2e8f0;
+}
+
+[data-theme="light"] th {
+    color: #1e40af;
+    background-color: #dbeafe;
+}
+
+[data-theme="light"] td {
+    color: #1e293b;
+}
+
+[data-theme="light"] tr:hover {
+    background-color: #f8fafc;
 }

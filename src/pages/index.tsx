@@ -30,7 +30,7 @@ function FeatureCard({
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                         {title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 mt-1">
+                    <p className="text-gray-700 dark:text-gray-300 mt-1">
                         {description}
                     </p>
                 </div>
@@ -67,7 +67,7 @@ function StatCard({ number, label }: { number: string; label: string }) {
             <div className="text-3xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 bg-clip-text text-transparent">
                 {number}
             </div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            <div className="text-sm text-gray-700 dark:text-gray-400 mt-1 font-medium">
                 {label}
             </div>
         </div>
@@ -127,7 +127,7 @@ function QuickLinks() {
                     <h3 className="text-lg font-semibold mb-2">
                         {link.label.split(" ").slice(1).join(" ")}
                     </h3>
-                    <p className="text-white/80 text-sm">{link.description}</p>
+                    <p className="text-white/90 text-sm">{link.description}</p>
                 </a>
             ))}
         </div>
@@ -173,7 +173,7 @@ export default function Home(): ReactNode {
                     </h1>
 
                     {/* 副标题 */}
-                    <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+                    <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto font-medium">
                         保持你自己的方式，收集和分享技术知识
                     </p>
 
@@ -189,9 +189,11 @@ export default function Home(): ReactNode {
 
                     {/* 底部装饰 */}
                     <div className="mt-16 text-center">
-                        <div className="inline-flex items-center space-x-2 text-gray-500 dark:text-gray-400">
+                        <div className="inline-flex items-center space-x-2 text-gray-600 dark:text-gray-400">
                             <div className="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></div>
-                            <span className="text-sm">持续更新中</span>
+                            <span className="text-sm font-medium">
+                                持续更新中
+                            </span>
                             <div
                                 className="w-2 h-2 bg-secondary-500 rounded-full animate-pulse"
                                 style={{ animationDelay: "0.5s" }}

@@ -65,7 +65,7 @@ function Feature({ Svg, title, description, link, color }) {
                         >
                             {title}
                         </Heading>
-                        <p className="text-white/90 leading-relaxed">
+                        <p className="text-white/95 leading-relaxed font-medium">
                             {description}
                         </p>
                     </div>
