@@ -31,6 +31,7 @@
     "aio-modal": "0.0.4001-modal-custom",
     "aio-tool": "^0.0.2",
     "clsx": "^2.0.0",
+    "framer-motion": "^12.23.6",
     "lodash-es": "^4.17.21",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
