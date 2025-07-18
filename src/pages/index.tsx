@@ -7,8 +7,9 @@ import {
     SearchBox,
     TechStack,
     FooterInfo,
-    DecorativeBackground,
     ArticleNavigation,
+    Background,
+    DecorativeBackground,
 } from "../components/home";
 
 export default function Home(): ReactNode {
@@ -22,8 +23,7 @@ export default function Home(): ReactNode {
             {/* 英雄区域 */}
             <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
                 {/* 背景渐变 */}
-                <div className="fixed -z-10 inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
-
+                <Background />
                 {/* 粒子背景 */}
                 <ParticleBackground />
 
