@@ -86,7 +86,7 @@ const config: Config = {
 
         // 现代化导航栏配置
         navbar: {
-            title: "知识收集站",
+            title: "Home",
             logo: {
                 alt: "Knowledge Collections Logo",
                 src: "img/loopy.png",
@@ -98,44 +98,44 @@ const config: Config = {
                     type: "docSidebar",
                     sidebarId: "tutorialSidebar",
                     position: "left",
-                    label: "📚 文档",
+                    label: "Document",
                 },
                 {
                     to: "/blog",
-                    label: "✍️ 博客",
+                    label: "Blog",
                     position: "left",
                 },
                 {
                     to: "/interview",
-                    label: "💼 面试",
+                    label: "Interview",
                     position: "left",
                     activeBaseRegex: `/interview`,
                 },
                 {
                     to: "/personal",
-                    label: "👤 个人",
+                    label: "Personal",
                     position: "left",
                 },
                 {
                     to: "/reference",
-                    label: "🔍 参考",
+                    label: "Reference",
                     position: "left",
                 },
                 {
                     type: "dropdown",
-                    label: "🔗 链接",
+                    label: "Links",
                     position: "right",
                     items: [
                         {
-                            label: "📄 简历",
+                            label: "Resume",
                             to: "http://resume.fuelstack.icu/",
                         },
                         {
-                            label: "🤖 AI 助手",
+                            label: "AI Assistant",
                             to: "http://ai.fuelstack.icu/",
                         },
                         {
-                            label: "📦 GitHub",
+                            label: "GitHub",
                             to: "https://github.com/marvin-season/blog-website",
                         },
                     ],
@@ -149,7 +149,7 @@ const config: Config = {
 
         // 现代化页脚配置
         footer: {
-            style: "dark",
+            style: "light",
             links: [
                 {
                     title: "备案信息",
@@ -173,7 +173,7 @@ const config: Config = {
         // 颜色模式配置
         colorMode: {
             defaultMode: "light",
-            disableSwitch: false,
+            disableSwitch: true,
             respectPrefersColorScheme: true,
         },
 

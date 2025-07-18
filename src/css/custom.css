@@ -10,12 +10,19 @@
 :root {
     /* 滚动行为 */
     scroll-behavior: smooth;
-
+    --ifm-leading: 1rem
 }
 
 /* 暗色模式 */
 [data-theme="dark"] {
 
+}
+
+.navbar {
+    background: transparent;
+    position: fixed;
+    inset: 0;
+    box-shadow: none;
 }
 
 a {

@@ -3,7 +3,6 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import {
     UserAvatar,
-    StatCard,
     ParticleBackground,
     SearchBox,
     TechStack,
@@ -56,16 +55,6 @@ export default function Home(): ReactNode {
 
                     {/* 技术栈 */}
                     <TechStack />
-
-                    {/* 统计信息 */}
-                    <div
-                        className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 max-w-4xl mx-auto animate-slide-up"
-                        style={{ animationDelay: "0.4s" }}
-                    >
-                        <StatCard number="50+" label="技术文章" icon="📚" />
-                        <StatCard number="100+" label="代码示例" icon="💻" />
-                        <StatCard number="200+" label="面试题目" icon="🎯" />
-                    </div>
 
                     {/* 站内导航按钮 */}
                     <ArticleNavigation />
