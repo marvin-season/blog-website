@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
+@import "./bg.css";
 
 /**
  * 现代化设计系统 - 文档站点主题升级
@@ -20,7 +21,6 @@
 
 .navbar {
     background: transparent;
-    position: fixed;
     inset: 0;
     box-shadow: none;
 }

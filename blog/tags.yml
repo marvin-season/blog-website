@@ -3,10 +3,10 @@ promise:
   permalink: /promise
   description: Promise tag description
 
-javscript:
-  label: Javscript
-  permalink: /javscript
-  description: Javscript tag description
+javascript:
+  label: Javascript
+  permalink: /javascript
+  description: Javascript tag description
 
 ai:
   label: AI

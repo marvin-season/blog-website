@@ -3,15 +3,12 @@ description: Tiptap is a renderless rich-text editor lib
 slug: tiptap
 title: Tiptap Practise
 authors: [marvin-season]
-tags: [javscript, tiptap]
+tags: [javascript, tiptap]
 date: "2025-02-05"
 ---
-import { RichEditor } from '@site/src/components/rich-editor'
-
-<RichEditor />
-
 
 ## Core Concept
+
 - **Editor**: The main editor component
     - **Node**: A piece of content in the editor
     - **Mark**: A piece of text formatting
@@ -21,9 +18,10 @@ import { RichEditor } from '@site/src/components/rich-editor'
 - **Plugins**: Extend the editor with custom functionality
 - **State**: The current state of the editor
 
-{/* truncate  */}
+{/* truncate */}
 
 ## Design
+
 ```mermaid
 sequenceDiagram
     participant User
@@ -41,23 +39,29 @@ sequenceDiagram
     Editor-->>Editor: 更新 JSON
     Editor->>User: 渲染文本
     User->>Editor: 保存文本
-    
+
     Editor-->>User: 序列化为 文本信息
     Note over Editor: 自定义节点匹配规则
 ```
+
 ## What
+
 A RichEditor.
+
 ## How
+
 Creating a custom node.
+
 ## Core Code
+
 ```tsx
 const View = ({ node, updateAttributes }: NodeViewProps) => {
-    const { type, value, options, placeholder } = node.attrs
+    const { type, value, options, placeholder } = node.attrs;
 
     const handleInput = (e: React.FormEvent) => {
         const inputElement = e.target as HTMLInputElement;
-        const newValue = inputElement.value || '';
-        updateAttributes({ value: newValue })
+        const newValue = inputElement.value || "";
+        updateAttributes({ value: newValue });
     };
 
     // dynaimc with of input
@@ -66,17 +70,16 @@ const View = ({ node, updateAttributes }: NodeViewProps) => {
     return (
         <NodeViewWrapper as="span">
             <NodeViewContent
-                as={'input'}
+                as={"input"}
                 style={{ width: `${count}rem` }}
                 contentEditable={false}
                 onInput={handleInput}
                 placeholder={placeholder}
                 defaultValue={value}
-            >
-            </NodeViewContent>
+            ></NodeViewContent>
         </NodeViewWrapper>
-    )
-}
+    );
+};
 
 const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
     renderHTML({ HTMLAttributes, node }) {
@@ -84,10 +87,10 @@ const InlinePlaceholder = Node.create<InlinePlaceholderAttributes>({
             this.options.HTMLAttributes || {},
             HTMLAttributes,
         );
-        return ['span', attrs, 0]; // 0 or child of span
+        return ["span", attrs, 0]; // 0 or child of span
     },
     addNodeView() {
         return ReactNodeViewRenderer(View);
     },
-})
+});
 ```

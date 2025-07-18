@@ -2,8 +2,8 @@
 slug: functional-programming
 title: Functional Programming
 authors: [marvin-season]
-tags: [javscript]
-date: '2024-01-01'
+tags: [javascript]
+date: "2024-01-01"
 ---
 
 ## Currying
@@ -12,7 +12,7 @@ Currying is a technique of converting a function that takes multiple arguments i
 
 **In short: Using the characteristics of higher-order functions, the function is partially called according to the parameters.**
 
-{/* truncate  */}
+{/* truncate */}
 
 ### Currying Function
 
@@ -65,12 +65,13 @@ const arr = [{ name: "a" }, { name: "b" }];
 // Use compose to arrange appropriate functions to get the data `A.B`
 
 const func1 = R.compose(
-  R.join("."),
-  R.map(R.compose(R.toUpper, R.prop("name")))
+    R.join("."),
+    R.map(R.compose(R.toUpper, R.prop("name"))),
 );
 
 console.log(func1(arr)); // expected: A.B
 ```
+
 :::tip
 The various functions used in the above example from the ramda library are all curried. By composing various methods with compose, a new function that can achieve the target functionality is obtained.
 :::
