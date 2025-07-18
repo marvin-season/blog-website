@@ -92,8 +92,7 @@ const config: Config = {
                 src: "img/loopy.png",
                 srcDark: "img/loopy.png",
             },
-            hideOnScroll: false,
-            style: "primary",
+            hideOnScroll: true,
             items: [
                 {
                     type: "docSidebar",
