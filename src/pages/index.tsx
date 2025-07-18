@@ -22,7 +22,7 @@ export default function Home(): ReactNode {
             {/* 英雄区域 */}
             <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
                 {/* 背景渐变 */}
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
+                <div className="fixed -z-10 inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"></div>
 
                 {/* 粒子背景 */}
                 <ParticleBackground />

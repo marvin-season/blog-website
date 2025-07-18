@@ -11,12 +11,13 @@
 :root {
     /* 滚动行为 */
     scroll-behavior: smooth;
-    --ifm-leading: 1rem
+    --ifm-leading: 1rem;
+    --ifm-navbar-background-color: transparent;
 }
 
 /* 暗色模式 */
 [data-theme="dark"] {
-
+    --ifm-navbar-background-color: transparent;
 }
 
 .main-wrapper {
@@ -24,6 +25,11 @@
 
 a {
     text-decoration: none;
+}
+
+.navbar {
+    /* 毛玻璃 */
+    backdrop-filter: blur(10px);
 }
 
 a:hover {

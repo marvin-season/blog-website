@@ -101,11 +101,7 @@ const config: Config = {
                     label: "Personal",
                     position: "left",
                 },
-                {
-                    to: "/reference",
-                    label: "Reference",
-                    position: "left",
-                },
+
                 {
                     type: "dropdown",
                     label: "Links",
@@ -122,6 +118,10 @@ const config: Config = {
                         {
                             label: "GitHub",
                             to: "https://github.com/marvin-season/blog-website",
+                        },
+                        {
+                            to: "/reference",
+                            label: "Reference",
                         },
                     ],
                 },
