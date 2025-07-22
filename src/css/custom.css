@@ -20,8 +20,6 @@
     --ifm-navbar-background-color: transparent;
 }
 
-.main-wrapper {
-}
 
 a {
     text-decoration: none;
@@ -30,6 +28,11 @@ a {
 .navbar {
     /* 毛玻璃 */
     backdrop-filter: blur(10px);
+}
+
+.navbar-sidebar{
+    height: 100dvh;
+    background-color: #fff;
 }
 
 a:hover {
