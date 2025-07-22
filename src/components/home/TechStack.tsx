@@ -32,11 +32,19 @@ export function TechStack() {
             className: themeMaps.yellow,
         },
         {
+            name: "Shadcn UI",
+            className: themeMaps.yellow,
+        },
+        {
+            name: "Tailwind CSS",
+            className: themeMaps.green,
+        },
+        {
             name: "Node.js",
             className: themeMaps.green,
         },
         {
-            name: "Python",
+            name: "Java",
             className: themeMaps.gray,
         },
         {
@@ -50,9 +58,6 @@ export function TechStack() {
             className="text-center mb-12 animate-slide-up"
             style={{ animationDelay: "0.5s" }}
         >
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 font-medium">
-                技术栈
-            </p>
             <div className="flex flex-wrap justify-center gap-2">
                 {technologies.map((tech, index) => (
                     <TechTag

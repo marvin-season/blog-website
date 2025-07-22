@@ -4,7 +4,6 @@ import Layout from "@theme/Layout";
 import {
     UserAvatar,
     ParticleBackground,
-    SearchBox,
     TechStack,
     FooterInfo,
     ArticleNavigation,
@@ -33,7 +32,7 @@ export default function Home(): ReactNode {
                 {/* 主要内容 */}
                 <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
                     {/* 头像 */}
-                    <div className="flex justify-center my-12 animate-fade-in">
+                    <div className="flex justify-center mb-12 animate-fade-in">
                         <UserAvatar />
                     </div>
 
@@ -49,9 +48,6 @@ export default function Home(): ReactNode {
                         className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto font-medium leading-relaxed animate-slide-up"
                         style={{ animationDelay: "0.2s" }}
                     ></p>
-
-                    {/* 搜索框 */}
-                    <SearchBox />
 
                     {/* 技术栈 */}
                     <TechStack />
