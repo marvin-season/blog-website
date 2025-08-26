@@ -1,5 +1,5 @@
 #!/bin/bash
-# pnpm build
+yarn build
 
 # 服务器信息
 SERVER="fuelstack"
