@@ -108,12 +108,8 @@ const config: Config = {
                     position: "right",
                     items: [
                         {
-                            label: "Resume",
-                            to: "http://resume.fuelstack.icu/",
-                        },
-                        {
-                            label: "AI Assistant",
-                            to: "http://ai.fuelstack.icu/",
+                            label: "APP",
+                            to: "http://app.fuelstack.icu/",
                         },
                         {
                             label: "GitHub",
@@ -158,7 +154,7 @@ const config: Config = {
         // 颜色模式配置
         colorMode: {
             defaultMode: "light",
-            disableSwitch: true,
+            disableSwitch: false,
             respectPrefersColorScheme: true,
         },
 
