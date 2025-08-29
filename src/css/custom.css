@@ -13,11 +13,13 @@
     scroll-behavior: smooth;
     --ifm-leading: 1rem;
     --ifm-navbar-background-color: transparent;
+    --ifm-sidebar-background-color: rgba(255, 255, 255, 0.8);
 }
 
 /* 暗色模式 */
 [data-theme="dark"] {
     --ifm-navbar-background-color: transparent;
+    --ifm-sidebar-background-color: rgba(0, 0, 0, 0.8);
 }
 
 
@@ -32,7 +34,8 @@ a {
 
 .navbar-sidebar{
     height: 100dvh;
-    background-color: #fff;
+    background-color: var(--ifm-sidebar-background-color);
+    backdrop-filter: blur(10px);
 }
 
 a:hover {

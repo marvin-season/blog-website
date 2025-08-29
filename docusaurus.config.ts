@@ -154,7 +154,7 @@ const config: Config = {
         // 颜色模式配置
         colorMode: {
             defaultMode: "light",
-            disableSwitch: false,
+            disableSwitch: true,
             respectPrefersColorScheme: true,
         },
 
