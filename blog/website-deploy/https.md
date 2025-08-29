@@ -28,3 +28,43 @@ _acme-challenge.fuelstack.icu  value_from_certbot
 ```
 
 ###  将证书挂载到 Docker 中的 Nginx
+```yml
+- /etc/letsencrypt/live/fuelstack.icu-0001/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro
+- /etc/letsencrypt/live/fuelstack.icu-0001/privkey.pem:/etc/ssl/private/privkey.pem:ro
+```
+```yml
+services:
+  nginx-service:
+    image: nginx:latest
+    container_name: nginx_service
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./build:/usr/share/nginx/html
+      - /etc/letsencrypt/live/fuelstack.icu-0001/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro
+      - /etc/letsencrypt/live/fuelstack.icu-0001/privkey.pem:/etc/ssl/private/privkey.pem:ro
+    restart: always
+    networks:
+      - common_network
+networks:
+  common_network:
+    external: true
+```
+
+```nginx
+http {
+  server {
+    listen 443 ssl;
+    server_name fuelstack.icu www.fuelstack.icu;
+
+    ssl_certificate /etc/ssl/certs/fullchain.pem;
+    ssl_certificate_key /etc/ssl/private/privkey.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+  }
+}
+```
