@@ -86,106 +86,88 @@ self.addEventListener('notificationclick', (event) => {
 ### 站内配置
 类似 service worker中配置, 用来获取token
 ```ts
-import { type FirebaseOptions, initializeApp, getApps } from 'firebase/app'
-import { getMessaging } from 'firebase/messaging'
+// utils/firebase.ts
+'use client'
 
+import { initializeApp } from 'firebase/app'
+import {
+  getMessaging,
+  getToken,
+  type GetTokenOptions,
+  isSupported,
+} from 'firebase/messaging'
+// TODO: Replace the following with your app's Firebase project configuration
 // See: https://firebase.google.com/docs/web/learn-more#config-object
-const firebaseConfig: FirebaseOptions = {
-  apiKey: 'AIzaSyCN99e2MFNFCBgZAh4YjbboM7dx4L208cc',
-  authDomain: 'my-awesome-20250904.firebaseapp.com',
-  projectId: 'my-awesome-20250904',
-  storageBucket: 'my-awesome-20250904.firebasestorage.app',
-  messagingSenderId: '447700238822',
-  appId: '1:447700238822:web:57170ca06a374c10671627',
+const firebaseConfig = {
+  apiKey: 'AIzaSyACFvAu1_mSLYWwud_qeniCDGwUtv4Ri-g',
+  authDomain: 'hixai-5b8b9.firebaseapp.com',
+  projectId: 'hixai-5b8b9',
+  storageBucket: 'hixai-5b8b9.firebasestorage.app',
+  messagingSenderId: '932980486363',
+  appId: '1:932980486363:web:93813654e4617ecbaa1cfe',
 }
 // Initialize Firebase
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApps()[0]
+const app = initializeApp(firebaseConfig)
 
 // Initialize Firebase Cloud Messaging and get a reference to the service
-const messaging = () => getMessaging(app)
+export const messaging = () => getMessaging(app)
 
-export { messaging }
+export const getFCMToken = async (
+  params: {
+    permission?: NotificationPermission
+  } & Pick<GetTokenOptions, 'vapidKey'>,
+) => {
+  const { permission, vapidKey } = params
+  if (
+    typeof window !== 'undefined' &&
+    'serviceWorker' in navigator &&
+    permission === 'granted'
+  ) {
+    if (!(await isSupported())) return
+
+    return await getToken(messaging(), {
+      vapidKey,
+    })
+  }
+}
+
 ```
-获取浏览器通知权限
-```js
-import { useEffect, useState } from 'react'
 
-export default function useRequestPermission() {
-  const [permission, setPermission] =
-    useState<NotificationPermission>('default')
+```ts
+// utils/notification.ts
+export async function requestPermission() {
+  if (!('Notification' in window)) {
+    console.warn('Current browser does not support Notification API')
+    return
+  }
 
-  useEffect(() => {
-    if ('Notification' in window) {
-      Notification.requestPermission().then((permission) => {
-        setPermission(permission)
-      })
+  if (Notification.permission !== 'granted') {
+    try {
+      return await Notification.requestPermission()
+    } catch (error) {
+      console.error('requestPermission error:', error)
+      return 'denied'
     }
-  }, [])
+  }
 
-  return permission
+  return Notification.permission
 }
-
 ```
 
-获取token
-
-```js
-import { useCallback, useEffect, useState } from 'react'
-import { messaging } from '@/utils/firebase'
-
-import { getToken, isSupported } from 'firebase/messaging'
-import useRequestPermission from '@/hooks/useRequestPermission'
-
-const publicVapidKey = process.env.NEXT_PUBLIC_VAPID_KEY
-
-export default function useFCMToken() {
-  const permission = useRequestPermission()
-  const [token, setToken] = useState<string>('')
-
-  const getFCMToken = useCallback(
-    async (permission: NotificationPermission) => {
-      if (
-        typeof window !== 'undefined' &&
-        'serviceWorker' in navigator &&
-        permission === 'granted'
-      ) {
-        if (!(await isSupported())) return
-
-        getToken(messaging(), {
-          vapidKey: publicVapidKey,
-        }).then((token) => {
-          setToken(token)
-        })
-      }
-    },
-    [],
-  )
-
-  useEffect(() => {
-    getFCMToken(permission)
-  }, [permission])
-
-  return token
-}
-
-```
 站内通知(可选)
 
 ```js
-export default function useFCM() {
-  const token = useFCMToken()
+export default function App() {
 
   useEffect(() => {
-    if (token) {
-      const un = onMessage(messaging(), (payload) => {
-        console.log('payload', payload)
-      })
+    const un = onMessage(messaging(), (payload) => {
+      console.log('payload', payload)
+    })
 
-      return () => {
-        un()
-      }
+    return () => {
+      un()
     }
-  }, [token])
+  }, [])
 
   return {
     token,
