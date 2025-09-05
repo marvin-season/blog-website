@@ -22,65 +22,28 @@ FCM is a messaging service that allows you to send and receive messages across p
 
 ```js
 // public/firebase-messaging-sw.js
-// @ts-nocheck
+/* eslint-disable no-undef */
 
 importScripts(
-  'https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js',
+  'https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js',
 )
 importScripts(
-  'https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js',
+  'https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js',
 )
 
-// Steps中生成的信息
 const firebaseConfig = {
-  apiKey: 'AIzaSyCN99e2MFNFCBgZAh4YjbboM7dx4L208cc',
-  authDomain: 'my-awesome-20250904.firebaseapp.com',
-  projectId: 'my-awesome-20250904',
-  storageBucket: 'my-awesome-20250904.firebasestorage.app',
-  messagingSenderId: '447700238822',
-  appId: '1:447700238822:web:57170ca06a374c10671627',
+// ...
 }
-
+// Initialize the Firebase app in the service worker by passing in
+// your app's Firebase config object.
+// https://firebase.google.com/docs/web/setup#config-object
 firebase.initializeApp(firebaseConfig)
 
+// Retrieve an instance of Firebase Messaging so that it can handle background
+// messages.
+// eslint-disable-next-line no-unused-vars
 const messaging = firebase.messaging()
 
-// 处理后台推送
-messaging.onBackgroundMessage((payload) => {
-  console.log('[firebase-messaging-sw.js] 收到后台消息 ', payload)
-  const { title, body, image } = payload.notification
-  const data = payload.data
-  // 站外通知
-  self.registration.showNotification(title, {
-    body,
-    image,
-    data: { url: data.url },
-  })
-})
-
-// 处理点击通知信息: 打开链接中的url信息
-self.addEventListener('notificationclick', (event) => {
-  console.log('notificationclick', event)
-  event.notification.close()
-  event.waitUntil(
-    clients
-      .matchAll({ type: 'window', includeUncontrolled: true })
-      .then((windowClients) => {
-        for (const client of windowClients) {
-          const clientUrl = new URL(client.url)
-          const notificationUrl = new URL(event.notification.data?.url)
-
-          if (
-            clientUrl.origin === notificationUrl.origin &&
-            'focus' in client
-          ) {
-            return client.focus()
-          }
-        }
-        return clients.openWindow(event.notification.data.url)
-      }),
-  )
-})
 ```
 
 ### 站内配置
