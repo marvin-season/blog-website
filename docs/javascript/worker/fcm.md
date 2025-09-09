@@ -23,6 +23,15 @@ FCM is a messaging service that allows you to send and receive messages across p
 ```js
 // public/firebase-messaging-sw.js
 /* eslint-disable no-undef */
+// ⚠️： 如果想自定义事件，必须放在脚本导入之前
+self.addEventListener('notificationclick', (event) => {
+  const { FCM_MSG } = event.notification.data
+  const { data } = FCM_MSG
+  console.log('notificationclick', event)
+
+  event.notification.close()
+  event.waitUntil(clients.openWindow(data.link + '?source=notification'))
+})
 
 importScripts(
   'https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js',
