@@ -2,8 +2,8 @@
 slug: vue-grid-layout
 title: Vue-grid-layout
 authors: [marvin-season]
-tags: [javscript]
-date: '2023-12-01'
+tags: [javascript]
+date: "2023-12-01"
 ---
 
 # Drag-and-Drop Layout Solution Based on Vue-Grid-Layout
@@ -17,7 +17,9 @@ Users can perform operations such as **dragging** and **resizing** the content o
 ## What is Vue-Grid-Layout?
 
 [Vue-Grid-Layout](https://jbaysolutions.github.io/vue-grid-layout/) is a drag-and-drop layout component that can meet the above requirements. It is a secondary development based on [Gridster](http://dsmorse.github.io/gridster.js/), supporting drag-and-drop, scaling, responsive layout, etc.
+
 <!--truncate  -->
+
 ## How to Use?
 
 ### Installation
@@ -62,13 +64,13 @@ Note: The meaning of the fields in the array items:
 
 ```ts
 {
-  i: string // id
-  x: number // x-axis,
-  y: number // y-axis,
-  w: number // width,
-  h: number // height
-  static: boolean // won't be draggable, resizable or moved by other items
-  // other custom properties
+    i: string; // id
+    x: number; // x-axis,
+    y: number; // y-axis,
+    w: number; // width,
+    h: number; // height
+    static: boolean; // won't be draggable, resizable or moved by other items
+    // other custom properties
 }
 ```
 
@@ -83,7 +85,7 @@ Note: The attribute configuration of the element component:
 `Resizable`
 
 ```vue
-<grid-layout :isResizable="true" :layout.sync="layout" :col-num="12" <grid-item>...</grid-item>   
+<grid-layout :isResizable="true" :layout.sync="layout" :col-num="12" <grid-item>...</grid-item>
 >
 </grid-layout>
 ```
@@ -91,7 +93,7 @@ Note: The attribute configuration of the element component:
 `Draggable`
 
 ```vue
-<grid-layout :is-draggable="true" :layout.sync="layout" :col-num="12" <grid-item>...</grid-item>   
+<grid-layout :is-draggable="true" :layout.sync="layout" :col-num="12" <grid-item>...</grid-item>
 >
 </grid-layout>
 ```
@@ -107,7 +109,7 @@ Note: The attribute configuration of the element component:
   :layout.sync="layout"
   :col-num="12"
   <grid-item
->...</grid-item>   
+>...</grid-item>
 >
 </grid-layout>
 ```
@@ -118,33 +120,34 @@ Note: The attribute configuration of the element component:
 
 ```vue
 <template>
-  <grid-layout :layout.sync="layout">
-    <grid-item
-      v-for="item in layout"
-      :key="item.i"
-      :x="item.x"
-      :y="item.y"
-      :w="item.w"
-      :h="item.h"
-      :i="item.i"
-    >
-      12321
-    </grid-item>
-  </grid-layout>
+    <grid-layout :layout.sync="layout">
+        <grid-item
+            v-for="item in layout"
+            :key="item.i"
+            :x="item.x"
+            :y="item.y"
+            :w="item.w"
+            :h="item.h"
+            :i="item.i"
+        >
+            12321
+        </grid-item>
+    </grid-layout>
 </template>
 
 <script>
-import { GridLayout, GridItem } from 'vue-grid-layout'
+import { GridLayout, GridItem } from "vue-grid-layout";
 
 export default {
-  components: { GridLayout, GridItem },
-  data() {
-    return {
-      layout: [
-        { x: 0, y: 0, w: 3, h: 2, i: '1', static: false },
-        { x: 6, y: 0, w: 3, h: 2, i: '2', static: false },
-      ],
-    }
-  },
-}
+    components: { GridLayout, GridItem },
+    data() {
+        return {
+            layout: [
+                { x: 0, y: 0, w: 3, h: 2, i: "1", static: false },
+                { x: 6, y: 0, w: 3, h: 2, i: "2", static: false },
+            ],
+        };
+    },
+};
 </script>
+```

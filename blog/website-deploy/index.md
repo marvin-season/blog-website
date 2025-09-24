@@ -3,12 +3,15 @@ title: Website Deploy
 ---
 
 ## Static Website
+
 **借助Nginx来完成部署静态站点。**
-+ 编写docker-compose 
-+ 配置 nginx
-+ docker-compose up -d
+
+- 编写docker-compose
+- 配置 nginx
+- docker-compose up -d
 
 `docker-compose.yml`
+
 ```shell
 services:
   nginx:
@@ -26,7 +29,9 @@ networks:
   common_network:
     external: true
 ```
+
 `nginx.conf`
+
 ```shell
 server {
     listen 80;
@@ -37,16 +42,18 @@ server {
     }
     location / {
         root /usr/share/nginx/html;
-        try_files $uri $uri/ /index.html; 
+        try_files $uri $uri/ /index.html;
         index index.html;
     }
 }
 ```
 
 ## Main WebSite
+
 配置一个主站点。分发或导航到其他子站点, 例如：`fuelstack.icu`, `sub.fuelstack.icu`。
 
 `nginx.conf`
+
 ```shell
 events {
     worker_connections 1024;
@@ -56,22 +63,22 @@ http {
     # 主站点配置
     server {
         listen 80;
-        server_name fuelstack.icu;   
+        server_name fuelstack.icu;
         include mime.types;
-        
-        # 将 /danny-website 路径映射到网站根目录
-        location /danny-website {
+
+        # 将 /blog-website 路径映射到网站根目录
+        location /blog-website {
             # With alias, your files should be directly in /usr/share/nginx/html/
-            # With root, your files should be in /usr/share/nginx/html/danny-website/
+            # With root, your files should be in /usr/share/nginx/html/blog-website/
             alias /usr/share/nginx/html;
             index index.html;
-            try_files $uri $uri/ /danny-website/index.html;
+            try_files $uri $uri/ /blog-website/index.html;
             add_header Cache-Control "public, max-age=3600";
         }
 
-        # 重定向根路径到 /danny-website
+        # 重定向根路径到 /blog-website
         location = / {
-            return 301 /danny-website/;
+            return 301 /blog-website/;
         }
         # 添加 404 错误页面映射
         error_page 404 /404.html;
@@ -105,9 +112,11 @@ http {
 ```
 
 ## Deploy script
+
 本地构建产物，并将产物推送到服务器，然后在服务器上解压并重启容器。
 
 `deploy.sh`
+
 ```shell
 #!/bin/bash
 # pnpm build
@@ -150,3 +159,86 @@ rm $ZIP_FILE
 
 echo "部署完成！"
 ```
+
+
+## 升级Https
+### 申请使用通配符证书（覆盖所有二级域名）
+使用 letsencrypt 申请证书
+1.	安装 Certbot（在宿主机上即可，不用在容器里）：
+```sh
+sudo apt update
+sudo apt install certbot -y
+```
+
+2.	申请通配符证书（DNS 验证）：
+```sh
+sudo certbot -d "*.fuelstack.icu" -d "fuelstack.icu" --manual --preferred-challenges dns certonly
+```
+
+3.	Certbot 会提示你在 DNS 添加 TXT 记录：(控制台会输出信息)
+```txt
+_acme-challenge.fuelstack.icu  value_from_certbot
+```
+
+4.	证书默认位置：
+
+```txt
+/etc/letsencrypt/live/fuelstack.icu/fullchain.pem
+/etc/letsencrypt/live/fuelstack.icu/privkey.pem
+```
+
+###  将证书挂载到 Docker 中的 Nginx
+```yml
+- /etc/letsencrypt/live/fuelstack.icu-0001/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro
+- /etc/letsencrypt/live/fuelstack.icu-0001/privkey.pem:/etc/ssl/private/privkey.pem:ro
+```
+```yml
+services:
+  nginx-service:
+    image: nginx:latest
+    container_name: nginx_service
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./build:/usr/share/nginx/html
+      - /etc/letsencrypt/live/fuelstack.icu-0001/fullchain.pem:/etc/ssl/certs/fullchain.pem:ro
+      - /etc/letsencrypt/live/fuelstack.icu-0001/privkey.pem:/etc/ssl/private/privkey.pem:ro
+    restart: always
+    networks:
+      - common_network
+networks:
+  common_network:
+    external: true
+```
+
+```nginx
+http {
+  server {
+    listen 443 ssl;
+    server_name fuelstack.icu www.fuelstack.icu;
+
+    ssl_certificate /etc/ssl/certs/fullchain.pem;
+    ssl_certificate_key /etc/ssl/private/privkey.pem;
+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+  }
+}
+```
+
+## Github OAuth
+创建配置 Github OAuth
+创建App, 生产clientid等信息, 配合NextAuth
+
+配置url,生产环境需要https
+- 填写首页url # https://app.fuelstack.icu/
+- 填写callback # https://app.fuelstack.icu/api/auth/callback/github
+
+
+## FAP
+Auth 504
+
+- 查看日志, 认证授权需要一些基础的表, 需要先创建 `npx prisma db push`

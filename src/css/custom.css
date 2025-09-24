@@ -1,75 +1,131 @@
 @import "tailwindcss";
 @config "../../tailwind.config.js";
+@import "./bg.css";
+
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * 现代化设计系统 - 文档站点主题升级
+ * 包含现代化的配色、排版、动画和交互效果
  */
 
-/* You can override the default Infima variables here. */
+/* 基础变量定义 */
 :root {
-    --ifm-color-primary: #2e8555;
-    --ifm-color-primary-dark: #29784c;
-    --ifm-color-primary-darker: #277148;
-    --ifm-color-primary-darkest: #205d3b;
-    --ifm-color-primary-light: #33925d;
-    --ifm-color-primary-lighter: #359962;
-    --ifm-color-primary-lightest: #3cad6e;
-    --ifm-code-font-size: 95%;
-    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-
-    /* scroll behavior */
+    /* 滚动行为 */
     scroll-behavior: smooth;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 1.1rem;
+    --ifm-leading: 1rem;
+    --ifm-navbar-background-color: transparent;
+    --ifm-sidebar-background-color: rgba(255, 255, 255, 0.8);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
+/* 暗色模式 */
 [data-theme="dark"] {
-    --ifm-color-primary: #25c2a0;
-    --ifm-color-primary-dark: #21af90;
-    --ifm-color-primary-darker: #1fa588;
-    --ifm-color-primary-darkest: #1a8870;
-    --ifm-color-primary-light: #29d5b0;
-    --ifm-color-primary-lighter: #32d8b4;
-    --ifm-color-primary-lightest: #4fddbf;
-    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-
-    /* scroll behavior */
-    scroll-behavior: smooth;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 1.1rem;
+    --ifm-navbar-background-color: transparent;
+    --ifm-sidebar-background-color: rgba(0, 0, 0, 0.8);
 }
 
+
+a {
+    text-decoration: none;
+}
+
+.navbar {
+    /* 毛玻璃 */
+    backdrop-filter: blur(10px);
+}
+
+.navbar-sidebar{
+    height: 100dvh;
+    background-color: var(--ifm-sidebar-background-color);
+    backdrop-filter: blur(10px);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.footer__col, .footer__link-item {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    gap: 10px;
+    justify-content: center;
+}
+
+.footer__title {
+    margin: 0;
+}
+/* 滚动条样式 */
 *::-webkit-scrollbar {
-    width: 6px;
-    height: 8px;
+    display: none;
 }
 
-*::-webkit-scrollbar-thumb {
-    background-color: #c7bcbc;
-    border-radius: 8px;
-}
-
-/* 全局 CSS 文件（如 globals.css） */
-@keyframes ripple {
-    0% {
-        transform: scale(0.1);
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
         opacity: 1;
-    }
-
-    50% {
-        transform: scale(1.2);
-        opacity: 0.1;
-    }
-
-    100% {
-        transform: scale(0.1);
-        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-.animate-ripple {
-    animation: ripple 3.2s infinite reverse;
-    transform-origin: 50% 49%;
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 应用动画 */
+.theme-doc-markdown {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* 现代化组件样式 */
+.backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+}
+
+.backdrop-blur-md {
+    backdrop-filter: blur(12px);
+}
+
+/* 玻璃态效果增强 */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-effect {
+    background: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 平滑滚动 */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #2563eb, #7c3aed);
 }

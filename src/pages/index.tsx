@@ -1,66 +1,69 @@
 import type { ReactNode } from "react";
-import React, { useState } from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-
-
-function UserLink() {
-    const links = [
-        { href: "docs/intro", label: "Docs" },
-        {
-            href: "http://ai.fuelstack.icu",
-            label: "AI Editor",
-            target: "_blank",
-        },
-    ];
-    return (
-        <div className={"flex flex-col p-4"}>
-            {links.map((link, index) => (
-                <a
-                    key={index}
-                    className={"!no-underline hover:bg-green-50 px-2 py-1 rounded"}
-                    href={link.href}
-                    target={link.target || "_self"}
-                >
-                    {link.label}
-                </a>
-            ))}
-        </div>
-    );
-}
-
-function UserAvatar() {
-    return (
-        <a
-            href="https://github.com/marvin-season/danny-website"
-            target={"_blank"}
-        >
-            <img
-                src={"img/loopy-smile.jpg"}
-                alt={""}
-                className={`h-[100px] w-[100px] rounded-full object-cover 
-                                shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 border-2 border-white 
-                                cursor-pointer
-                            `}
-            ></img>
-        </a>
-    );
-}
+import {
+    UserAvatar,
+    ParticleBackground,
+    TechStack,
+    FooterInfo,
+    ArticleNavigation,
+    Background,
+    DecorativeBackground,
+} from "../components/home";
 
 export default function Home(): ReactNode {
     const { siteConfig } = useDocusaurusContext();
+
     return (
         <Layout
-            title={`Hello from ${siteConfig.title}`}
-            description="Description will go into a meta tag in <head />"
+            title={siteConfig.title}
+            description="知识收集站 - 技术文档、博客文章、面试题库和AI助手"
         >
-            <div className={"flex flex-col justify-center items-center"}>
-                <div className={"flex justify-around pt-12 relative"}>
-                    <UserAvatar />
+            {/* 英雄区域 */}
+            <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+                {/* 背景渐变 */}
+                <Background />
+                {/* 粒子背景 */}
+                <ParticleBackground />
+
+                {/* 装饰性背景元素 */}
+                <DecorativeBackground />
+
+                {/* 主要内容 */}
+                <div className="relative z-10 text-center px-6 max-w-6xl mx-auto">
+                    {/* 头像 */}
+                    <div className="flex justify-center mb-12 animate-fade-in">
+                        <UserAvatar />
+                    </div>
+
+                    {/* 标题 */}
+                    <h1 className="text-6xl md:text-7xl font-bold mb-8 animate-slide-up">
+                        <span className="bg-gradient-to-r from-primary-600 via-secondary-600 to-primary-600 bg-clip-text text-transparent">
+                            {siteConfig.title}
+                        </span>
+                    </h1>
+
+                    {/* 副标题 */}
+                    <p
+                        className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-12 max-w-3xl mx-auto font-medium leading-relaxed animate-slide-up"
+                        style={{ animationDelay: "0.2s" }}
+                    ></p>
+
+                    {/* 技术栈 */}
+                    <TechStack />
+
+                    {/* 站内导航按钮 */}
+                    <ArticleNavigation />
+
+                    {/* 最近活动 */}
+
+                    {/* 社交媒体链接 */}
+
+                    {/* 底部装饰 */}
+                    <div className="mt-20 text-center">
+                        <FooterInfo />
+                    </div>
                 </div>
-                <button className="mt-4 border rounded px-2 py-0.5 border-gray-200 hover:bg-gray-100">
-                    <a className="!text-blue-500 !no-underline" href="http://ai.fuelstack.icu/">ai seek</a>
-                </button>
             </div>
         </Layout>
     );
