@@ -12,6 +12,10 @@ date: "2025-10-16"
 
 A headless form library based on Zod v4.
 
+```sh
+npm install zodv4-form
+```
+
 ## How
 
 Using Zod v4 to validate the form data.
