@@ -1,3 +1,11 @@
+---
+slug: zodv4-form
+title: Zodv4-Form
+authors: [marvin-season]
+tags: [react, zod, form]
+date: "2025-10-16"
+---
+
 # Zodv4-Form
 
 ## What
@@ -16,6 +24,8 @@ Using Zod v4 to validate the form data.
 - ✅ Generate the form component automatically and dynamically
 - ✅ Customize the form component
 - ✅ Built-in string component
+
+<!-- truncate -->
 
 ## Example
 
