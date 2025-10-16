@@ -15,6 +15,7 @@ This is a simple markdown example using **react-markdown**.
 
 <agent data-status="loading"></agent>
 <agent data-status="loading"></agent>
+
 `
 
 const components: Components & {
@@ -32,12 +33,12 @@ export default function ReactMarkdownTest({ }: Props) {
         const stream = createMockStream(source, /\n/);
         // @ts-ignore
         for await (const element of stream) {
-            const id = Date.now();;
             const text = element.text;
             const isAgent = text.includes('<agent');
             if (isAgent) {
-                const agentMessage = { id, text, type: 'agent' } as ContentType
-                setContents(prev => [...prev, agentMessage]);
+                const id = Math.random();
+                await sleep(1000);
+                setContents(prev => [...prev, { id, text, type: 'agent' }]);
                 // scroll to top
                 requestIdleCallback(() => {
                     containerRef.current.scrollTo({
@@ -46,22 +47,21 @@ export default function ReactMarkdownTest({ }: Props) {
                     });
                 })
                 await sleep(3000);
-                agentMessage.text = '<agent data-status="success" data-description="hello"></agent>'
                 setContents(prev => {
-                    const index = prev.findIndex(c => c.id === agentMessage.id);
-                    if (index !== -1) {
-                        const newContents = [...prev];
-                        newContents[index] = agentMessage;
-                        return newContents;
-                    }
-                    return prev;
+                    return prev.map(c => {
+                        if (c.id === id) {
+                            return { ...c, text: '<agent data-status="success" data-description="处理成功"></agent>' }
+                        }
+
+                        return c;
+                    })
                 });
             } else if (text?.length > 0) {
                 const stream = createMockStream(text);
                 // @ts-ignore
                 for await (const element of stream) {
-                    await sleep(100);
-                    const id = Date.now();
+                    await sleep(30);
+                    const id = Math.random();
                     const text = element.text;
                     setContents(prev => [...prev, { id, text }]);
 
