@@ -108,8 +108,8 @@ const config: Config = {
                     position: "right",
                     items: [
                         {
-                            label: "APP",
-                            to: "http://app.fuelstack.icu/",
+                            label: "组件库",
+                            to: "https://marvin-season.github.io/registry-template/",
                         },
                         {
                             label: "GitHub",
