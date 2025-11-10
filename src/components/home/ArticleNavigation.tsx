@@ -12,8 +12,8 @@ export function ArticleNavigation() {
             <NavigationButton href={`/blog`} icon="✍️">
                 Blog
             </NavigationButton>
-            <NavigationButton href={`http://ai.fuelstack.icu/`} icon="🤖">
-                AI Assistant
+            <NavigationButton href={`https://app.fuelstack.icu/`} icon="🤖">
+                Shadcn/UI Registry
             </NavigationButton>
         </div>
     );
