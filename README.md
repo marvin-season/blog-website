@@ -6,6 +6,10 @@ This website is built using [Docusaurus](https://docusaurus.io/), a modern stati
 
 [fuelstack.icu](http://www.fuelstack.icu/blog-website/)
 
+## Deprecated
+
+https://github.com/marvin-season/registry-template/
+
 ### Installation
 
 ```
@@ -57,8 +61,9 @@ Host fuelstack
 Errors You May Encounter:
 
 - Permission denied (publickey).
-  + Please check whether your private key is correct and that your account has permission to access the server.
-  + Try using `sudo xxx` if necessary.
+
+    - Please check whether your private key is correct and that your account has permission to access the server.
+    - Try using `sudo xxx` if necessary.
 
 - Docker error: "Error response from daemon: network not found"
-  + Please check your Docker networks, or create one with: `docker network create common_network`
+    - Please check your Docker networks, or create one with: `docker network create common_network`
