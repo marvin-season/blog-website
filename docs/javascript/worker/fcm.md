@@ -24,7 +24,7 @@ FCM is a messaging service that allows you to send and receive messages across p
 这里不需要手动注册service worker, 因为firebase会自动注册
 
 ```js
-// public/firebase-messaging-sw.js
+// public/firebase-messaging-sw.js 如果需要打包进bundle，可以借助 @serwist/next
 
 // ⚠️： 如果想自定义事件，必须放在脚本导入之前
 self.addEventListener("notificationclick", (event) => {
@@ -127,7 +127,7 @@ export async function requestPermission() {
 }
 ```
 
-站内通知(可选)
+### 站内通知(可选)
 
 ```js
 // src/App.tsx
@@ -148,7 +148,7 @@ export default function App() {
 }
 ```
 
-## Notice
+## Analytics
 
 Firebase 也提供了Analytics，可以用来分析用户行为。只需要在站内添加导出analytics的函数即可。
 
