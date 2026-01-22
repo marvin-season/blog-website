@@ -12,3 +12,4 @@ export * from "./FooterInfo";
 export * from "./DecorativeBackground";
 export * from "./ArticleNavigation";
 export * from "./Background";
+export * from "./Banner";

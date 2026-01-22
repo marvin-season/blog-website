@@ -9,6 +9,7 @@ import {
     ArticleNavigation,
     Background,
     DecorativeBackground,
+    Banner,
 } from "../components/home";
 
 export default function Home(): ReactNode {
@@ -19,6 +20,7 @@ export default function Home(): ReactNode {
             title={siteConfig.title}
             description="知识收集站 - 技术文档、博客文章、面试题库和AI助手"
         >
+            <Banner />
             {/* 英雄区域 */}
             <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
                 {/* 背景渐变 */}

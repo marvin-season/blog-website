@@ -2,7 +2,7 @@
 function TechTag({ name, className }: { name: string; className: string }) {
     return (
         <span
-            className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${className}`}
+            className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium ${className} hover:scale-105 cursor-pointer transition-all duration-300`}
         >
             {name}
         </span>

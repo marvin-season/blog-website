@@ -12,7 +12,7 @@ export function ArticleNavigation() {
             <NavigationButton href={`/blog`} icon="✍️">
                 Blog
             </NavigationButton>
-            <NavigationButton href={`https://app.fuelstack.icu/`} icon="🤖">
+            <NavigationButton href={`https://marvin-season.github.io/registry-template/`} icon="🤖">
                 Shadcn/UI Registry
             </NavigationButton>
         </div>
